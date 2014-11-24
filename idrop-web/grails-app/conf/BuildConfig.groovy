@@ -29,7 +29,8 @@ grails.project.dependency.resolution = {
 	dependencies {
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 		compile 'commons-io:commons-io:2.1'
-		provided 'junit:junit:4.8.1'
+		compile 'junit:junit:4.11'
+		compile 'cglib:cglib:2.2.2'
 		test 'org.mockito:mockito-all:1.8.1'
 		compile ('org.irods.jargon:jargon-core:4.0.2-SNAPSHOT') { excludes ([group:'org.jglobus'])}
 		compile ('org.irods.jargon:jargon-data-utils:4.0.2-SNAPSHOT')  { excludes ([group:'org.jglobus'])}

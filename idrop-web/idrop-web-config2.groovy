@@ -12,21 +12,23 @@
  */
 environments {
 	
-	 production {  grails.serverURL = "http://localhost:8080/idrop-web2" } 
+	 production {  grails.serverURL = "http://labs.library.tamu.edu/idrop-web2" } 
 	 
 }
 
 /*
  * 2) If you want to set things up so that the idrop web browser automatically points to a certain grid (i.e. only user ID and password show, then do something like below.
  * Take the following outside of the comment block and configure here
- * 
- idrop.config.preset.host="someHost"
+ */ 
+ 
+ idrop.config.preset.host="osd131.library.tamu.edu"
  idrop.config.preset.port="1247"
- idrop.config.preset.zone="someZone"
- idrop.config.preset.resource="someResc"
+ idrop.config.preset.zone="tempZone"
+ idrop.config.preset.resource="demoResc"
+
  // can be Standard or PAM right now
  idrop.config.preset.authScheme="Standard"
- */
+ 
 
 //idrop.config.idrop.jnlp="http://iren-web.renci.org:8080/idrop/idrop.jnlp"
 //drop.config.idrop.jnlp="http://iren-web.renci.org/idrop-snapshot/idrop.jnlp"

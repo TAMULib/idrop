@@ -18,21 +18,23 @@ environments {
 	 production {  grails.serverURL = "http://iren-web.renci.org:8080/${appName}" } 
 	 production {  grails.serverURL = "http://srbbrick15.ucsd.edu:1525//${appName}" } 
 	 production {  grails.serverURL = "http://www.irods.org" } */
-	production { grails.serverURL = "http://put.your.server.name.here:8080/${appName}" }
-	development { grails.serverURL = "http://localhost:8080/${appName}" }
-	test { grails.serverURL = "http://localhost:8080/${appName}" }
+	
+	production { grails.serverURL = "http://labs.library.tamu.edu/${appName}" }
+	development { grails.serverURL = "http://labs.library.tamu.edu/${appName}" }
+	test { grails.serverURL = "http://labs.library.tamu.edu/${appName}" }
 }
 
 /*
  * 2) If you want to set things up so that the idrop web browser automatically points to a certain grid (i.e. only user ID and password show, then do something like below.
  * Take the following outside of the comment block and configure here
- * 
- idrop.config.preset.host="diamond.ils.unc.edu"
- idrop.config.preset.port="2247"
- idrop.config.preset.zone="lifelibZone"
- idrop.config.preset.resource="lifelibResc1"
+ */ 
+ 
+ idrop.config.preset.host="osd131.library.tamu.edu"
+ idrop.config.preset.port="1247"
+ idrop.config.preset.zone="tempZone"
+ idrop.config.preset.resource="demoResc"
  idrop.config.preset.authScheme="Standard"
- */
+ 
 
 /*
  * 3) iDROP web includes the idrop-lite Java applet, which is launched from the iDROP web interface.  The interface needs to know where to find this jar file.
@@ -47,8 +49,8 @@ environments {
  idrop.config.idrop.lite.use.applet.dir=false
  */
 
-idrop.config.idrop.lite.applet.jar="idrop-lite-2.0.1-SNAPSHOT-jar-with-dependencies.jar"
-idrop.config.idrop.lite.codebase="https://code.renci.org/gf/download/frsrelease/221/2529/"
+idrop.config.idrop.lite.applet.jar="idrop-lite-2.0.1-RC1-jar-with-dependencies.jar"
+idrop.config.idrop.lite.codebase="http://labs.library.tamu.edu/idrop-web2/"
 idrop.config.idrop.lite.use.applet.dir=false
 
 
