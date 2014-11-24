@@ -29,7 +29,7 @@ environments {
  * Take the following outside of the comment block and configure here
  */ 
  
- idrop.config.preset.host="osd131.library.tamu.edu"
+ idrop.config.preset.host="10.20.1.131"
  idrop.config.preset.port="1247"
  idrop.config.preset.zone="tempZone"
  idrop.config.preset.resource="demoResc"
