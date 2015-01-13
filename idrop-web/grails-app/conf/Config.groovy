@@ -1,5 +1,5 @@
 grails.config.locations = [
-	"file:/etc/idrop-web/idrop-web-config2.groovy"
+	"file:/data/idrop/idrop-web/idrop-web-config2.groovy"
 ]
 
 /*
