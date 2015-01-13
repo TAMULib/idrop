@@ -21,10 +21,10 @@ environments {
  * Take the following outside of the comment block and configure here
  */ 
  
- idrop.config.preset.host="osd131.library.tamu.edu"
- idrop.config.preset.port="1247"
- idrop.config.preset.zone="tempZone"
- idrop.config.preset.resource="demoResc"
+ idrop.config.preset.host=""
+ idrop.config.preset.port=""
+ idrop.config.preset.zone=""
+ idrop.config.preset.resource=""
 
  // can be Standard or PAM right now
  idrop.config.preset.authScheme="Standard"

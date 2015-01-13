@@ -29,11 +29,11 @@ environments {
  * Take the following outside of the comment block and configure here
  */ 
  
- idrop.config.preset.host="odyssey-pre.library.tamu.edu"
- idrop.config.preset.port="1247"
- idrop.config.preset.zone="tamulib"
- idrop.config.preset.resource="tamu_main"
- idrop.config.preset.authScheme="Standard"
+ idrop.config.preset.host=""
+ idrop.config.preset.port=""
+ idrop.config.preset.zone=""
+ idrop.config.preset.resource=""
+ idrop.config.preset.authScheme=""
  
 
 /*
