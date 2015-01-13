@@ -12,7 +12,7 @@
  */
 environments {
 	
-	 production {  grails.serverURL = "http://labs.library.tamu.edu/idrop-web2" } 
+	 production {  grails.serverURL = "http://labs.library.tamu.edu/" } 
 	 
 }
 
