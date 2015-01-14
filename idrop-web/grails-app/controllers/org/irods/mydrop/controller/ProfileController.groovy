@@ -155,19 +155,19 @@ class ProfileCommand {
 	String title
 
 	static constraints = {
-		nickName(null:false)
-		givenName( null:false)
-		lastName(null:false)
-		city(null:false)
-		state(null:false)
-		email(null:false)
-		description(null:false)
-		labeledURL(null:false)
-		postalAddress(null:false)
-		postalCode(null:false)
-		postOfficeBox(null:false)
-		telephoneNumber(null:false)
-		title(null:false)
+		nickName(null:true)
+		givenName(null:true)
+		lastName(null:true)
+		city(null:true)
+		state(null:true)
+		email(null:true)
+		description(null:true)
+		labeledURL(null:true)
+		postalAddress(null:true)
+		postalCode(null:true)
+		postOfficeBox(null:true)
+		telephoneNumber(null:true)
+		title(null:true)
 	}
 }
 
