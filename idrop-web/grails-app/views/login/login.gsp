@@ -102,18 +102,22 @@ legend {
 								value="${loginCommand.authMethod}" />
 						</g:else>
 
+						<div>
+						  <div style="float: left;">
+						    <label><g:message code="text.guest.login" />:</label>
+						  </div>
+						  <div style="margin: 20px;">
+						    <g:checkBox name="useGuestLogin" id="useGuestLogin" value="${loginCommand.useGuestLogin}" onclick="toggleGuestLogin()" />
+						  </div
+						</div>
 
-						<label><g:message code="text.guest.login" />:</label>
-
-						<g:checkBox name="useGuestLogin" id="useGuestLogin"
-							value="${loginCommand.useGuestLogin}"
-							onclick="toggleGuestLogin()" />
-
-
-						<label class="userLoginData"><g:message code="text.user" />:</label> <input type="text"
+						<label class="userLoginData" style="margin-bottom: 15px;">
+						  <g:message code="text.user" />:</label> <input type="text"
 							class="input-text userLoginData" name="user" id="user"
-							value="${loginCommand.user}" /> <label class="userLoginData"><g:message
-								code="text.password" />:</label> <input type="password"
+							value="${loginCommand.user}" />
+							 
+						<label class="userLoginData">
+						  <g:message code="text.password" />:</label> <input type="password"
 							class="input-text userLoginData" name="password" id="password"
 							value="${loginCommand.password}" />
 
