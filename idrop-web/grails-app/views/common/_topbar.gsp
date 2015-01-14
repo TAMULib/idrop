@@ -24,7 +24,7 @@
 	      					<!--  <li><a href="#" id="searchMetadata" onclick="xxx()")>Search By Metadata</a></li>  -->
       				  </ul>
 			</li>
-			<li id="topbarTools" class="dropdown">
+			<li id="topbarTools" class="dropdown" style="display: none;">
 				 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       				<g:message code="text.tools" /><b class="caret"></b></a>
       				 <ul class="dropdown-menu">
