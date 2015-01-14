@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="span12">
-      <center>TAMU iRODS iDrop.</center>
+      <div style="float: left; margin-left: 20px;">TAMU iRODS iDrop.</div>
     </div>
   </div>
 </div>
