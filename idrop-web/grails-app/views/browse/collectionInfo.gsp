@@ -126,7 +126,8 @@
 						${collection.info2}
 					</div>
 				</div>
-
+				
+				<!--
 				<div class="row">
 					<div class="span2">
 						<strong><g:message code="text.tags" />:</strong>
@@ -152,6 +153,8 @@
 							onclick="updateTags()"><g:message code="text.update.tags" /></button>
 					</div>
 				</div>
+				-->
+				
 			</div>
 
 		</div>
