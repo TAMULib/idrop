@@ -107,7 +107,8 @@ legend {
 						    <label><g:message code="text.guest.login" />:</label>
 						  </div>
 						  <div style="margin: 20px;">
-						    <g:checkBox name="useGuestLogin" id="useGuestLogin" value="${loginCommand.useGuestLogin}" onclick="toggleGuestLogin()" />
+						    <g:checkBox name="useGuestLogin" id="useGuestLogin" value="${loginCommand.useGuestLogin}" 
+						      onclick="toggleGuestLogin()" style="margin-left: 15px; vertical-align: text-top;" />
 						  </div
 						</div>
 
