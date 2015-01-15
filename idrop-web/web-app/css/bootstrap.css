@@ -774,7 +774,7 @@ a.badge:hover {
 }
 .label-important,
 .badge-important {
-  background-color: #b94a48;
+  background-color: #6c491d;
 }
 .label-important[href],
 .badge-important[href] {
@@ -790,7 +790,7 @@ a.badge:hover {
 }
 .label-success,
 .badge-success {
-  background-color: #468847;
+  background-color: #1d3362;
 }
 .label-success[href],
 .badge-success[href] {
@@ -798,7 +798,7 @@ a.badge:hover {
 }
 .label-info,
 .badge-info {
-  background-color: #3a87ad;
+  background-color: #104554;
 }
 .label-info[href],
 .badge-info[href] {
@@ -1064,16 +1064,16 @@ table [class*=span],
   margin-left: 0;
 }
 .table tbody tr.success td {
-  background-color: #dff0d8;
+  background-color: #a5adc0;
 }
 .table tbody tr.error td {
-  background-color: #f2dede;
+  background-color: #fdefcc;
 }
 .table tbody tr.warning td {
   background-color: #fcf8e3;
 }
 .table tbody tr.info td {
-  background-color: #d9edf7;
+  background-color: #9fb5bb;
 }
 .table-hover tbody tr.success:hover td {
   background-color: #d0e9c6;
@@ -1471,19 +1471,19 @@ input[type="checkbox"][readonly] {
 .control-group.error > label,
 .control-group.error .help-block,
 .control-group.error .help-inline {
-  color: #b94a48;
+  color: #6c491d;
 }
 .control-group.error .checkbox,
 .control-group.error .radio,
 .control-group.error input,
 .control-group.error select,
 .control-group.error textarea {
-  color: #b94a48;
+  color: #6c491d;
 }
 .control-group.error input,
 .control-group.error select,
 .control-group.error textarea {
-  border-color: #b94a48;
+  border-color: #6c491d;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1498,26 +1498,26 @@ input[type="checkbox"][readonly] {
 }
 .control-group.error .input-prepend .add-on,
 .control-group.error .input-append .add-on {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #b94a48;
+  color: #6c491d;
+  background-color: #fdefcc;
+  border-color: #6c491d;
 }
 .control-group.success > label,
 .control-group.success .help-block,
 .control-group.success .help-inline {
-  color: #468847;
+  color: #1d3362;
 }
 .control-group.success .checkbox,
 .control-group.success .radio,
 .control-group.success input,
 .control-group.success select,
 .control-group.success textarea {
-  color: #468847;
+  color: #1d3362;
 }
 .control-group.success input,
 .control-group.success select,
 .control-group.success textarea {
-  border-color: #468847;
+  border-color: #1d3362;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1532,26 +1532,26 @@ input[type="checkbox"][readonly] {
 }
 .control-group.success .input-prepend .add-on,
 .control-group.success .input-append .add-on {
-  color: #468847;
-  background-color: #dff0d8;
-  border-color: #468847;
+  color: #1d3362;
+  background-color: #a5adc0;
+  border-color: #1d3362;
 }
 .control-group.info > label,
 .control-group.info .help-block,
 .control-group.info .help-inline {
-  color: #3a87ad;
+  color: #104554;
 }
 .control-group.info .checkbox,
 .control-group.info .radio,
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  color: #3a87ad;
+  color: #104554;
 }
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  border-color: #3a87ad;
+  border-color: #104554;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1566,14 +1566,14 @@ input[type="checkbox"][readonly] {
 }
 .control-group.info .input-prepend .add-on,
 .control-group.info .input-append .add-on {
-  color: #3a87ad;
+  color: #104554;
   background-color: #d9edf7;
-  border-color: #3a87ad;
+  border-color: #104554;
 }
 input:focus:required:invalid,
 textarea:focus:required:invalid,
 select:focus:required:invalid {
-  color: #b94a48;
+  color: #6c491d;
   border-color: #ee5f5b;
 }
 input:focus:required:invalid:focus,
@@ -3295,7 +3295,7 @@ input[type="submit"].btn.btn-mini {
   float: left;
   display: block;
   padding: 10px 20px 10px;
-  margin-left: -20px;
+  margin-left: 0px;
   font-size: 20px;
   font-weight: 200;
   color: #717071;
@@ -3946,20 +3946,20 @@ a.thumbnail:hover {
   line-height: 20px;
 }
 .alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #468847;
+  background-color: #a5adc0;
+  border-color: #7785a1;
+  color: #1d3362;
 }
 .alert-danger,
 .alert-error {
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  color: #b94a48;
+  background-color: #fdefcc;
+  border-color: #fbdf99;
+  color: #6c491d;
 }
 .alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #3a87ad;
+  background-color: #9fb5bb;
+  border-color: #708f98;
+  color: #104554;
 }
 .alert-block {
   padding-top: 14px;
