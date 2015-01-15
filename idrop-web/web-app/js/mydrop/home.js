@@ -1549,6 +1549,9 @@ function showIdropLiteGivenPath(path, displayMode) {
 	$("#toggleHtmlArea").hide('slow');
 	$("#toggleHtmlArea").width = "0%";
 	$("#toggleHtmlArea").height = "0%";
+	
+	var appletDiv = $("#idropLiteArea");
+	$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
 
 	/*
 	lcShowBusyIconInDiv(idropLiteSelector);
