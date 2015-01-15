@@ -106,20 +106,20 @@ class ProfileController {
 		}
 
 		userProfile.userName = irodsAccount.userName
-		userProfile.userProfilePublicFields.nickName = Jsoup.clean(profileCommand.nickName,Whitelist.basic())
-		userProfile.userProfilePublicFields.description = Jsoup.clean(profileCommand.description,Whitelist.basic())
-		userProfile.userProfileProtectedFields.mail = Jsoup.clean(profileCommand.email,Whitelist.basic())
-		userProfile.userProfilePublicFields.givenName = Jsoup.clean(profileCommand.givenName,Whitelist.basic())
-		userProfile.userProfilePublicFields.sn = Jsoup.clean(profileCommand.lastName,Whitelist.basic())
-		userProfile.userProfilePublicFields.localityName = Jsoup.clean(profileCommand.city,Whitelist.basic())
-		userProfile.userProfilePublicFields.st = Jsoup.clean(profileCommand.state,Whitelist.basic())
-		userProfile.userProfilePublicFields.description = Jsoup.clean(profileCommand.description,Whitelist.basic())
-		userProfile.userProfilePublicFields.labeledURL = Jsoup.clean(profileCommand.labeledURL,Whitelist.basic())
-		userProfile.userProfilePublicFields.postalAddress = Jsoup.clean(profileCommand.postalAddress,Whitelist.basic())
-		userProfile.userProfilePublicFields.postalCode = Jsoup.clean(profileCommand.postalCode,Whitelist.basic())
-		userProfile.userProfilePublicFields.postOfficeBox = Jsoup.clean(profileCommand.postOfficeBox,Whitelist.basic())
-		userProfile.userProfilePublicFields.telephoneNumber = Jsoup.clean(profileCommand.telephoneNumber,Whitelist.basic())
-		userProfile.userProfilePublicFields.title = Jsoup.clean(profileCommand.title,Whitelist.basic())
+		userProfile.userProfilePublicFields.nickName = profileCommand.nickName ? Jsoup.clean(profileCommand.nickName,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.description = profileCommand.description ? Jsoup.clean(profileCommand.description,Whitelist.basic()) : ""
+		userProfile.userProfileProtectedFields.mail = profileCommand.email ? Jsoup.clean(profileCommand.email,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.givenName = profileCommand.givenName ? Jsoup.clean(profileCommand.givenName,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.sn = profileCommand.lastName ? Jsoup.clean(profileCommand.lastName,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.localityName = profileCommand.city ? Jsoup.clean(profileCommand.city,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.st = profileCommand.state ? Jsoup.clean(profileCommand.state,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.description = profileCommand.description ? Jsoup.clean(profileCommand.description,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.labeledURL = profileCommand.labeledURL ? Jsoup.clean(profileCommand.labeledURL,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.postalAddress = profileCommand.postalAddress ? Jsoup.clean(profileCommand.postalAddress,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.postalCode = profileCommand.postalCode ? Jsoup.clean(profileCommand.postalCode,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.postOfficeBox = profileCommand.postOfficeBox ? Jsoup.clean(profileCommand.postOfficeBox,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.telephoneNumber = profileCommand.telephoneNumber ? Jsoup.clean(profileCommand.telephoneNumber,Whitelist.basic()) : ""
+		userProfile.userProfilePublicFields.title = profileCommand.title ? Jsoup.clean(profileCommand.title,Whitelist.basic()) : ""
 
 		log.info "updating profile...."
 		try {
@@ -139,6 +139,7 @@ class ProfileController {
 }
 
 class ProfileCommand {
+
 	String userName
 	String nickName
 	String givenName
@@ -153,6 +154,22 @@ class ProfileCommand {
 	String postOfficeBox
 	String telephoneNumber
 	String title
+	
+	static constraints = { 
+		nickName(nullable:true) 
+		givenName(nullable:true) 
+		lastName(nullable:true) 
+		city(nullable:true) 
+		state(nullable:true) 
+		email(nullable:true) 
+		description(nullable:true) 
+		labeledURL(nullable:true) 
+		postalAddress(nullable:true) 
+		postalCode(nullable:true) 
+		postOfficeBox(nullable:true) 
+		telephoneNumber(nullable:true) 
+		title(nullable:true) 
+	} 
 	
 }
 
