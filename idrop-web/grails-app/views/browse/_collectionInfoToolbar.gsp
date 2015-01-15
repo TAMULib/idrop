@@ -72,7 +72,6 @@
 	*/
 	function cibBulkUploadViaBrowser() {
 		
-		/*
 		var path = $("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
@@ -80,7 +79,7 @@
 		}
 
 		showIdropLiteGivenPath(path, 2);
-		*/
+		
 	}
 
 	/**

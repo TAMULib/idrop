@@ -1550,6 +1550,7 @@ function showIdropLiteGivenPath(path, displayMode) {
 	$("#toggleHtmlArea").width = "0%";
 	$("#toggleHtmlArea").height = "0%";
 
+	/*
 	lcShowBusyIconInDiv(idropLiteSelector);
 	setMessage("This will launch the iDrop Lite applet, it may take a minute for the applet to load, please be patient");
 
@@ -1638,6 +1639,7 @@ function showIdropLiteGivenPath(path, displayMode) {
 					}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);
 			});
+			*/
 
 }
 
