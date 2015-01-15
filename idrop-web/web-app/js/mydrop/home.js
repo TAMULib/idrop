@@ -1550,8 +1550,6 @@ function showIdropLiteGivenPath(path, displayMode) {
 	$("#toggleHtmlArea").width = "0%";
 	$("#toggleHtmlArea").height = "0%";
 	
-	alert("Drag and Drop Bulk Upload. Under Construction.");
-	
 	var params = {
 		absPath : path
 	}
@@ -1575,7 +1573,7 @@ function showIdropLiteGivenPath(path, displayMode) {
 						}						
 						
 						var appletDiv = $("#idropLiteArea");
-						$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>")
+						$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
 						
 						var appletTagDiv = document.createElement('div');
 						appletTagDiv.setAttribute('id', 'appletTagDiv');
