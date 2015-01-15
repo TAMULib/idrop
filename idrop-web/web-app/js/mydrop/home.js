@@ -1550,16 +1550,46 @@ function showIdropLiteGivenPath(path, displayMode) {
 	$("#toggleHtmlArea").width = "0%";
 	$("#toggleHtmlArea").height = "0%";
 	
-	var appletDiv = $("#idropLiteArea");
-	$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
+	alert("Drag and Drop Bulk Upload. Under Construction.");
+	
+	var params = {
+		absPath : path
+	}
+	
+	var jqxhr = $
+			.post(context + idropLiteUrl, params, function(data, status, xhr) {
+				lcClearDivAndDivClass(idropLiteSelector);
+			}, "html")
+			.error(function(xhr, status, error) {
+
+				setErrorMessage(xhr.responseText);
+
+			})
+			.success(
+					function(data, status, xhr) {
+
+						var continueReq = checkForSessionTimeout(data, xhr);
+						
+						if (!continueReq) {
+							return false;
+						}						
+						
+						var appletDiv = $("#idropLiteArea");
+						$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>")
+						
+						var appletTagDiv = document.createElement('div');
+						appletTagDiv.setAttribute('id', 'appletTagDiv');
+						appletDiv.append(appletTagDiv);
+						$("#idropLiteArea").removeAttr('style');
+					}).error(function(xhr, status, error) {
+				setErrorMessage(xhr.responseText);
+			});
+
+
 
 	/*
 	lcShowBusyIconInDiv(idropLiteSelector);
 	setMessage("This will launch the iDrop Lite applet, it may take a minute for the applet to load, please be patient");
-
-	var params = {
-		absPath : path
-	}
 
 	var jqxhr = $
 			.post(context + idropLiteUrl, params, function(data, status, xhr) {
