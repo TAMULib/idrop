@@ -1,6 +1,6 @@
 <div class="navbar navbar-fixed-top navbar-inverse">
 <div class="navbar-inner">
-    <a class="brand" href="#">iDrop</a>
+    <a class="brand" style="margin-left: 10px;" href="#">iDrop</a>
    
     <ul class="nav">
     	 <g:ifAuthenticated>
