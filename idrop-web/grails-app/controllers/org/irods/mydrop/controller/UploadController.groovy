@@ -44,17 +44,14 @@ class UploadController {
 	def handle = {
 	
 		log.info("upload action in file controller")
-		
-		log.into(params.file);
-		log.into(params.path);
-						
+								
 		int status = 0
 		def statusText = ""
 		
 		response.contentType = 'application/json'
 		
 		response.setStatus(status)
-		render([written: (status == 200), fileName: params.file, status: status, statusText: statusText] as JSON)
+		render([written: (status == 200), fileName: "", status: status, statusText: statusText] as JSON)
 		
 		
 		/*

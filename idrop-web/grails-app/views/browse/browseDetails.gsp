@@ -8,15 +8,14 @@
 		<asset:javascript src="uploadr.manifest.js"/>
     	<asset:stylesheet href="uploadr.manifest.css"/>	
 		<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
-		<uploadr:onSuccess>
+			<uploadr:onSuccess>
 	
-			var file_name = file.fileName;
-			var collection = $j("#browseDetailsAbsPath").val();
-			alert("Uploaded " + file_name + ", Collection: " + collection);
-			$j{remoteFunction(controller: 'UploadController' , action: 'upload', params: [file: file_name, path: collection])}	
+				var file_name = file.fileName;
+				var collection = $j("#browseDetailsAbsPath").val();
+				alert("Uploaded " + file_name + ", Collection: " + collection);				
 			
-		</uploadr:onSuccess>
-	</uploadr:add>
+			</uploadr:onSuccess>
+		</uploadr:add>
 		<div id='bulkUploadMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>
 			<button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropUploadr' onclick='closeIdropUploadrArea()')>Close Bulk Upload</button>			
 		</div>

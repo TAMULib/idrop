@@ -12,8 +12,7 @@
 	
 			var file_name = file.fileName;
 			var collection = $j("#infoAbsPath").val();
-			alert("Uploaded " + file_name + ", Collection: " + collection);
-			$j{remoteFunction(controller: 'UploadController' , action: 'upload', params: [file: file_name, path: collection])}	
+			alert("Uploaded " + file_name + ", Collection: " + collection);				
 			
 		</uploadr:onSuccess>
 	</uploadr:add>
