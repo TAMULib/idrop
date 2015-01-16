@@ -97,10 +97,12 @@
 	
 </div><!-- table -->
 </div><!--  toggle html area -->
-	
 
-    <script>
+<script>
 
+$j("#idropUploadrArea").animate({
+	height : 'hide'
+}, 'fast');
 
 function updateTagsFromCollectionInfoMini() {
 	var infoTagsVal = $j("#infoTags").val();

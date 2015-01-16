@@ -1,7 +1,6 @@
 <div id="browseDetailsMessageArea"></div>
 <div id=browseDetailsDialogArea" style-"height:0px;></div>
-<g:hiddenField id="browseDetailsAbsPath" name="absolutePath"
-	value="${parent.collectionName}" />
+<g:hiddenField id="browseDetailsAbsPath" name="absolutePath" value="${parent.collectionName}" />
 
 <div style="overflow: visible; position: relative;">
 	<div id="idropUploadrArea">
@@ -114,6 +113,10 @@
 </div>
 <script>
 	var dataTable;
+	
+	$j("#idropUploadrArea").animate({
+		height : 'hide'
+	}, 'fast');
 
 	tableParams = {
 		"bJQueryUI" : true,

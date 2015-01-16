@@ -1456,9 +1456,11 @@ function buildFormFromACLDetailsTable() {
  * Close the iDrop lite applet area
  */
 function closeIdropUploadrArea() {
+	
 	$j("#idropUploadrArea").animate({
 		height : 'hide'
 	}, 'slow');
+	
 	$j("#toggleHtmlArea").show('slow');
 	$j("#toggleHtmlArea").height = "100%";
 	$j("#toggleHtmlArea").width = "100%";
@@ -1549,6 +1551,10 @@ function showIdropLiteGivenPath(path, displayMode) {
 	$j("#toggleHtmlArea").hide('slow');
 	$j("#toggleHtmlArea").width = "0%";
 	$j("#toggleHtmlArea").height = "0%";
+	
+	$j("#idropUploadrArea").animate({
+		height : 'show'
+	}, 'slow');
 	
 	var params = {
 		absPath : path

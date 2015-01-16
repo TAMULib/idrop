@@ -269,6 +269,11 @@
 	<!--  toggle html area -->
 
 	<script type="text/javascript">
+	
+		$j("#idropUploadrArea").animate({
+			height : 'hide'
+		}, 'fast');
+	
 		$j(function() {
 			$j(".idropLiteBulkUpload").hide();
 			$j("#menuDownload").show();

@@ -186,6 +186,11 @@
 
 
 <script>
+
+	$j("#idropUploadrArea").animate({
+		height : 'hide'
+	}, 'fast');
+	
 	$j(function() {
 
 		$j(".idropLiteBulkUpload").show();

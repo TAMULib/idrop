@@ -144,6 +144,10 @@
 
 <script>
 
+$j("#idropUploadrArea").animate({
+	height : 'hide'
+}, 'fast');
+
 function updateTagsFromDataObjectInfoMini() {
 	var infoTagsVal = $j("#infoTags").val();
 	var infoCommentVal = $j("#infoComment").val();
