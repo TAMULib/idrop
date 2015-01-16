@@ -10,6 +10,7 @@
     <asset:stylesheet href="uploadr.manifest.css"/>
 	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" />
 	<uploadr:onSuccess>
+		alert("Uploaded " + file.fileName);
 		${remoteFunction(controller: 'UploadrController' , action: 'upload', params: [file: file.fileName, collectionParentName: ${parent.collectionName}])}			
 	</uploadr:onSuccess>	
 	<div id='bulkUploadMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>

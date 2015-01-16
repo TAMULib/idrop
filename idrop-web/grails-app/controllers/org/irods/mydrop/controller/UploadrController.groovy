@@ -1,6 +1,5 @@
 package org.irods.mydrop.controller
 
-import java.io.File
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
