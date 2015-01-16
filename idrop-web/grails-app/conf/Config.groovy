@@ -2,6 +2,11 @@ grails.config.locations = [
 	"file:/data/idrop/idrop-web/idrop-web-config2.groovy"
 ]
 
+
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/upload/**': ['ROLE_ADMIN','ROLE_USER']
+]
+
 /*
  * Configuration for idrop-web - iDROP Cloud browser
  * Project page: https://code.renci.org/gf/project/irodsidrop/
