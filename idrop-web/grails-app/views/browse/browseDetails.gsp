@@ -12,8 +12,26 @@
 	
 				var file_name = file.fileName;
 				var collection = $j("#browseDetailsAbsPath").val();
-				alert("Uploaded " + file_name + ", Collection: " + collection);	
-				$j{remoteFunction(controller:'uploadr', action:'handle', params:'\'file=\'+file._name+\'&collectionParentName=\'+collection')};
+				
+				var parameters = {
+					"file": file_name,
+					"path": collection
+				};
+				
+				alert("Uploaded " + file_name + ", Collection: " + collection);
+				$.ajax({
+    				url:"${g.createLink(controller:'uploadr',action:'handle')}",
+    					dataType: 'json',
+    					data: parameters,
+    					success: function(data) {
+        					alert(data)
+    					},
+    					error: function(request, status, error) {
+        					alert(error)
+    					},
+    					complete: function() {
+    					}
+				});				
 			
 			</uploadr:onSuccess>
 		</uploadr:add>

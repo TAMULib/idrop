@@ -4,7 +4,8 @@ grails.config.locations = [
 
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/upload/**': ['ROLE_ADMIN','ROLE_USER']
+	'/upload/**': ['ROLE_ADMIN','ROLE_USER'],
+	'/uploadr/**': ['ROLE_ADMIN','ROLE_USER'],
 ]
 
 /*
