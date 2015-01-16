@@ -1556,12 +1556,10 @@ function showIdropLiteGivenPath(path, displayMode) {
 	
 	var jqxhr = $
 			.post(context + idropLiteUrl, params, function(data, status, xhr) {
-				lcClearDivAndDivClass(idropLiteSelector);
+				//lcClearDivAndDivClass(idropLiteSelector);
 			}, "html")
 			.error(function(xhr, status, error) {
-
 				setErrorMessage(xhr.responseText);
-
 			})
 			.success(
 					function(data, status, xhr) {
@@ -1574,15 +1572,11 @@ function showIdropLiteGivenPath(path, displayMode) {
 						
 						var appletDiv = $("#idropLiteArea");
 						$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
-						
-						var appletTagDiv = document.createElement('div');
-						appletTagDiv.setAttribute('id', 'appletTagDiv');
-						appletDiv.append(appletTagDiv);
+												
 						$("#idropLiteArea").removeAttr('style');
 					}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);
 			});
-
 
 
 	/*

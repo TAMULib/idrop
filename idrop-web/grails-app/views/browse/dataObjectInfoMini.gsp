@@ -5,7 +5,8 @@
 	<!--  -->
 </div>
 <div id="idropLiteArea">
-	<!--  area to show idrop lite applet -->
+	<!--  area to show idrop lite 5 -->
+	<uploadr:add name="idropUploadr" path="/data/tmp/uploadr/idropUploader" direction="up" maxVisible="10" colorPicker="true" maxSize="204800" />
 </div>
 <div id="toggleHtmlArea">
 	<div id="displayArea" >

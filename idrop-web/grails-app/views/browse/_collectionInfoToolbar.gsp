@@ -77,9 +77,7 @@
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
 		}
-		
-		alert("Drag and Drop Bulk Upload. Under Construction.");
-		
+				
 		showIdropLiteGivenPath(path, 2);
 		
 	}

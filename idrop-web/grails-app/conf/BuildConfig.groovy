@@ -28,7 +28,8 @@ grails.project.dependency.resolution = {
 	}
 	dependencies {
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-		compile 'commons-io:commons-io:2.1'
+		//compile 'commons-io:commons-io:2.1'
+		compile 'commons-io:commons-io:2.2'
 		compile 'junit:junit:4.11'
 		compile 'cglib:cglib:2.2.2'
 		test 'org.mockito:mockito-all:1.8.1'
@@ -52,8 +53,32 @@ grails.project.dependency.resolution = {
 	}
 
 	plugins {
-		build ":tomcat:7.0.52.1"
-		runtime ":hibernate:3.6.10.10"
-		compile ":asset-pipeline:1.8.3"
+		//build ":tomcat:7.0.52.1"
+		//runtime ":hibernate:3.6.10.10"
+		//compile ":asset-pipeline:1.8.3"
+		
+		// plugins for the build system only
+        build ":tomcat:7.0.54"
+
+        // plugins for the compile step
+        compile ":scaffolding:2.1.2"
+        compile ':cache:1.1.8'
+        compile ":asset-pipeline:1.9.9"
+        compile ":sass-asset-pipeline:1.9.0"
+
+        // plugins needed at runtime but not for compilation
+        runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+        runtime ":database-migration:1.4.0"
+        runtime ":jquery:1.11.1"
+
+        // Uncomment these to enable additional asset-pipeline capabilities
+        //compile ":sass-asset-pipeline:1.7.4"
+        //compile ":less-asset-pipeline:1.7.0"
+        //compile ":coffee-asset-pipeline:1.7.0"
+        //compile ":handlebars-asset-pipeline:1.3.0.3"
+
+        // Load the Uploadr plugin
+        compile ":uploadr:1.1.1"
+		
 	}
 }
