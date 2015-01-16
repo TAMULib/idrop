@@ -1,5 +1,6 @@
 package org.irods.mydrop.controller
 
+import java.io.File
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
@@ -12,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
 	IRODSAccount irodsAccount
-	static long MAX_UPLOAD = 3221225472  // shooting for 3GB max, make parm?
+	static long MAX_UPLOAD = 3221225472  // 3GB
 
 	/**
 	 * Interceptor grabs IRODSAccount from the SecurityContextHolder
@@ -37,11 +38,12 @@ class UploadrController {
 	 * Process an actual call to upload data to iRODS as a multi-part file
 	 */
 	def upload = {
-		log.info("upload action in file controller " + params.file)
-		
+		log.info("upload action in file controller")
+		log.info("file " + params.file)
+		log.info("collection " + params.collectionParentName)
 		
 		/*
-		MultipartFile f = request.getFile('file')
+		MultipartFile f //= new File("/tmp/uploadr/" + params.file)
 		def name = f.getOriginalFilename()
 
 		log.info("f is ${f}")
