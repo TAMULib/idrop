@@ -8,7 +8,7 @@
 	<!--  area to show idrop lite 5 -->
 	<asset:javascript src="uploadr.manifest.js"/>
     <asset:stylesheet href="uploadr.manifest.css"/>
-	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="1204800" />
+	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" />
 	<uploadr:onSuccess>
 		${remoteFunction(controller: 'UploadrController' , action: 'upload', params: '\'file=\' + file.fileName')}			
 	</uploadr:onSuccess>	
