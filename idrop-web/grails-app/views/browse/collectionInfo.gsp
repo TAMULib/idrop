@@ -8,7 +8,7 @@
 	<!--  area to show idrop lite 2 -->
 	<asset:javascript src="uploadr.manifest.js"/>
     <asset:stylesheet href="uploadr.manifest.css"/>
-	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" maxSize="204800" />
+	<uploadr:add name="idropUploadr" path="/tmp/uploadr" controller="FileController" action="upload" direction="up" maxVisible="10" colorPicker="true" maxSize="204800" />
 	<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>
 		<button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropUploadr' onclick='closeIdropUploadrArea()')>Close iDrop</button>
 	</div>
