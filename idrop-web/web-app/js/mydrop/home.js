@@ -1526,55 +1526,6 @@ function showBrowseDetailsIdropLiteLocalAndIrods() {
 	showIdropLiteGivenPath(path, 1);
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-
-var files;
-
-function handleDragOver(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    var dropZone = document.getElementById('idropLiteArea');
-    dropZone.innerHTML = "Drop now";
-}
-
-function handleDnDFileSelect(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    /* Read the list of all the selected files. */
-    files = event.dataTransfer.files;
-
-    
-    /* Consolidate the output element. */
-    ///////////////////////////////////////
-    var form = document.getElementById('');
-    ///////////////////////////////////////
-    
-    
-    var data = new FormData(form);
-
-    for (var i = 0; i < files.length; i++) {
-        data.append(files[i].name, files[i]);
-    }
-
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText) {
-            alert("upload done!");
-        } else {
-            //alert("upload failed!");
-        }
-    };
-    //xhr.open('POST', "Default.aspx");
-    // xhr.setRequestHeader("Content-type", "multipart/form-data");
-    //xhr.send(data);
-
-    document.getElementById('idropLiteArea').innerHTML = "Drop files here";
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-
-
 /**
  * Given a path which is the parent collection to display in iDrop lite, show
  * the iDrop-lite applet
@@ -1624,12 +1575,6 @@ function showIdropLiteGivenPath(path, displayMode) {
 						var appletDiv = $("#idropLiteArea");
 						$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
 						
-						$("#idropLiteArea").hover(function(){
-							$(this).css('border','1px solid blue');
-						},function(){
-							$(this).css('border','1px solid transparent');
-						});
-						
 						var appletTagDiv = document.createElement('div');
 						appletTagDiv.setAttribute('id', 'appletTagDiv');
 						appletDiv.append(appletTagDiv);
@@ -1638,24 +1583,6 @@ function showIdropLiteGivenPath(path, displayMode) {
 				setErrorMessage(xhr.responseText);
 			});
 
-	
-	
-    if (window.File && window.FileList && window.FileReader) {
-        /************************************ 
-         * All the File APIs are supported. * 
-         * Entire code goes here.           *
-         ************************************/
-
-
-        /* Setup the Drag-n-Drop listeners. */
-        var dropZone = document.getElementById('idropLiteArea');
-        dropZone.addEventListener('dragover', handleDragOver, false);
-        dropZone.addEventListener('drop', handleDnDFileSelect, false);
-
-    }
-    else {
-        alert('Sorry! this browser does not support HTML5 File APIs.');
-    }
 
 
 	/*
