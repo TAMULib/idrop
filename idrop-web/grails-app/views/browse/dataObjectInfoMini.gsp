@@ -8,20 +8,17 @@
 	<!--  area to show idrop lite 5 -->
 	<asset:javascript src="uploadr.manifest.js"/>
     <asset:stylesheet href="uploadr.manifest.css"/>
-	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" maxSize="204800" />
-	<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>
-		<button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropUploadr' onclick='closeIdropUploadrArea()')>Close iDrop</button>
+	<uploadr:add name="idropUploadr" path="/tmp/uploadr" controller="UploadrFileController" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="1204800" />	
+	<div id='bulkUploadMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>
+		<button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropUploadr' onclick='closeIdropUploadrArea()')>Close Bulk Upload</button>			
 	</div>
 </div>
 <div id="toggleHtmlArea">
 	<div id="displayArea" >
 	<div id="infoDialogArea"><!--  no empty divs --></div>
 	
-	
 	<!-- display area lays out info in a main and side column -->
 	<div id="infoDisplayLayout">
-	
-	
 	
 	<div style="display:table-row;">
 		<div id="infoDisplayMain"  style="display:table-cell;">
@@ -30,7 +27,6 @@
 		<!-- inner table for general data -->
 		
 			<div id="container" style="height:100%;width:100%;">
-		
 				
 				<div >
 					<div><label><g:message code="text.file.name" />:</label></div>
