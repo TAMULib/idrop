@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="${resource(dir:'css',file:'jquery.fileupload-ui.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'superfish.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'jquery.gritter.css')}" />
-    <link rel="stylesheet" href="${resource(dir:'css',file:'overcast/jquery-ui-1.9.0.custom.css')}" />
-    <link rel="stylesheet" href="${resource(dir:'assets',file:'uploadr.manifest.css')}" />
+    <link rel="stylesheet" href="${resource(dir:'css',file:'overcast/jquery-ui-1.9.0.custom.css')}" />    
     <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
   <g:layoutHead />
   <g:javascript library="jquery-1.7.2.min" />
@@ -39,4 +38,3 @@
   <g:javascript library="jquery.gritter.min" />
   <g:javascript library="jquery.opacityrollover" />
   <g:javascript library="superfish" />
-  <g:javascript library="uploadr.manifest" />

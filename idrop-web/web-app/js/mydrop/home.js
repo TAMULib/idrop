@@ -1455,14 +1455,14 @@ function buildFormFromACLDetailsTable() {
 /**
  * Close the iDrop lite applet area
  */
-function closeApplet() {
-	$j("#idropLiteArea").animate({
+function closeIdropUploadrArea() {
+	$j("#idropUploadrArea").animate({
 		height : 'hide'
 	}, 'slow');
 	$j("#toggleHtmlArea").show('slow');
 	$j("#toggleHtmlArea").height = "100%";
 	$j("#toggleHtmlArea").width = "100%";
-	//$j("#idropLiteArea").empty();
+	//$j("#idropUploadrArea").empty();
 
 	if (selectedPath == "" || selectedPath == null) {
 		// ignore reload tree
@@ -1536,7 +1536,7 @@ function showBrowseDetailsIdropLiteLocalAndIrods() {
  *            1=local/irods tree, 2=bulk upload
  */
 function showIdropLiteGivenPath(path, displayMode) {
-	var idropLiteSelector = "#idropLiteArea";
+	var idropLiteSelector = "#idropUploadrArea";
 	if (path == null) {
 		alert("No path was selected, use the tree to select an iRODS collection to upload the file to");
 		return;
@@ -1553,118 +1553,6 @@ function showIdropLiteGivenPath(path, displayMode) {
 	var params = {
 		absPath : path
 	}
-	
-	var jqxhr = $j
-			.post(context + idropLiteUrl, params, function(data, status, xhr) {
-				//lcClearDivAndDivClass(idropLiteSelector);
-			}, "html")
-			.error(function(xhr, status, error) {
-				setErrorMessage(xhr.responseText);
-			})
-			.success(
-					function(data, status, xhr) {
-
-						var continueReq = checkForSessionTimeout(data, xhr);
-						
-						if (!continueReq) {
-							return false;
-						}						
-						
-						var appletDiv = $j("#idropLiteArea");
-						$j(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
-
-					}).error(function(xhr, status, error) {
-				setErrorMessage(xhr.responseText);
-			});
-
-
-	/*
-	lcShowBusyIconInDiv(idropLiteSelector);
-	setMessage("This will launch the iDrop Lite applet, it may take a minute for the applet to load, please be patient");
-
-	var jqxhr = $j
-			.post(context + idropLiteUrl, params, function(data, status, xhr) {
-				lcClearDivAndDivClass(idropLiteSelector);
-			}, "html")
-			.error(function(xhr, status, error) {
-
-				setErrorMessage(xhr.responseText);
-
-			})
-			.success(
-					function(data, status, xhr) {
-
-						var continueReq = checkForSessionTimeout(data, xhr);
-						if (!continueReq) {
-							return false;
-						}
-						var dataJSON = jQuery.parseJSON(data);
-						var appletDiv = $j("#idropLiteArea");
-						$j(appletDiv)
-								.append(
-										"<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>")
-						var appletTagDiv = document.createElement('div');
-						appletTagDiv.setAttribute('id', 'appletTagDiv');
-						var a = document.createElement('applet');
-						appletTagDiv.appendChild(a);
-						a.setAttribute('code', dataJSON.appletCode);
-						// a.setAttribute('codebase',
-						// 'http://iren-web.renci.org/idrop-web/applet');//dataJSON.appletUrl);
-						a.setAttribute('codebase', dataJSON.appletUrl);
-						a.setAttribute('archive', dataJSON.archive);
-						a.setAttribute('width', 800);
-						a.setAttribute('height', 600);
-						var p = document.createElement('param');
-						p.setAttribute('name', 'mode');
-						p.setAttribute('value', dataJSON.mode);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'host');
-						p.setAttribute('value', dataJSON.host);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'port');
-						p.setAttribute('value', dataJSON.port);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'zone');
-						p.setAttribute('value', dataJSON.zone);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'user');
-						p.setAttribute('value', dataJSON.user);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'password');
-						p.setAttribute('value', dataJSON.password);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'absPath');
-						p.setAttribute('value', dataJSON.absolutePath);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'uploadDest');
-						p.setAttribute('value', dataJSON.absolutePath);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'defaultStorageResource');
-						p
-								.setAttribute('value',
-										dataJSON.defaultStorageResource);
-						a.appendChild(p);
-						p = document.createElement('param');
-						p.setAttribute('name', 'displayMode');
-						p.setAttribute('value', displayMode);
-						a.appendChild(p);
-						appletDiv.append(appletTagDiv);
-
-						$j("#idropLiteArea").removeAttr('style');
-
-					}).error(function(xhr, status, error) {
-				setErrorMessage(xhr.responseText);
-			});
-			*/
-
 }
 
 /**

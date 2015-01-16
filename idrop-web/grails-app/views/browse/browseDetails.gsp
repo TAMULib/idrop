@@ -4,9 +4,14 @@
 	value="${parent.collectionName}" />
 
 <div style="overflow: visible; position: relative;">
-	<div id="idropLiteArea">
-		<!--  area to show idrop lite 1 -->		
+	<div id="idropUploadrArea">
+		<!--  area to show idrop lite 1 -->	
+		<asset:javascript src="uploadr.manifest.js"/>
+    	<asset:stylesheet href="uploadr.manifest.css"/>	
 		<uploadr:add name="idropUploadr" path="/data/tmp/uploadr/idropUploader" direction="up" maxVisible="10" colorPicker="true" maxSize="204800" />
+		<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>
+			<button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropUploadr' onclick='closeIdropUploadrArea()')>Close iDrop</button>
+		</div>
 	</div>
 	<div id="toggleHtmlArea">
 		<div id="infoDialogArea">
