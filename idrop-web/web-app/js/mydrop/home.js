@@ -1462,7 +1462,7 @@ function closeApplet() {
 	$j("#toggleHtmlArea").show('slow');
 	$j("#toggleHtmlArea").height = "100%";
 	$j("#toggleHtmlArea").width = "100%";
-	$j("#idropLiteArea").empty();
+	//$j("#idropLiteArea").empty();
 
 	if (selectedPath == "" || selectedPath == null) {
 		// ignore reload tree
@@ -1572,8 +1572,7 @@ function showIdropLiteGivenPath(path, displayMode) {
 						
 						var appletDiv = $j("#idropLiteArea");
 						$j(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
-												
-						$j("#idropLiteArea").removeAttr('style');
+
 					}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);
 			});

@@ -5,9 +5,7 @@
 
 <div style="overflow: visible; position: relative;">
 	<div id="idropLiteArea">
-		<!--  area to show idrop lite 1 -->
-		<asset:javascript src="uploadr.manifest.js"/>
-    	<asset:stylesheet href="uploadr.manifest.css"/>
+		<!--  area to show idrop lite 1 -->		
 		<uploadr:add name="idropUploadr" path="/data/tmp/uploadr/idropUploader" direction="up" maxVisible="10" colorPicker="true" maxSize="204800" />
 	</div>
 	<div id="toggleHtmlArea">
