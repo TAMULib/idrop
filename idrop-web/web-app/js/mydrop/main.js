@@ -39,7 +39,7 @@ var splitMode = 'n';
 function setPathCrumbtrail(irodsAbsolutePath) {
 
 	if (irodsAbsolutePath == null || irodsAbsolutePath.length == 0) {
-		$("#infoDivPathArea").html("");
+		$j("#infoDivPathArea").html("");
 		return;
 	}
 
@@ -51,7 +51,7 @@ function setPathCrumbtrail(irodsAbsolutePath) {
 	var totLen = 0;
 
 	// compress each part of the path
-	$.each(pathArray, function(index, value) {
+	$j.each(pathArray, function(index, value) {
 		compressedPathArray[index] = truncatePathPart(value);
 		totLen += compressedPathArray[index].length;
 
@@ -64,7 +64,7 @@ function setPathCrumbtrail(irodsAbsolutePath) {
 		s += "...";
 	}
 
-	$.each(compressedPathArray, function(index, value) {
+	$j.each(compressedPathArray, function(index, value) {
 		if (index > 0) {
 
 			// if the path name is really long, just show the last 3 path
@@ -89,7 +89,7 @@ function setPathCrumbtrail(irodsAbsolutePath) {
 
 	});
 
-	$("#infoDivPathArea").html(s);
+	$j("#infoDivPathArea").html(s);
 
 }
 
@@ -97,7 +97,7 @@ function buildPathPartAnchor(indexOfCurrentPathPart, pathArray) {
 
 	var pathUrl = "<a href='#' id='";
 	var absPathSubsection = "";
-	$.each(pathArray, function(index, value) {
+	$j.each(pathArray, function(index, value) {
 		// only building abs path for the current subsection of the link
 		if (index > indexOfCurrentPathPart) {
 			return;
@@ -159,12 +159,12 @@ function clickOnPathInCrumbtrail(data) {
 	/* bug!  what if root of tree is below the path...need to reset the tree */
 
 	if (data.length <= baseAbsPath.length) {
-		/*currentNode = $.jstree._reference(dataTree).get_container();
-		var children = $.jstree._reference(dataTree)._get_children(currentNode);
+		/*currentNode = $j.jstree._reference(dataTree).get_container();
+		var children = $j.jstree._reference(dataTree)._get_children(currentNode);
 		currentNode = children[0];
 
-		$.jstree._reference(dataTree).open_node(currentNode);
-		$.jstree._reference(dataTree).select_node(currentNode, true);*/
+		$j.jstree._reference(dataTree).open_node(currentNode);
+		$j.jstree._reference(dataTree).select_node(currentNode, true);*/
 		if (data == "") {
 			data = "/";
 		}
@@ -173,8 +173,8 @@ function clickOnPathInCrumbtrail(data) {
 
 		splitPathAndPerformOperationAtGivenTreePath(data, null, null, function(
 				path, dataTree, currentNode) {
-			$.jstree._reference(dataTree).open_node(currentNode);
-			$.jstree._reference(dataTree).select_node(currentNode, true);
+			$j.jstree._reference(dataTree).open_node(currentNode);
+			$j.jstree._reference(dataTree).select_node(currentNode, true);
 
 		});
 	}
@@ -193,9 +193,9 @@ function showDefaultResourceDialog() {
  * Linked to update tags button on info view, update the tags in iRODS
  */
 function updateTags() {
-	var infoTagsVal = $("#infoTags").val();
-	var infoCommentVal = $("#infoComment").val();
-	var absPathVal = $("#infoAbsPath").val();
+	var infoTagsVal = $j("#infoTags").val();
+	var infoCommentVal = $j("#infoComment").val();
+	var absPathVal = $j("#infoAbsPath").val();
 
 	var params = {
 		absPath : absPathVal,

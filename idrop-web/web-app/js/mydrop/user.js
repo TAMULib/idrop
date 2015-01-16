@@ -23,8 +23,8 @@ function searchUsers(userSearchType, userName, targetDiv) {
 	}
 	
 	
-	//var userSearchType = $("#userSearchType").val();
-	//var userName = $("#userSearchTerm").val();
+	//var userSearchType = $j("#userSearchType").val();
+	//var userName = $j("#userSearchTerm").val();
 	lcSendValueAndCallbackHtmlAfterErrorCheckPreserveMessage("/user/userSearchByNameLike?userSearchTerm="
 			+ encodeURIComponent(userName), targetDiv, targetDiv, null);
 	

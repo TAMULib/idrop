@@ -1,11 +1,11 @@
 <script>
-$(document).ready(function() {
+$j(document).ready(function() {
 	
 	//sectabs.tabs('select', '#tabs-1');
 		refreshTagCloud();
 		displayCartTab();
-		var sectabs = $("#secondaryTabs").tabs();
-		$(sectabs).tabs('select', '#tabs-1');
+		var sectabs = $j("#secondaryTabs").tabs();
+		$j(sectabs).tabs('select', '#tabs-1');
 		//showUserPanel();
 	});
 

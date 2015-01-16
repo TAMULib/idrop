@@ -30,8 +30,8 @@
 </div>
 <script>
 
-	$(function() {
-		$("#renameDialog").dialog({width:500, modal:true});
+	$j(function() {
+		$j("#renameDialog").dialog({width:500, modal:true});
 	});
 
 	

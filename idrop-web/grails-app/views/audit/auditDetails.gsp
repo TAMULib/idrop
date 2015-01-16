@@ -36,17 +36,17 @@
 	var lastCount = 0;
 	var auditPageSize = 1000;
 
-	var path = $("#auditDetailsAbsPath").val();
+	var path = $j("#auditDetailsAbsPath").val();
 	if (path == null) {
 		path = baseAbsPath;
 	}
 	
-	$(function() {
+	$j(function() {
 		reloadAuditTable(path);
 	});
 
 	function callReloadForAudit() {
-		var absPath = $("#auditDetailsAbsPath").val();
+		var absPath = $j("#auditDetailsAbsPath").val();
 		reloadAuditTable(path);
 	}
 

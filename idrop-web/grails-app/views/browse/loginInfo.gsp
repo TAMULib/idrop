@@ -3,7 +3,7 @@
 </span>
 <script type="text/javascript">
 function topBarDefaultResourceChanged() {
-	var resource = $("#defaultStorageResource").val();
+	var resource = $j("#defaultStorageResource").val();
 	if (resource == null) {
 		return false;
 	}

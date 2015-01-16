@@ -33,8 +33,8 @@
 </div>
 <script>
 
-	$(function() {
-		$("#starDialog").dialog({width:500, modal:true});
+	$j(function() {
+		$j("#starDialog").dialog({width:500, modal:true});
 	});
 
 </script>

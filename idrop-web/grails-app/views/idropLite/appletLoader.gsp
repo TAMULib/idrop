@@ -13,10 +13,10 @@
 <script type="text/javascript">
 
 function closeApplet() {
-	$("#idropLiteArea").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-	$("#toggleBrowseDataDetailsTable").show('slow');
-	$("#toggleBrowseDataDetailsTable").height="100%";
-	$("#toggleBrowseDataDetailsTable").width="100%";
+	$j("#idropLiteArea").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+	$j("#toggleBrowseDataDetailsTable").show('slow');
+	$j("#toggleBrowseDataDetailsTable").height="100%";
+	$j("#toggleBrowseDataDetailsTable").width="100%";
 	dataLayout.resizeAll();
 }
 

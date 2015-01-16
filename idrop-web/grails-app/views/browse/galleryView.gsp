@@ -18,14 +18,14 @@
 </div>
 
 <script type="text/javascript">
-	jQuery(document).ready(function($) {
+	jQuery(document).ready(function($j) {
 		   Galleria.loadTheme(context + '/js/themes/classic/galleria.classic.min.js');
-		   $("#gallery").galleria({
+		   $j("#gallery").galleria({
 		        width: 800,
 		        height: 750,
 		        dataConfig: function(img) {
 		            return {
-		                description: $(img).next('div').html()
+		                description: $j(img).next('div').html()
 		            }
 		        }
 		    });

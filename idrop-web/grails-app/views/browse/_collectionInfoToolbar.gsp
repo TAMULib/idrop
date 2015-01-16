@@ -41,7 +41,7 @@
 <script type="text/javascript">
 
 	function cibSetCollectionAsRoot() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -56,7 +56,7 @@
 	* Show the uplaod dialog using the hidden path in the info view
 	*/
 	function cibUploadViaBrowser() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -72,7 +72,7 @@
 	*/
 	function cibBulkUploadViaBrowser() {
 		
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -86,7 +86,7 @@
 	* Create a new folder underneath the current directory
 	**/
 	function cibNewFolder() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -98,7 +98,7 @@
 	* Delete the collection currently displayed in the info view
 	*/
 	function cibRenameCollection() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -112,7 +112,7 @@
 	* call delete using the path in the info panel
 	*/
 	function cibDeleteCollection() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -125,7 +125,7 @@
 	* favorite, or 'star' the collection currently displayed in the info view
 	*/
 	function cibStarCollection() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -151,7 +151,7 @@
 	* unfavorite favorite, or 'star' the collection currently displayed in the info view
 	*/
 	function cibUnstarCollection() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		if (path == null) {
 			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 			return false;
@@ -172,7 +172,7 @@
 
 		showBlockingPanel();
 
-		var jqxhr = $.post(context + url, params,
+		var jqxhr = $j.post(context + url, params,
 				function(data, status, xhr) {
 				}, "html").success(
 				function(returnedData, status, xhr) {

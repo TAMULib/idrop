@@ -37,9 +37,9 @@
 </div>
 <script type="text/javascript">
 
-	$(function() {
-		$("#topbarShoppingCart").addClass("active");
+	$j(function() {
+		$j("#topbarShoppingCart").addClass("active");
 		refreshCartFiles();
 	});
 
-	</script>
+</script>

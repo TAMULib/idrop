@@ -45,8 +45,8 @@
 </div>
 
 <script>
-	$(function() {
-		$("#addParameterDialog").dialog({
+	$j(function() {
+		$j("#addParameterDialog").dialog({
 			"modal" : true,
 			"width" : "500px"
 		});
@@ -54,19 +54,19 @@
 
 	function submitAddInputParameterDialog() {
 
-		var absPath = $("#newParameterAbsPath").val();
+		var absPath = $j("#newParameterAbsPath").val();
 		if (absPath == null || absPath == "") {
 			setErrorMessage("no absPath for rule");
 			return false;
 		}
 
-		var inputParamKey = $("#addParameterName").val();
+		var inputParamKey = $j("#addParameterName").val();
 		if (inputParamKey == null || inputParamKey == "") {
 			setErrorMessage("no input parameter key for rule");
 			return false;
 		}
 
-		var inputParamValue = $("#addParameterValue").val();
+		var inputParamValue = $j("#addParameterValue").val();
 		if (inputParamValue == null || inputParamValue == "") {
 			setErrorMessage("no input parameter value for rule");
 			return false;
@@ -81,7 +81,7 @@
 
 		showBlockingPanel();
 
-		var jqxhr = $.post(context + url, params, "html")
+		var jqxhr = $j.post(context + url, params, "html")
 				.success(
 						function(returnedData, status, xhr) {
 							var continueReq = checkForSessionTimeout(
@@ -90,10 +90,10 @@
 								unblockPanel();
 								return false;
 							}
-							$("#ruleDetailDiv").html(returnedData);
+							$j("#ruleDetailDiv").html(returnedData);
 
-							$("#addParameterDialog").dialog("close");
-							$("#addParameterDialog").html("");
+							$j("#addParameterDialog").dialog("close");
+							$j("#addParameterDialog").html("");
 							unblockPanel();
 
 						}).error(function(xhr, status, error) {
@@ -104,19 +104,19 @@
 	}
 
 	function closeAddParameterDialog() {
-		$("#addParameterDialog").dialog("close");
-		$("#addParameterDialog").html("");
+		$j("#addParameterDialog").dialog("close");
+		$j("#addParameterDialog").html("");
 	}
 
 	function submitAddOutputParameterDialog() {
 
-		var absPath = $("#newParameterAbsPath").val();
+		var absPath = $j("#newParameterAbsPath").val();
 		if (absPath == null || absPath == "") {
 			setErrorMessage("no absPath for rule");
 			return false;
 		}
 
-		var inputParamKey = $("#addParameterName").val();
+		var inputParamKey = $j("#addParameterName").val();
 		if (inputParamKey == null || inputParamKey == "") {
 			setErrorMessage("no input parameter key for rule");
 			return false;
@@ -130,7 +130,7 @@
 
 		showBlockingPanel();
 
-		var jqxhr = $.post(context + url, params, "html")
+		var jqxhr = $j.post(context + url, params, "html")
 				.success(
 						function(returnedData, status, xhr) {
 							var continueReq = checkForSessionTimeout(
@@ -139,10 +139,10 @@
 								unblockPanel();
 								return false;
 							}
-							$("#ruleDetailDiv").html(returnedData);
+							$j("#ruleDetailDiv").html(returnedData);
 
-							$("#addParameterDialog").dialog("close");
-							$("#addParameterDialog").html("");
+							$j("#addParameterDialog").dialog("close");
+							$j("#addParameterDialog").html("");
 							unblockPanel();
 
 						}).error(function(xhr, status, error) {

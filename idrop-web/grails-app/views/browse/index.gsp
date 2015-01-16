@@ -15,17 +15,17 @@
 <script type="text/javascript">
 	var dataLayout;
 	var tabs;
-	$(document).ready(function() {
+	$j(document).ready(function() {
 
-		$("#topbarBrowser").addClass("active");
+		$j("#topbarBrowser").addClass("active");
 
-		$.ajaxSetup({
+		$j.ajaxSetup({
 			cache : false
 		});
 
-		$("#infoDiv").resize();
+		$j("#infoDiv").resize();
 
-		dataLayout = $("#dataTreeView").layout({
+		dataLayout = $j("#dataTreeView").layout({
 			applyDefaultStyles : false,
 			size : "auto",
 			west__minSize : 150,
@@ -37,10 +37,10 @@
 		These values are passed in by the BrowseController and preservered in gsp fields to be picked up by the javascript
 		*/
 		
-		var mode = $("#mode").val(); // mode of building tree (detect = seek the best root, path = open to the given path, root = set to the root, etc)
-		browseOptionVal = $("#viewStateBrowseOptionVal").val(); // browse view, info view, gallery view, etc
-		dataTreePath = $("#presetPath").val(); // root of the tree
-		var thisSelectedPath = $("#viewStateSelectedPath").val(); // optional path to select
+		var mode = $j("#mode").val(); // mode of building tree (detect = seek the best root, path = open to the given path, root = set to the root, etc)
+		browseOptionVal = $j("#viewStateBrowseOptionVal").val(); // browse view, info view, gallery view, etc
+		dataTreePath = $j("#presetPath").val(); // root of the tree
+		var thisSelectedPath = $j("#viewStateSelectedPath").val(); // optional path to select
 		
 		
 		if (mode == null || mode=="" || dataTreePath == null || dataTreePath == "") {
@@ -53,9 +53,9 @@
 			retrieveBrowserFirstView(mode, dataTreePath, thisSelectedPath);
 		}
 
-		 $(window).bind( 'hashchange', function(e) {
+		 $j(window).bind( 'hashchange', function(e) {
 			  
-             processStateChange( $.bbq.getState());
+             processStateChange( $j.bbq.getState());
 
 		});
 

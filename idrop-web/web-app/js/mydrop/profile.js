@@ -10,16 +10,16 @@ function updateUserProfile() {
 
 	/*
 	var params = {
-			nickName : $("#nickName").val(),
-			description : $("#description").val(),
-			email : $("#email").val()
+			nickName : $j("#nickName").val(),
+			description : $j("#description").val(),
+			email : $j("#email").val()
 		}
 */
 		showBlockingPanel();
-		$("#userProfileForm").submit();
+		$j("#userProfileForm").submit();
 
 		/*
-		var jqxhr = $.post(context + "/profile/updateProfile", params,
+		var jqxhr = $j.post(context + "/profile/updateProfile", params,
 				function(data, status, xhr) {
 				}, "html").success(function(returnedData, status, xhr) {
 			var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -27,7 +27,7 @@ function updateUserProfile() {
 				return false;
 			}
 			setMessage(jQuery.i18n.prop('msg_profile_update_successful'));
-			$("#profileDataArea").html(returnedData);
+			$j("#profileDataArea").html(returnedData);
 			unblockPanel();
 		}).error(function(xhr, status, error) {
 			setErrorMessage(xhr.responseText);

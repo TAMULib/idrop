@@ -8,7 +8,7 @@ currently unused...need to update to put something in the side-bar
 <script type="text/javascript">
 
 	
-	$(function() {
+	$j(function() {
 		lcPrepareForCall();
 		dataTable = lcBuildTableInPlace("#aclDetailsTable", null, null);	
 

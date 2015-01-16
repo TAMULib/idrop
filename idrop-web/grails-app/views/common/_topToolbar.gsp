@@ -30,10 +30,10 @@
 <script type="text/javascript">
 	var showLite = false;
 
-	$(function() {
-		$(".toolbarMenuItem").hide();
-		$(".detailsToolbarMenuItem").hide();
-		//$("ul.sf-menu").superfish();
+	$j(function() {
+		$j(".toolbarMenuItem").hide();
+		$j(".detailsToolbarMenuItem").hide();
+		//$j("ul.sf-menu").superfish();
 	});
 
 	function setDefaultView(view) {
@@ -46,7 +46,7 @@
 		//var state = {};
 
 		//state["browseOptionVal"] = browseOptionVal;
-		//$.bbq.pushState(state);
+		//$j.bbq.pushState(state);
 
 	}
 
@@ -107,20 +107,20 @@
 	// browse toolbar scripts
 
 	function showInTreeClickedFromToolbar() {
-		var path = $("#infoAbsPath").val();
-		$(tabs).tabs('select', 0); // switch to home tab
+		var path = $j("#infoAbsPath").val();
+		$j(tabs).tabs('select', 0); // switch to home tab
 		splitPathAndPerformOperationAtGivenTreePath(path, null, null, function(
 				path, dataTree, currentNode) {
 
-			$.jstree._reference(dataTree).open_node(currentNode);
-			$.jstree._reference(dataTree).select_node(currentNode, true);
+			$j.jstree._reference(dataTree).open_node(currentNode);
+			$j.jstree._reference(dataTree).select_node(currentNode, true);
 			// updateBrowseDetailsForPathBasedOnCurrentModel(data);
 
 		});
 	}
 
 	function downloadAction() {
-		var path = $("#infoAbsPath").val();
+		var path = $j("#infoAbsPath").val();
 		downloadViaToolbar(path);
 	}
 	

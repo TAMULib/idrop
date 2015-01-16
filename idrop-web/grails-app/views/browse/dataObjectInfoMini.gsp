@@ -142,9 +142,9 @@
 <script>
 
 function updateTagsFromDataObjectInfoMini() {
-	var infoTagsVal = $("#infoTags").val();
-	var infoCommentVal = $("#infoComment").val();
-	var absPathVal = $("#infoAbsPath").val();
+	var infoTagsVal = $j("#infoTags").val();
+	var infoCommentVal = $j("#infoComment").val();
+	var absPathVal = $j("#infoAbsPath").val();
 	
 	updateTagsAtPath(absPathVal, infoTagsVal, infoCommentVal);
 }
@@ -154,7 +154,7 @@ function updateTagsFromDataObjectInfoMini() {
 <g:if test="${getThumbnail}">
 	<script>
 
-$(function() {
+$j(function() {
 	requestThumbnailImageForInfoPane();
 });
 
@@ -164,9 +164,9 @@ $(function() {
 </g:if>
 <g:else>
 <script>
-$(function() {
-	//$.fn.media.mapFormat('pdf', 'quicktime');
-	$('.media').media( { width: 300, height: 200, autoplay: true } ); 
+$j(function() {
+	//$j.fn.media.mapFormat('pdf', 'quicktime');
+	$j('.media').media( { width: 300, height: 200, autoplay: true } ); 
 
 });
 </script>

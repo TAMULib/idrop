@@ -11,12 +11,12 @@ function processTagSearchStateChange(state) {
 
 	if (tab) {
 		var selector = '#searchTabs a[href="' + tab + '"]';
-		$(selector).tab('show');
+		$j(selector).tab('show');
 	}
 }
 
 function clickInTagCloud(data) {
-	$('#tabs').tabs({
+	$j('#tabs').tabs({
 		selected : 1
 	}); // activate search results tab
 	searchWithTag(data);
@@ -49,7 +49,7 @@ function searchWithTag(data) {
 	var tableParams = {"bJQueryUI" : false, "bFilter" : false, "iDisplayLength":"5000"}
 
 	// show result tab
-	$('#searchTabs a[href="#resultsTab"]').tab('show');
+	$j('#searchTabs a[href="#resultsTab"]').tab('show');
 	lcSendValueAndBuildTable("/search/search", params, "#resultsTabInner",
 			"#searchResultTable", searchDetailsClick, ".search-detail-icon", tableParams);
 
@@ -59,8 +59,8 @@ function searchWithTag(data) {
  * Update the information in the tag cloud
  */
 function haveTagCloudData(data) {
-	$("#tagCloudDiv").empty();
-	$("#tagCloudDiv").jQCloud(data, {
+	$j("#tagCloudDiv").empty();
+	$j("#tagCloudDiv").jQCloud(data, {
 		width : 800,
 		height : 600
 	});

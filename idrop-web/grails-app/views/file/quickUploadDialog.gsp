@@ -37,8 +37,8 @@
 
 <script>
 function closeUploadDialog() {
-	$("#uploadDialog").dialog('close');
-	$("#uploadDialog").remove();
+	$j("#uploadDialog").dialog('close');
+	$j("#uploadDialog").remove();
 }
 
 </script>

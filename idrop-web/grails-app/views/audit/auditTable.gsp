@@ -33,7 +33,7 @@
 		</tfoot>
 	</table>
 	<script>
-	$(function() {
+	$j(function() {
 		
 		 pageableForward = "${pageableForward}";
 		 pageableBackwards = "${pageableBackwards}";
@@ -42,15 +42,15 @@
 		 lastCount = "${lastCount}";
 		 
 		 if (pageableForward == true) {
-				$('#forwardAuditButton').show();
+				$j('#forwardAuditButton').show();
 			} else {
-				$('#forwardAuditButton').hide();
+				$j('#forwardAuditButton').hide();
 			}
 		
 			if (pageableBackwards == true) {
-				$('#backwardAuditButton').show();
+				$j('#backwardAuditButton').show();
 			} else {
-				$('#backwardAuditButton').hide();
+				$j('#backwardAuditButton').hide();
 			}
 		
 	});

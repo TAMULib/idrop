@@ -23,8 +23,8 @@
 
 <script type="text/javascript">
 
-	$(function() {
-		$("ul.sf-menu").superfish();
+	$j(function() {
+		$j("ul.sf-menu").superfish();
 	});
 
 </script>

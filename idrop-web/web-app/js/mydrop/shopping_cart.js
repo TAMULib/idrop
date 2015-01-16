@@ -16,7 +16,7 @@ var idropLiteShoppingCartSelector = "#cartAppletDiv";
  * The add to shopping cart button has been selected from an info view
  */
 function addToCartViaToolbar() {
-	var infoAbsPath = $("#infoAbsPath").val();
+	var infoAbsPath = $j("#infoAbsPath").val();
 	addToCartGivenPath(infoAbsPath);
 }
 
@@ -24,7 +24,7 @@ function addToCartViaToolbar() {
  * The add to cart button was selected from the browseDetailsView
  */
 function addToCartViaBrowseDetailsToolbar() {
-	//var path = $("#browseDetailsAbsPath").val();
+	//var path = $j("#browseDetailsAbsPath").val();
 	addToCartGivenPath(selectedPath);
 }
 
@@ -42,7 +42,7 @@ function addToCartGivenPath(absPath) {
 	
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + addToCartUrl, params, "html").success(
+	var jqxhr = $j.post(context + addToCartUrl, params, "html").success(
 			function(returnedData, status, xhr) {
 				var continueReq = checkForSessionTimeout(returnedData, xhr);
 				if (!continueReq) {
@@ -81,7 +81,7 @@ function refreshCartFiles() {
  * Clear the files in the shopping cart
  */
 function clearCart() {
-	var jqxhr = $.post(context + clearCartUrl, null, "html").success(
+	var jqxhr = $j.post(context + clearCartUrl, null, "html").success(
 			function(returnedData, status, xhr) {
 				var continueReq = checkForSessionTimeout(returnedData, xhr);
 				if (!continueReq) {
@@ -103,8 +103,8 @@ function deleteFromCart() {
 	var filesToDelete = new Array();
 	var i = 0;
 	if (answer) {
-		var formData = $("#cartTableForm").serializeArray();
-		var jqxhr = $.post(context + deleteCartUrl, formData, "html").success(
+		var formData = $j("#cartTableForm").serializeArray();
+		var jqxhr = $j.post(context + deleteCartUrl, formData, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
@@ -124,8 +124,8 @@ function deleteFromCart() {
  */
 function addToCartBulkAction() {
 	
-		var formData = $("#browseDetailsForm").serializeArray();
-		var jqxhr = $.post(context + addToCartBulkActionUrl, formData, "html").success(
+		var formData = $j("#browseDetailsForm").serializeArray();
+		var jqxhr = $j.post(context + addToCartBulkActionUrl, formData, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
@@ -141,13 +141,13 @@ function addToCartBulkAction() {
 
 function closeShoppingCartApplet() {
 	
-	$(idropLiteShoppingCartSelector).animate({
+	$j(idropLiteShoppingCartSelector).animate({
 		height : 'hide'
 	}, 'slow');
-	$("#cartToggleDiv").show('slow');
-	$("#cartToggleDiv").height = "100%";
-	$("#cartToggleDiv").width = "100%";
-	$(idropLiteShoppingCartSelector).empty();
+	$j("#cartToggleDiv").show('slow');
+	$j("#cartToggleDiv").height = "100%";
+	$j("#cartToggleDiv").width = "100%";
+	$j(idropLiteShoppingCartSelector).empty();
 	
 }
 
@@ -157,19 +157,19 @@ function closeShoppingCartApplet() {
 function checkOut() {
 	
 	// first hide cart details table
-	$("#cartToggleDiv").hide('slow');
-	$("#cartToggleDiv").width = "0%";
-	$("#cartToggleDiv").height = "0%";
-	$(idropLiteShoppingCartSelector).animate({ height: '100%',
+	$j("#cartToggleDiv").hide('slow');
+	$j("#cartToggleDiv").width = "0%";
+	$j("#cartToggleDiv").height = "0%";
+	$j(idropLiteShoppingCartSelector).animate({ height: '100%',
 		 opacity: '100%' }, 'slow');
-	$(idropLiteShoppingCartSelector).show('slow');
-	$(idropLiteShoppingCartSelector).width = "100%";
-	$(idropLiteShoppingCartSelector).height = "100%";
+	$j(idropLiteShoppingCartSelector).show('slow');
+	$j(idropLiteShoppingCartSelector).width = "100%";
+	$j(idropLiteShoppingCartSelector).height = "100%";
 
 
 	lcShowBusyIconInDiv(idropLiteShoppingCartSelector);
 	setMessage("This will launch the iDrop Lite applet, it may take a minute for the applet to load, please be patient");
-	var jqxhr = $
+	var jqxhr = $j
 			.post(context + checkOutCartUrl, null, function(data, status, xhr) {
 				var continueReq = checkForSessionTimeout(data, xhr);
 				if (!continueReq) {
@@ -181,18 +181,18 @@ function checkOut() {
 
 				setErrorMessage(xhr.responseText);
 				
-				$("#cartToggleDiv").show('slow');
-				$("#cartToggleDiv").width = "100%";
-				$("#cartToggleDiv").height = "100%";
-				$(idropLiteShoppingCartSelector).hide('slow');
+				$j("#cartToggleDiv").show('slow');
+				$j("#cartToggleDiv").width = "100%";
+				$j("#cartToggleDiv").height = "100%";
+				$j(idropLiteShoppingCartSelector).hide('slow');
 
 			})
 			.success(
 					function(data) {
 
 						var dataJSON = jQuery.parseJSON(data);
-						var appletDiv = $(idropLiteShoppingCartSelector);
-						$(appletDiv)
+						var appletDiv = $j(idropLiteShoppingCartSelector);
+						$j(appletDiv)
 								.append(
 										"<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleCartClosed' class='ui-state-default ui-corner-all' value='toggleCartClosed' onclick='closeShoppingCartApplet()')>Close Cart</button></div>")
 						var appletTagDiv = document.createElement('div');
@@ -254,7 +254,7 @@ function checkOut() {
 						a.appendChild(p);
 						appletDiv.append(appletTagDiv);
 
-						$(idropLiteShoppingCartSelector).removeAttr('style');
+						$j(idropLiteShoppingCartSelector).removeAttr('style');
 
 					
 					});

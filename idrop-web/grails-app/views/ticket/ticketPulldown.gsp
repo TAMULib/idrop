@@ -156,9 +156,9 @@
 			
 </div>
 <script>
-	$(function() {
+	$j(function() {
 
-		$.datepicker.setDefaults($.datepicker.regional[""]);
+		$j.datepicker.setDefaults($j.datepicker.regional[""]);
 		var current =
 ${ticket.usesCount}
 	;
@@ -176,9 +176,9 @@ ${ticket.usesLimit}
 			limit = 0;
 		}
 
-		var data = [ $.gchart.series('Usage', [ current, limit ]) ];
+		var data = [ $j.gchart.series('Usage', [ current, limit ]) ];
 
-		$('#ticketUsesChart').gchart({
+		$j('#ticketUsesChart').gchart({
 			type : 'pie3D',
 			series : data,
 			legend : 'bottom',
@@ -203,9 +203,9 @@ ${ticket.writeByteLimit}
 			limit = 0;
 		}
 
-		data = [ $.gchart.series('Bytes', [ current, limit ]) ];
+		data = [ $j.gchart.series('Bytes', [ current, limit ]) ];
 
-		$('#ticketWriteBytesChart').gchart({
+		$j('#ticketWriteBytesChart').gchart({
 			type : 'pie3D',
 			series : data,
 			legend : 'bottom',
@@ -228,9 +228,9 @@ ${ticket.writeFileLimit}
 			current = 1;
 			limit = 0;
 		}
-		data = [ $.gchart.series('Files', [ current, limit ]) ];
+		data = [ $j.gchart.series('Files', [ current, limit ]) ];
 
-		$('#ticketWriteFilesChart').gchart({
+		$j('#ticketWriteFilesChart').gchart({
 			type : 'pie3D',
 			series : data,
 			legend : 'bottom',
@@ -238,9 +238,9 @@ ${ticket.writeFileLimit}
 			height : 80
 		});
 
-		$("#ticketPulldownUrlLanding").hide();
-		$("#ticketPulldownUrl").show();
-		$("#expireTime").datepicker();
+		$j("#ticketPulldownUrlLanding").hide();
+		$j("#ticketPulldownUrl").show();
+		$j("#expireTime").datepicker();
 
 	});
 
@@ -248,14 +248,14 @@ ${ticket.writeFileLimit}
 	 * switches content of url displayed to show either the URL with the landing page parameter, or one without to go 'direct'
 	 */
 	function toggleLandingUrl() {
-		var checkVal = $("#showLandingPage").attr("checked");
+		var checkVal = $j("#showLandingPage").attr("checked");
 		if (checkVal) {
-			$("#ticketPulldownUrl").hide("fast");
-			$("#ticketPulldownUrlLanding").show("slow");
+			$j("#ticketPulldownUrl").hide("fast");
+			$j("#ticketPulldownUrlLanding").show("slow");
 
 		} else {
-			$("#ticketPulldownUrlLanding").hide("fast");
-			$("#ticketPulldownUrl").show("slow");
+			$j("#ticketPulldownUrlLanding").hide("fast");
+			$j("#ticketPulldownUrl").show("slow");
 		}
 	}
 </script>

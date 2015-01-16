@@ -35,7 +35,7 @@
 function topBarDefaultResourceChanged() {
 	//showBlockingPanel();
 	try {
-	var resource = $("#defaultStorageResource").val();
+	var resource = $j("#defaultStorageResource").val();
 		if (resource == null) {
 			return false;
 		}

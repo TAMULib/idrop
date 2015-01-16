@@ -11,8 +11,8 @@
 </div>
 <script type="text/javascript">
 	
-	$(document).ready(function() {
-		baseAbsPath = $("#absPath").val();
+	$j(document).ready(function() {
+		baseAbsPath = $j("#absPath").val();
 		if (baseAbsPath == null) {
 			return false;
 		}

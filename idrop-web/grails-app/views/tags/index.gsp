@@ -34,30 +34,30 @@
 </div>
 
 <script>
-	$(document).ready(function() {
+	$j(document).ready(function() {
 
-		$.ajaxSetup({
+		$j.ajaxSetup({
 			cache : false
 		});
-		$("#topbarSearch").addClass("active");
+		$j("#topbarSearch").addClass("active");
 
-		$('#searchTabs a').click(function (e) {
+		$j('#searchTabs a').click(function (e) {
 
 			  e.preventDefault();
-			  $(this).tab('show');
+			  $j(this).tab('show');
 			  var state = {};
 			  var tabId = this.hash
 			  state["tab"] = tabId;
-			  $.bbq.pushState(state);
+			  $j.bbq.pushState(state);
 		});
 
-		 $(window).bind( 'hashchange', function(e) {
-             processTagSearchStateChange( $.bbq.getState());
+		 $j(window).bind( 'hashchange', function(e) {
+             processTagSearchStateChange( $j.bbq.getState());
 		});
 
 		 refreshTagCloud();
 
-		  $(window).trigger( 'hashchange' );
+		  $j(window).trigger( 'hashchange' );
 	
 	});
 

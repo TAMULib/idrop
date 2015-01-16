@@ -10,20 +10,20 @@
           host = "${request.localName}";
           port = "${request.localPort}";
 
-          $(function(){
+          $j(function(){
                   // Keep a mapping of url-to-container for caching purposes.
                  /* var cache = {
                   // If url is '' (no fragment), display this div's content.
-                  '': $('.bbq-default')
+                  '': $j('.bbq-default')
                   };*/
 
 
                    // Bind an event to window.onhashchange that, when the history state changes,
                     // gets the url from the hash and displays either our cached content or fetches
                     // new content to be displayed.
-                 /*   $(window).bind( 'hashchange', function(e) {
+                 /*   $j(window).bind( 'hashchange', function(e) {
 			  
-                                  processStateChange( $.bbq.getState());
+                                  processStateChange( $j.bbq.getState());
 			   
                     });*/
 

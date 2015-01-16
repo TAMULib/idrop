@@ -183,37 +183,37 @@
 
 
 <script>
-	$(function() {
+	$j(function() {
 
-		$(".idropLiteBulkUpload").show();
-		$("#menuDownload").hide();
-		$("#menuUpload").show();
-		$("#menuBulkUpload").show();
+		$j(".idropLiteBulkUpload").show();
+		$j("#menuDownload").hide();
+		$j("#menuUpload").show();
+		$j("#menuBulkUpload").show();
 
-		$('#infoTabs a').click(function(e) {
+		$j('#infoTabs a').click(function(e) {
 			e.preventDefault();
-			$(this).tab('show');
+			$j(this).tab('show');
 		});
 
-		$('#infoTab').on('shown', function(e) {
+		$j('#infoTab').on('shown', function(e) {
 			//e.target // activated tab
 			//e.relatedTarget // previous tab
 			showMetadataView(selectedPath, "#infoAccordionMetadataInner");
 		});
 
-		$('#metadataTab').on('shown', function(e) {
+		$j('#metadataTab').on('shown', function(e) {
 			showMetadataView(selectedPath, "#infoAccordionMetadataInner");
 		});
 
-		$('#permissionTab').on('shown', function(e) {
+		$j('#permissionTab').on('shown', function(e) {
 			showSharingView(selectedPath, "#infoAccordionACLInner");
 		});
 
-		$('#ticketTab').on('shown', function(e) {
+		$j('#ticketTab').on('shown', function(e) {
 			showTicketView(selectedPath, "#infoAccordionTicketsInner");
 		});
 
-		$('#auditTab').on('shown', function(e) {
+		$j('#auditTab').on('shown', function(e) {
 			showAuditView(selectedPath, "#infoAccordionAuditInner");
 		});
 

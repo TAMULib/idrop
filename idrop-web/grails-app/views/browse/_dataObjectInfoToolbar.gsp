@@ -27,7 +27,7 @@
 <script type="text/javascript">
 
 function dibDownloadFile() {
-	var path = $("#infoAbsPath").val();
+	var path = $j("#infoAbsPath").val();
 	//alert("path from infoAbsPath:" + path);
 	if (path == null) {
 		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
@@ -41,7 +41,7 @@ function dibDownloadFile() {
 * Delete the file currently displayed in the info view
 */
 function dibRenameFile() {
-	var path = $("#infoAbsPath").val();
+	var path = $j("#infoAbsPath").val();
 	if (path == null) {
 		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 		return false;
@@ -54,7 +54,7 @@ function dibRenameFile() {
 * call delete using the path in the info panel
 */
 function dibDeleteFile() {
-	var path = $("#infoAbsPath").val();
+	var path = $j("#infoAbsPath").val();
 	if (path == null) {
 		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 		return false;
@@ -67,7 +67,7 @@ function dibDeleteFile() {
 * favorite, or 'star' the data object currently displayed in the info view
 */
 function dibStarFile() {
-	var path = $("#infoAbsPath").val();
+	var path = $j("#infoAbsPath").val();
 	if (path == null) {
 		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 		return false;
@@ -93,7 +93,7 @@ function dibStarFile() {
 * unfavorite favorite, or 'star' the collection currently displayed in the info view
 */
 function dibUnstarFile() {
-	var path = $("#infoAbsPath").val();
+	var path = $j("#infoAbsPath").val();
 	if (path == null) {
 		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
 		return false;
@@ -112,7 +112,7 @@ function dibUnstarFile() {
 			absPath : path
 	}
 
-	var jqxhr = $.post(context + url, params,
+	var jqxhr = $j.post(context + url, params,
 			function(data, status, xhr) {
 			}, "html").success(
 			function(returnedData, status, xhr) {

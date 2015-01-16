@@ -33,8 +33,8 @@
 
 	var cartTable;
 
-	$(function() {
-		cartTable = $("#cartTable").dataTable(  {"bJQueryUI" : true,
+	$j(function() {
+		cartTable = $j("#cartTable").dataTable(  {"bJQueryUI" : true,
 	          	"bLengthChange": false,
 	          	"bFilter": false,
 	          	"iDisplayLength" : 500

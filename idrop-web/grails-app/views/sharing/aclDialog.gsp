@@ -48,7 +48,7 @@
  * Handle click on search from ACL dialog to build user list
  */
 function lookUpUserNameFromACLDialogClicked() {
-	 var userName = $("#userName").val();
+	 var userName = $j("#userName").val();
 	 searchUsers(1, userName, "#aclUserPickList");
 }
 

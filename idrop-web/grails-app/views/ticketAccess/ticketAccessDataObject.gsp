@@ -36,8 +36,8 @@
 <script>
 
 function downloadDataObjectButton() {
-	var ticketString = $("#ticketString").val();
-	var irodsURI = $("#irodsURI").val();
+	var ticketString = $j("#ticketString").val();
+	var irodsURI = $j("#irodsURI").val();
 	
 	window.open(context + '/ticketAccess/redeemTicket?ticketString=' + encodeURI(ticketString) + "&irodsURI=" + encodeURI(irodsURI), '_blank');
 }

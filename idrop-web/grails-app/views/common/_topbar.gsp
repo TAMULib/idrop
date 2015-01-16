@@ -64,8 +64,8 @@
 <script>
 	var currentZone = "${irodsAccount?.zone}";
 	var currentUser = "${irodsAccount?.userName}";
-	//$(function() {	
-		//$("#accountZoneAndUserDisplay").html(currentZone + ":" + currentUser);
+	//$j(function() {	
+		//$j("#accountZoneAndUserDisplay").html(currentZone + ":" + currentUser);
 //	});
 	 </g:ifAuthenticated>
 </script>

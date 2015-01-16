@@ -2,8 +2,8 @@
 	<center><h1>No profile data available</h1></center>	
 	<script type="text/javascript">
 	
-	$(document).ready(function() {
-		$("#profileToolbar").hide();
+	$j(document).ready(function() {
+		$j("#profileToolbar").hide();
 	});
 </script>
 		

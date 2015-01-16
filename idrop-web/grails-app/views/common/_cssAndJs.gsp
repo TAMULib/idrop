@@ -1,5 +1,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><g:layoutTitle default="iDrop-web - iRODS Cloud Browser" /></title>
+    <title><g:layoutTitle default="TAMU Libraries iDrop iRODS Cloud Browser" /></title>
     <link rel="stylesheet" href="${resource(dir:'css',file:'style.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'bootstrap.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'bootstrap-responsive.min.css')}" />
@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="${resource(dir:'css',file:'superfish.css')}" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'jquery.gritter.css')}" />    
     <link rel="stylesheet" href="${resource(dir:'css',file:'overcast/jquery-ui-1.9.0.custom.css')}" />
-    <link rel="shortcut icon"
-          href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
+    <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
   <g:layoutHead />
   <g:javascript library="jquery-1.7.2.min" />
   <g:javascript library="jquery-ui-1.8.7.custom.min" />

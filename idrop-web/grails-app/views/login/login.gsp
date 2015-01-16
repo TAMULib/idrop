@@ -150,18 +150,18 @@ legend {
 
 	</div>
 	<script type="text/javascript">
-	$(function() {
+	$j(function() {
 		toggleGuestLogin();
 
 	});
 
 	function toggleGuestLogin() {
-		var checkVal = $("#useGuestLogin").attr("checked");
+		var checkVal = $j("#useGuestLogin").attr("checked");
 		if (checkVal) {
-			$(".userLoginData").hide("slow");
+			$j(".userLoginData").hide("slow");
 
 		} else {
-			$(".userLoginData").show("slow");
+			$j(".userLoginData").show("slow");
 		}
 	}
 </script>

@@ -266,40 +266,40 @@
 	<!--  toggle html area -->
 
 	<script type="text/javascript">
-		$(function() {
-			$(".idropLiteBulkUpload").hide();
-			$("#menuDownload").show();
-			$("#menuUpload").hide();
-			$("#menuBulkUpload").hide();
+		$j(function() {
+			$j(".idropLiteBulkUpload").hide();
+			$j("#menuDownload").show();
+			$j("#menuUpload").hide();
+			$j("#menuBulkUpload").hide();
 
-			$('#infoTabs a').click(function(e) {
+			$j('#infoTabs a').click(function(e) {
 				e.preventDefault();
-				$(this).tab('show');
+				$j(this).tab('show');
 			});
 
-			$('#infoTab').on('shown', function(e) {
+			$j('#infoTab').on('shown', function(e) {
 				//e.target // activated tab
 				//e.relatedTarget // previous tab
 				showMetadataView(selectedPath, "#infoAccordionMetadataInner");
 			});
 
-			$('#metadataTab').on('shown', function(e) {
+			$j('#metadataTab').on('shown', function(e) {
 				showMetadataView(selectedPath, "#infoAccordionMetadataInner");
 			});
 
-			$('#permissionTab').on('shown', function(e) {
+			$j('#permissionTab').on('shown', function(e) {
 				showSharingView(selectedPath, "#infoAccordionACLInner");
 			});
 
-			$('#ticketTab').on('shown', function(e) {
+			$j('#ticketTab').on('shown', function(e) {
 				showTicketView(selectedPath, "#infoAccordionTicketsInner");
 			});
 
-			$('#auditTab').on('shown', function(e) {
+			$j('#auditTab').on('shown', function(e) {
 				showAuditView(selectedPath, "#infoAccordionAuditInner");
 			});
 
-			$('#ruleTab').on('shown', function(e) {
+			$j('#ruleTab').on('shown', function(e) {
 				showRuleView(selectedPath, "#infoAccordionRuleInner");
 			});
 
@@ -312,7 +312,7 @@
 		/*
 			
 
-			$("#infoAccordion").accordion({
+			$j("#infoAccordion").accordion({
 				clearStyle : true,
 				autoHeight : false
 			}).bind("accordionchange", function(event, ui) {
@@ -338,18 +338,18 @@
 			}
 		}
 	</script>
-	<g:if test="${getThumbnail}">
+	<g:if test="$j{getThumbnail}">
 		<script type="text/javascript">
-			$(function() {
+			$j(function() {
 				requestThumbnailImageForInfoPane();
 			});
 		</script>
 	</g:if>
 	<g:else>
 		<script type="text/javascript">
-			$(function() {
-				//$.fn.media.mapFormat('pdf', 'quicktime');
-				$('.media').media({
+			$j(function() {
+				//$j.fn.media.mapFormat('pdf', 'quicktime');
+				$j('.media').media({
 					width : 300,
 					height : 200,
 					autoplay : true

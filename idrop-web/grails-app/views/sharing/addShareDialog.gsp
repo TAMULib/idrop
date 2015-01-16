@@ -8,13 +8,13 @@
 		<g:hiddenField name="formAction" id="formAction" value="${formAction}"/>
 		<g:if test="${flash.error}">
 			<script type="text/javascript">
-                $(function() { setErrorMessage("${flash.error}"); });
+                $j(function() { setErrorMessage("${flash.error}"); });
                 </script>
 		</g:if>
 
 		<g:if test="${flash.message}">
 			<script type="text/javascript">
-                $(function() { setMessage("${flash.message}");});
+                $j(function() { setMessage("${flash.message}");});
                 </script>
 		</g:if>
 

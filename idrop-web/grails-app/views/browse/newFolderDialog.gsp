@@ -22,8 +22,8 @@
 
 <script>
 
-	$(function() {
-		$("#newFolderDialog").dialog(
+	$j(function() {
+		$j("#newFolderDialog").dialog(
 				{
 					"modal":true,
 					"width":"500px"

@@ -40,8 +40,8 @@
 
 	var messageAreaSelector="#ticketMessageArea";
 	
-	$(function() {
-		var path = $("#ticketDetailsAbsPath").val();
+	$j(function() {
+		var path = $j("#ticketDetailsAbsPath").val();
 		if (path == null) {
 			path = baseAbsPath;
 		}

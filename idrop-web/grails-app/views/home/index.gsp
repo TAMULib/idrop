@@ -27,19 +27,19 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$j(document).ready(function() {
 
-		$.ajaxSetup({
+		$j.ajaxSetup({
 			cache : false
 		});
-		$("#topbarHome").addClass("active");
+		$j("#topbarHome").addClass("active");
 		quickViewShowStarredFiles();
 
 	});
 
 	function quickViewShowStarredFolders() {
 		resetQuicknav();
-		$("#quickStarredFolders").addClass("active");
+		$j("#quickStarredFolders").addClass("active");
 		var url = "/home/starredCollections";
 		var params = {
 				
@@ -49,7 +49,7 @@
 
 	function quickViewShowStarredFiles() {
 		resetQuicknav();
-		$("#quickStarredFiles").addClass("active");
+		$j("#quickStarredFiles").addClass("active");
 		var url = "/home/starredDataObjects";
 		var params = {
 				
@@ -59,7 +59,7 @@
 
 	function quickViewShowFoldersSharedByMe() {
 		resetQuicknav();
-		$("#quickSharedByMeFolders").addClass("active");
+		$j("#quickSharedByMeFolders").addClass("active");
 		var url = "/home/sharedCollectionsByMe";
 		var params = {
 				
@@ -69,7 +69,7 @@
 
 	function quickViewShowFoldersSharedWithMe() {
 		resetQuicknav();
-		$("#quickSharedWithMeFolders").addClass("active");
+		$j("#quickSharedWithMeFolders").addClass("active");
 		var url = "/home/sharedCollectionsWithMe";
 		var params = {
 				
@@ -78,7 +78,7 @@
 	}
 
 	function resetQuicknav() {
-		$(".quicknav").removeClass("active");
+		$j(".quicknav").removeClass("active");
 	}
 
 	function quickUploadFromHome() {

@@ -61,7 +61,7 @@ var fileStarUrl = '/browse/starFile'
 function retrieveBrowserFirstView(type, path, pathSelectedInTree) {
 	if (dataTree != null) {
 		dataTree = null;
-		$("#dataTreeDiv").html("");
+		$j("#dataTreeDiv").html("");
 	}
 	
 	// with no type, go into detect mode and show the root
@@ -95,7 +95,7 @@ function retrieveBrowserFirstView(type, path, pathSelectedInTree) {
 	
 	//alert("requestedSelectedPath:" + requestedSelectedPath);
 	
-	$.bbq.pushState(state);
+	$j.bbq.pushState(state);
 
 	var parms = {
 		dir : path,
@@ -124,7 +124,7 @@ function browserFirstViewRetrieved(data) {
 
 	baseAbsPath = data[0].attr.absPath;
 	baseAbsPathAsArrayOfPathElements = baseAbsPath.split("/");
-	dataTree = $("#dataTreeDiv")
+	dataTree = $j("#dataTreeDiv")
 			.jstree(
 					{
 						"plugins" : [ "themes", "contextmenu", "json_data",
@@ -201,7 +201,7 @@ function browserFirstViewRetrieved(data) {
 					});
 	
     
-	$("#dataTreeDiv").bind("loaded.jstree", function(e, data) {
+	$j("#dataTreeDiv").bind("loaded.jstree", function(e, data) {
 		
 		//alert("tree loaded stuff now");
 		if (requestedSelectedPath) {
@@ -210,23 +210,23 @@ function browserFirstViewRetrieved(data) {
 	});
 	
 		    
-	$("#dataTreeDiv").bind("select_node.jstree", function(e, data) {
+	$j("#dataTreeDiv").bind("select_node.jstree", function(e, data) {
 		nodeSelected(e, data.rslt.obj);
 	});
 
-	$("#dataTreeDiv").bind("create.jstree", function(e, data) {
+	$j("#dataTreeDiv").bind("create.jstree", function(e, data) {
 		nodeAdded(e, data.rslt.obj);
 	});
 
-	$("#dataTreeDiv").bind("remove.jstree", function(e, data) {
+	$j("#dataTreeDiv").bind("remove.jstree", function(e, data) {
 		nodeRemoved(e, data.rslt.obj);
 	});
 
-	$("#dataTreeDiv").bind("rename.jstree", function(e, data) {
+	$j("#dataTreeDiv").bind("rename.jstree", function(e, data) {
 		nodeRenamed(e, data);
 	});
 
-	$("#dataTreeDiv").bind("move_node.jstree", function(e, data) {
+	$j("#dataTreeDiv").bind("move_node.jstree", function(e, data) {
 		var copy = false;
 		if (data.args[3] == true) {
 			copy = true;
@@ -246,7 +246,7 @@ function browserFirstViewRetrieved(data) {
 		var answer = confirm(msg); // FIXME: i18n
 
 		if (!answer) {
-			$.jstree.rollback(data.rlbk);
+			$j.jstree.rollback(data.rlbk);
 			return false;
 		}
 
@@ -312,13 +312,13 @@ function customMenu(node) {
 		refreshItem : { // The "refresh" menu item
 			label : "Refresh",
 			action : function() {
-				$.jstree._reference(dataTree).refresh();
+				$j.jstree._reference(dataTree).refresh();
 			}
 		},
 		renameItem : { // The "rename" menu item
 			label : "Rename",
 			action : function() {
-				$.jstree._reference(dataTree).rename(node);
+				$j.jstree._reference(dataTree).rename(node);
 			}
 		},
 		deleteItem : { // The "delete" menu item
@@ -327,14 +327,14 @@ function customMenu(node) {
 
 				var answer = confirm("Delete selected file?");
 				if (answer) {
-					$.jstree._reference(dataTree).remove(node);
+					$j.jstree._reference(dataTree).remove(node);
 				}
 			}
 		},
 		newFolderItem : { // The "new" menu item
 			label : "New Folder",
 			action : function() {
-				$.jstree._reference(dataTree).create(null, "inside", {
+				$j.jstree._reference(dataTree).create(null, "inside", {
 					data : name,
 					state : "closed",
 					attr : {
@@ -358,21 +358,21 @@ function customMenu(node) {
 			label : "Cut",
 			"separator_before" : true, // Insert a separator before the item
 			action : function() {
-				$.jstree._reference(dataTree).cut(node[0]);
+				$j.jstree._reference(dataTree).cut(node[0]);
 				setMessage("File cut and placed in clipboard:" + node[0].id);
 			}
 		},
 		copyItem : { // The "copy" menu item
 			label : "Copy",
 			action : function() {
-				$.jstree._reference(dataTree).copy(node[0]);
+				$j.jstree._reference(dataTree).copy(node[0]);
 				setMessage("File copied and placed in clipboard:" + node[0].id);
 			}
 		},
 		pasteItem : { // The "paste" menu item
 			label : "Paste",
 			action : function() {
-				$.jstree._reference(dataTree).paste(node[0]);
+				$j.jstree._reference(dataTree).paste(node[0]);
 			}
 		}
 
@@ -414,7 +414,7 @@ function nodeSelected(event, data) {
  */
 function nodeAdded(event, data) {
 
-	var parent = $.trim(data[0].parentNode.parentNode.id);
+	var parent = $j.trim(data[0].parentNode.parentNode.id);
 
 	/*
 	 * Firefox bug allows add of node outside of tree, so if my parent is
@@ -422,22 +422,22 @@ function nodeAdded(event, data) {
 	 */
 
 	if (parent == "dataTreeDiv") {
-		$.jstree._reference(dataTree).refresh();
+		$j.jstree._reference(dataTree).refresh();
 		setMessage("Cannot create a new folder outside of root of tree, select a tree node first");
 		return false;
 	}
 
-	var name = $.trim(data[0].innerText);
+	var name = $j.trim(data[0].innerText);
 
 	if (name == "") {
 		/*
 		 * If I can't find the name, this may be Firefox, which seems to behave
 		 * strangely, so look for it by manipulating the node I got back
 		 */
-		var node = $(data[0]);
+		var node = $j(data[0]);
 		var children = node.children();
-		var target = $(children).filter("a:last-child");
-		target = $(target).html();
+		var target = $j(children).filter("a:last-child");
+		target = $j(target).html();
 		var pos = target.indexOf("</ins>");
 		if (pos > -1) {
 			name = target.substr(pos + 6);
@@ -451,7 +451,7 @@ function nodeAdded(event, data) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + folderAddUrl, params,
+	var jqxhr = $j.post(context + folderAddUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -487,7 +487,7 @@ function nodeRemoved(event, data) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + fileDeleteUrl, params,
+	var jqxhr = $j.post(context + fileDeleteUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -525,7 +525,7 @@ function nodeRenamed(event, data) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + fileRenameUrl, params,
+	var jqxhr = $j.post(context + fileRenameUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -547,7 +547,7 @@ function nodeRenamed(event, data) {
 			data.rslt.obj[0].id = nodeRenamedTo;
 			data.rslt.obj[0].abspath = nodeRenamedTo;
 			// refresh this node
-			$.jstree._reference(dataTree).refresh(data.rslt.obj[0]);
+			$j.jstree._reference(dataTree).refresh(data.rslt.obj[0]);
 			updateBrowseDetailsForPathBasedOnCurrentModel(nodeRenamedTo);
 		}
 
@@ -582,7 +582,7 @@ function moveFile(sourcePath, targetPath) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + fileMoveUrl, params,
+	var jqxhr = $j.post(context + fileMoveUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -626,7 +626,7 @@ function copyFile(sourcePath, targetPath) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + fileCopyUrl, params,
+	var jqxhr = $j.post(context + fileCopyUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -653,7 +653,7 @@ function copyFile(sourcePath, targetPath) {
  * the right hand pane
  */
 function setBrowseMode() {
-	browseOptionVal = $("#browseDisplayOption").val();
+	browseOptionVal = $j("#browseDisplayOption").val();
 	updateBrowseDetailsForPathBasedOnCurrentModel(selectedPath);
 }
 
@@ -698,7 +698,7 @@ function showBrowseView(absPath) {
 	var state = {};
 	state["absPath"] = absPath;
 	state["browseOptionVal"] = "browse";
-	$.bbq.pushState(state);
+	$j.bbq.pushState(state);
 
 
         showBlockingPanel();
@@ -706,7 +706,7 @@ function showBrowseView(absPath) {
 	lcShowBusyIconInDiv("#infoDiv");
 
 
-	var jqxhr = $.get(
+	var jqxhr = $j.get(
 			context + "/browse/displayBrowseGridDetails?absPath="
 					+ encodeURIComponent(absPath), null,
 			function(data, status, xhr) {
@@ -716,7 +716,7 @@ function showBrowseView(absPath) {
 			return false;
 		}
 
-		$("#infoDiv").html(data);
+		$j("#infoDiv").html(data);
                 unblockPanel();
 	}).error(function(xhr, status, error) {
 		setInfoDivNoData();
@@ -746,7 +746,7 @@ function showAuditView(absPath, targetDiv) {
 				"/audit/auditList?absPath=" + encodeURIComponent(absPath),
 				targetDiv, function(data) {
 					// alert("data is:" + data);
-					$(targetDiv).html(data);
+					$j(targetDiv).html(data);
 				}, function() {
 					setInfoDivNoData();
 				});
@@ -766,7 +766,7 @@ function showAuditView(absPath, targetDiv) {
  * Set a no data message in the div
  */
 function setInfoDivNoData() {
-	$("#infoDiv").html("<h2>No data to display</h2>"); // FIXME: i18n
+	$j("#infoDiv").html("<h2>No data to display</h2>"); // FIXME: i18n
 
 }
 
@@ -792,7 +792,7 @@ function showSharingView(absPath, targetDiv) {
 						+ encodeURIComponent(absPath), targetDiv,
 				function(data) {
 					// alert("data is:" + data);
-					$(targetDiv).html(data);
+					$j(targetDiv).html(data);
 				}, function() {
 					setInfoDivNoData();
 				});
@@ -825,7 +825,7 @@ function showMetadataView(absPath, targetDiv) {
 						+ encodeURIComponent(absPath), targetDiv,
 				function(data) {
 					// alert("data is:" + data);
-					$(targetDiv).html(data);
+					$j(targetDiv).html(data);
 				}, function() {
 					setInfoDivNoData();
 				});
@@ -856,7 +856,7 @@ function showInfoView(absPath) {
 	var state = {};
 	state["absPath"] = absPath;
 	state["browseOptionVal"] = "info";
-	$.bbq.pushState(state);
+	$j.bbq.pushState(state);
 
 
 	
@@ -880,7 +880,7 @@ function showGalleryView(absPath) {
 	var state = {};
 	state["absPath"] = absPath;
 	state["browseOptionVal"] = "gallery";
-	$.bbq.pushState(state);
+	$j.bbq.pushState(state);
 	targetDiv = "#infoDiv";
 
 	try {
@@ -889,7 +889,7 @@ function showGalleryView(absPath) {
 				"/browse/galleryView?absPath=" + encodeURIComponent(absPath),
 				targetDiv, function(data) {
 					// alert("data is:" + data);
-					$("#infoDiv").html(data);
+					$j("#infoDiv").html(data);
 				}, function() {
 					setInfoDivNoData();
 				});
@@ -920,7 +920,7 @@ function showTicketView(absPath, targetDiv) {
 				"/ticket/index?absPath=" + encodeURIComponent(absPath),
 				targetDiv, function(data) {
 					// alert("data is:" + data);
-					$(targetDiv).html(data);
+					$j(targetDiv).html(data);
 				}, function() {
 					setInfoDivNoData();
 				});
@@ -951,7 +951,7 @@ function showRuleView(absPath, targetDiv) {
 				"/rule/index?absPath=" + encodeURIComponent(absPath),
 				targetDiv, function(data) {
 					// alert("data is:" + data);
-					$(targetDiv).html(data);
+					$j(targetDiv).html(data);
 				}, function() {
 					setInfoDivNoData();
 				});
@@ -992,7 +992,7 @@ function showUploadDialog() {
  * Show the dialog to upload from the browse details view
  */
 function showBrowseDetailsUploadDialog() {
-	var path = $("#browseDetailsAbsPath").val();
+	var path = $j("#browseDetailsAbsPath").val();
 	showUploadDialogUsingPath(path);
 }
 
@@ -1031,9 +1031,9 @@ function fillInUploadDialog(data) {
 		return;
 	}
 
-	$('#uploadDialog').remove();
+	$j('#uploadDialog').remove();
 
-	var $dialog = $('<div id="uploadDialog"></div>').html(data).dialog({
+	var $jdialog = $j('<div id="uploadDialog"></div>').html(data).dialog({
 		autoOpen : false,
 		modal : true,
 		width : 500,
@@ -1043,7 +1043,7 @@ function fillInUploadDialog(data) {
 		}
 	});
 
-	$dialog.dialog('open');
+	$jdialog.dialog('open');
 }
 
 /**
@@ -1058,9 +1058,9 @@ function fillInQuickUploadDialog(data) {
 		return;
 	}
 
-	$('#uploadDialog').remove();
+	$j('#uploadDialog').remove();
 
-	var $dialog = $('<div id="uploadDialog"></div>').html(data).dialog({
+	var $jdialog = $j('<div id="uploadDialog"></div>').html(data).dialog({
 		autoOpen : false,
 		modal : true,
 		width : 500,
@@ -1070,7 +1070,7 @@ function fillInQuickUploadDialog(data) {
 		}
 	});
 
-	$dialog.dialog('open');
+	$jdialog.dialog('open');
 }
 
 
@@ -1080,26 +1080,26 @@ function fillInQuickUploadDialog(data) {
 function initializeUploadDialogAjaxLoader() {
 
 	if (fileUploadUI != null) {
-		$("#fileUploadForm").remove;
+		$j("#fileUploadForm").remove;
 	}
 
-	fileUploadUI = $('#uploadForm')
+	fileUploadUI = $j('#uploadForm')
 			.fileUploadUI(
 					{
-						uploadTable : $('#files'),
-						downloadTable : $('#files'),
+						uploadTable : $j('#files'),
+						downloadTable : $j('#files'),
 
 						buildUploadRow : function(files, index) {
-							$("#upload_message_area").html("");
-							$("#upload_message_area").removeClass();
-							return $('<tr><td>'
+							$j("#upload_message_area").html("");
+							$j("#upload_message_area").removeClass();
+							return $j('<tr><td>'
 									+ files[index].name
 									+ '<\/td>'
 									+ '<td class="file_upload_progress"><div><\/div><\/td>'
 									+ '<\/tr>');
 						},
 						buildDownloadRow : function(file) {
-							return $('<tr><td>' + file.name + '<\/td><\/tr>');
+							return $j('<tr><td>' + file.name + '<\/td><\/tr>');
 						},
 						onComplete : function(event, files, index, xhr, handler) {
 							setMessage("Upload complete");
@@ -1111,7 +1111,7 @@ function initializeUploadDialogAjaxLoader() {
 							 * the parent
 							 */
 
-							var uploadParent = $("#collectionParentName").val();
+							var uploadParent = $j("#collectionParentName").val();
 
 							if (uploadParent != null) {
 								reloadAndSelectTreePathBasedOnIrodsAbsolutePath(uploadParent);
@@ -1121,8 +1121,8 @@ function initializeUploadDialogAjaxLoader() {
 								updateBrowseDetailsForPathBasedOnCurrentModel(selectedPath);
 							}
 
-							$('#uploadDialog').dialog('close');
-							$('#uploadDialog').remove();
+							$j('#uploadDialog').dialog('close');
+							$j('#uploadDialog').remove();
 
 						},
 						onError : function(event, files, index, xhr, handler) {
@@ -1138,32 +1138,32 @@ function initializeUploadDialogAjaxLoader() {
 function initializeQuickUploadDialogAjaxLoader() {
 
 	if (fileUploadUI != null) {
-		$("#fileUploadForm").remove;
+		$j("#fileUploadForm").remove;
 	}
 
-	fileUploadUI = $('#uploadForm')
+	fileUploadUI = $j('#uploadForm')
 			.fileUploadUI(
 					{
-						uploadTable : $('#files'),
-						downloadTable : $('#files'),
+						uploadTable : $j('#files'),
+						downloadTable : $j('#files'),
 
 						buildUploadRow : function(files, index) {
-							$("#upload_message_area").html("");
-							$("#upload_message_area").removeClass();
-							return $('<tr><td>'
+							$j("#upload_message_area").html("");
+							$j("#upload_message_area").removeClass();
+							return $j('<tr><td>'
 									+ files[index].name
 									+ '<\/td>'
 									+ '<td class="file_upload_progress"><div><\/div><\/td>'
 									+ '<\/tr>');
 						},
 						buildDownloadRow : function(file) {
-							return $('<tr><td>' + file.name + '<\/td><\/tr>');
+							return $j('<tr><td>' + file.name + '<\/td><\/tr>');
 						},
 						onComplete : function(event, files, index, xhr, handler) {
 							setMessage("Upload complete");
 
-							$('#uploadDialog').dialog('close');
-							$('#uploadDialog').remove();
+							$j('#uploadDialog').dialog('close');
+							$j('#uploadDialog').remove();
 
 						},
 						onError : function(event, files, index, xhr, handler) {
@@ -1190,7 +1190,7 @@ function aclUpdate(value, settings, userName) {
 		userName : userName
 	}
 
-	var jqxhr = $.post(context + aclAddUrl, params,
+	var jqxhr = $j.post(context + aclAddUrl, params,
 			function(data, status, xhr) {
 				lcClearDivAndDivClass(messageAreaSelector);
 			}, "html").error(function(xhr, status, error) {
@@ -1236,8 +1236,8 @@ function prepareAclDialog(isNew) {
  * @param data
  */
 function showAclDialog(data) {
-	$("#aclDetailsArea").hide("slow");
-	$("#aclDialogArea").html(data).show("slow");
+	$j("#aclDetailsArea").hide("slow");
+	$j("#aclDialogArea").html(data).show("slow");
 
 }
 
@@ -1248,7 +1248,7 @@ function showAclDialog(data) {
  */
 function submitAclDialog() {
 
-	var permissionVal = $('[name=acl]').val();
+	var permissionVal = $j('[name=acl]').val();
 	if (permissionVal == null || permissionVal == "" || permissionVal == "NONE") {
 		setErrorMessage("Please select a permission value in the drop-down");
 		return false;
@@ -1260,18 +1260,18 @@ function submitAclDialog() {
 	}
 
 	// see if there is form data (users in a pick list) that are selected
-	var formData = $("#userDialogForm").serializeArray();
+	var formData = $j("#userDialogForm").serializeArray();
 
 	if (formData == null) {
 		setErrorMessage("Please select a user to share data with");
 		return false;
 	}
 
-	var isCreate = $('[name=isCreate]').val();
+	var isCreate = $j('[name=isCreate]').val();
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + aclAddUserDialogUrl, formData,
+	var jqxhr = $j.post(context + aclAddUserDialogUrl, formData,
 			function(data, status, xhr) {
 			}, "html").success(function(data, status, xhr) {
 		var continueReq = checkForSessionTimeout(data, xhr);
@@ -1296,10 +1296,10 @@ function submitAclDialog() {
  */
 function closeAclAddDialog() {
 	try {
-		$("#aclDialogArea").hide("slow", new function() {
-			$("#aclDialogArea").html("");
-			$("#aclDetailsArea").css('display', 'block');
-			$("#aclDetailsArea").show("slow");
+		$j("#aclDialogArea").hide("slow", new function() {
+			$j("#aclDialogArea").html("");
+			$j("#aclDetailsArea").css('display', 'block');
+			$j("#aclDetailsArea").show("slow");
 		});
 
 	} catch (e) {
@@ -1321,14 +1321,14 @@ function reloadAclTable(absPath) {
 
 	lcClearDivAndDivClass(aclMessageAreaSelector);
 
-	$("#aclTableDiv").empty();
+	$j("#aclTableDiv").empty();
 	lcShowBusyIconInDiv("#aclTableDiv");
 
 	var params = {
 		absPath : absPath
 	}
 
-	var jqxhr = $.get(context + aclTableLoadUrl, params,
+	var jqxhr = $j.get(context + aclTableLoadUrl, params,
 			function(data, status, xhr) {
 
 			}, "html").error(function(xhr, status, error) {
@@ -1338,7 +1338,7 @@ function reloadAclTable(absPath) {
 		if (!continueReq) {
 			return false;
 		}
-		$('#aclTableDiv').html(data);
+		$j('#aclTableDiv').html(data);
 		buildAclTableInPlace();
 	});
 
@@ -1370,7 +1370,7 @@ function buildAclTableInPlace() {
 
 	try {
 
-		$('.forSharePermission', dataTable.fnGetNodes()).editable(
+		$j('.forSharePermission', dataTable.fnGetNodes()).editable(
 				function(value, settings) {
 					var userName = this.parentNode.getAttribute('id');
 					return aclUpdate(value, settings, userName);
@@ -1398,14 +1398,14 @@ function buildAclTableInPlace() {
  * @param permission
  */
 function addRowToAclDetailsTable(userName, permission) {
-	var idxs = $("#aclDetailsTable")
+	var idxs = $j("#aclDetailsTable")
 			.dataTable()
 			.fnAddData(
 					[
 							"<input id=\"selectedAcl\" type=\"checkbox\" name=\"selectedAcl\">",
 							userName, permission ], true);
-	var newNode = $("#aclDetailsTable").dataTable().fnGetNodes()[idxs[0]];
-	$(newNode).attr("id", userName);
+	var newNode = $j("#aclDetailsTable").dataTable().fnGetNodes()[idxs[0]];
+	$j(newNode).attr("id", userName);
 }
 
 /**
@@ -1420,14 +1420,14 @@ function deleteAcl() {
 		return;
 	}
 
-	var formFields = $("#aclDetailsForm").serializeArray();
+	var formFields = $j("#aclDetailsForm").serializeArray();
 	var pathInfo = new Object();
 	pathInfo.name = "absPath";
 	pathInfo.value = selectedPath;
 
 	formFields.push(pathInfo);
 
-	var jqxhr = $.post(context + aclDeleteUrl, formFields,
+	var jqxhr = $j.post(context + aclDeleteUrl, formFields,
 			function(data, status, xhr) {
 
 			}, "html").error(function(xhr, status, error) {
@@ -1444,7 +1444,7 @@ function deleteAcl() {
 }
 
 function buildFormFromACLDetailsTable() {
-	var formData = $("#aclDetailsForm").serializeArray();
+	var formData = $j("#aclDetailsForm").serializeArray();
 	formData.push({
 		name : 'absPath',
 		value : selectedPath
@@ -1456,13 +1456,13 @@ function buildFormFromACLDetailsTable() {
  * Close the iDrop lite applet area
  */
 function closeApplet() {
-	$("#idropLiteArea").animate({
+	$j("#idropLiteArea").animate({
 		height : 'hide'
 	}, 'slow');
-	$("#toggleHtmlArea").show('slow');
-	$("#toggleHtmlArea").height = "100%";
-	$("#toggleHtmlArea").width = "100%";
-	$("#idropLiteArea").empty();
+	$j("#toggleHtmlArea").show('slow');
+	$j("#toggleHtmlArea").height = "100%";
+	$j("#toggleHtmlArea").width = "100%";
+	$j("#idropLiteArea").empty();
 
 	if (selectedPath == "" || selectedPath == null) {
 		// ignore reload tree
@@ -1503,7 +1503,7 @@ function showIdropLiteLocalAndIrods() {
  */
 function showBrowseDetailsIdropLite() {
 
-	var path = selectedPath;// $("#browseDetailsAbsPath").val();
+	var path = selectedPath;// $j("#browseDetailsAbsPath").val();
 
 	if (path == null) {
 		path = "/";
@@ -1546,15 +1546,15 @@ function showIdropLiteGivenPath(path, displayMode) {
 	closeShoppingCartApplet();
 
 	// first hide Browse Data Details table
-	$("#toggleHtmlArea").hide('slow');
-	$("#toggleHtmlArea").width = "0%";
-	$("#toggleHtmlArea").height = "0%";
+	$j("#toggleHtmlArea").hide('slow');
+	$j("#toggleHtmlArea").width = "0%";
+	$j("#toggleHtmlArea").height = "0%";
 	
 	var params = {
 		absPath : path
 	}
 	
-	var jqxhr = $
+	var jqxhr = $j
 			.post(context + idropLiteUrl, params, function(data, status, xhr) {
 				//lcClearDivAndDivClass(idropLiteSelector);
 			}, "html")
@@ -1570,10 +1570,10 @@ function showIdropLiteGivenPath(path, displayMode) {
 							return false;
 						}						
 						
-						var appletDiv = $("#idropLiteArea");
-						$(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
+						var appletDiv = $j("#idropLiteArea");
+						$j(appletDiv).append("<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>");
 												
-						$("#idropLiteArea").removeAttr('style');
+						$j("#idropLiteArea").removeAttr('style');
 					}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);
 			});
@@ -1583,7 +1583,7 @@ function showIdropLiteGivenPath(path, displayMode) {
 	lcShowBusyIconInDiv(idropLiteSelector);
 	setMessage("This will launch the iDrop Lite applet, it may take a minute for the applet to load, please be patient");
 
-	var jqxhr = $
+	var jqxhr = $j
 			.post(context + idropLiteUrl, params, function(data, status, xhr) {
 				lcClearDivAndDivClass(idropLiteSelector);
 			}, "html")
@@ -1600,8 +1600,8 @@ function showIdropLiteGivenPath(path, displayMode) {
 							return false;
 						}
 						var dataJSON = jQuery.parseJSON(data);
-						var appletDiv = $("#idropLiteArea");
-						$(appletDiv)
+						var appletDiv = $j("#idropLiteArea");
+						$j(appletDiv)
 								.append(
 										"<div id='appletMenu' class='fg-buttonset fg-buttonset-single' style='float:none'><button type='button' id='toggleMenuButton' class='ui-state-default ui-corner-all' value='closeIdropApplet' onclick='closeApplet()')>Close iDrop Lite</button></div>")
 						var appletTagDiv = document.createElement('div');
@@ -1659,7 +1659,7 @@ function showIdropLiteGivenPath(path, displayMode) {
 						a.appendChild(p);
 						appletDiv.append(appletTagDiv);
 
-						$("#idropLiteArea").removeAttr('style');
+						$j("#idropLiteArea").removeAttr('style');
 
 					}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);
@@ -1674,7 +1674,7 @@ function showIdropLiteGivenPath(path, displayMode) {
  * elements.
  */
 function requestThumbnailImageForInfoPane() {
-	var absPath = $("#infoAbsPath").val();
+	var absPath = $j("#infoAbsPath").val();
 	absPath = encodeURIComponent(absPath);
 	var url = scheme + "://" + host + ":" + port + context + thumbnailLoadUrl
 			+ "?absPath=" + absPath;
@@ -1682,7 +1682,7 @@ function requestThumbnailImageForInfoPane() {
 	oImg.setAttribute('src', url);
 	oImg.setAttribute('alt', 'na');
 	oImg.setAttribute('class', 'thumb');
-	$("#infoThumbnailLoadArea").append(oImg);
+	$j("#infoThumbnailLoadArea").append(oImg);
 
 }
 
@@ -1690,7 +1690,7 @@ function requestThumbnailImageForInfoPane() {
  * Refresh the browse tree
  */
 function refreshTree() {
-	$.jstree._reference(dataTree).refresh();
+	$j.jstree._reference(dataTree).refresh();
 }
 
 /**
@@ -1698,7 +1698,7 @@ function refreshTree() {
  * file
  */
 function downloadViaToolbar() {
-	var infoAbsPath = $("#infoAbsPath").val();
+	var infoAbsPath = $j("#infoAbsPath").val();
 	window.open(context + '/file/download' + escape(infoAbsPath), '_self');
 
 }
@@ -1720,7 +1720,7 @@ function downloadViaToolbarGivenPath(path) {
 		absPath : path
 	}
 
-	var jqxhr = $
+	var jqxhr = $j
 			.post(context + "/file/screenForDownloadRights", params, null, "html")
 			.success(
 					function(returnedData, status, xhr) {
@@ -1757,7 +1757,7 @@ function doActualDownload(path) {
  * The rename button has been selected from an info view, show the rename dialog
  */
 function renameViaToolbar() {
-	var infoAbsPath = $("#infoAbsPath").val();
+	var infoAbsPath = $j("#infoAbsPath").val();
 	renameViaToolbarGivenPath(infoAbsPath);
 }
 
@@ -1766,7 +1766,7 @@ function renameViaToolbar() {
  * rename dialog
  */
 function renameViaBrowseDetailsToolbar() {
-	// var path = $("#browseDetailsAbsPath").val();
+	// var path = $j("#browseDetailsAbsPath").val();
 	renameViaToolbarGivenPath(selectedPath);
 }
 
@@ -1799,7 +1799,7 @@ function renameViaToolbarGivenPath(path) {
  */
 function deleteViaToolbar() {
 
-	var infoDivAbsPath = $("#infoAbsPath").val();
+	var infoDivAbsPath = $j("#infoAbsPath").val();
 
 	if (infoDivAbsPath != null) {
 		deleteViaToolbarGivenPath(infoDivAbsPath);
@@ -1838,7 +1838,7 @@ function deleteViaToolbarGivenPath(path) {
 			absPath : path
 		}
 
-		var jqxhr = $
+		var jqxhr = $j
 				.post(context + fileDeleteUrl, params, null, "html")
 				.success(
 						function(returnedData, status, xhr) {
@@ -1866,7 +1866,7 @@ function deleteViaToolbarGivenPath(path) {
  * new folder was selected from the toolbar
  */
 function newFolderViaToolbar() {
-	var infoAbsPath = $("#infoAbsPath").val();
+	var infoAbsPath = $j("#infoAbsPath").val();
 	newFolderViaToolbarGivenPath(infoAbsPath);
 }
 
@@ -1905,8 +1905,8 @@ function newFolderViaToolbarGivenPath(path) {
  * button on the toolbar.
  */
 function closeRenameDialog() {
-	$("#renameDialog").dialog('close');
-	$("#renameDialog").remove();
+	$j("#renameDialog").dialog('close');
+	$j("#renameDialog").remove();
 }
 
 /**
@@ -1914,8 +1914,8 @@ function closeRenameDialog() {
  * button on the toolbar.
  */
 function closeStarDialog() {
-	$("#starDialog").dialog('close');
-	$("#starDialog").remove();
+	$j("#starDialog").dialog('close');
+	$j("#starDialog").remove();
 }
 
 /**
@@ -1923,8 +1923,8 @@ function closeStarDialog() {
  * folder' button on the toolbar.
  */
 function closeNewFolderDialog() {
-	$("#newFolderDialog").dialog('close');
-	$("#newFolderDialog").remove();
+	$j("#newFolderDialog").dialog('close');
+	$j("#newFolderDialog").remove();
 }
 
 /**
@@ -1933,9 +1933,9 @@ function closeNewFolderDialog() {
  */
 function submitRenameDialog() {
 	lcClearDivAndDivClass("#renameDialogMessageArea");
-	var absPath = $("#renameDialogAbsPath").val();
-	var parentPath = $("#renameDialogParentPath").val();
-	var newName = $.trim($("#fileName").val());
+	var absPath = $j("#renameDialogAbsPath").val();
+	var parentPath = $j("#renameDialogParentPath").val();
+	var newName = $j.trim($j("#fileName").val());
 	// name must be entered
 	if (newName == null || newName.length == 0) {
 		setMessage("Please enter a new name");
@@ -1950,7 +1950,7 @@ function submitRenameDialog() {
 	closeRenameDialog();
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + fileRenameUrl, params,
+	var jqxhr = $j.post(context + fileRenameUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -1980,8 +1980,8 @@ function submitRenameDialog() {
 function submitNewFolderDialog() {
 
 	lcClearDivAndDivClass("#newFolderDialogMessageArea");
-	var absPath = $.trim($("#newFolderDialogAbsPath").val());
-	var newName = $.trim($("#fileName").val());
+	var absPath = $j.trim($j("#newFolderDialogAbsPath").val());
+	var newName = $j.trim($j("#fileName").val());
 	// name must be entered
 	if (newName == null || newName.length == 0) {
 		setErrorMessage("Please enter a new folder name");
@@ -1996,7 +1996,7 @@ function submitNewFolderDialog() {
 	closeNewFolderDialog();
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + folderAddUrl, params,
+	var jqxhr = $j.post(context + folderAddUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -2026,10 +2026,10 @@ function submitNewFolderDialog() {
  */
 function deleteFilesBulkAction() {
 
-	var formData = $("#browseDetailsForm").serializeArray();
+	var formData = $j("#browseDetailsForm").serializeArray();
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + deleteBulkActionUrl, formData, "html")
+	var jqxhr = $j.post(context + deleteBulkActionUrl, formData, "html")
 			.success(function(returnedData, status, xhr) {
 				var continueReq = checkForSessionTimeout(returnedData, xhr);
 				if (!continueReq) {
@@ -2065,7 +2065,7 @@ function addANodeToTheParentInTheTree(parentAbsolutePath, childRelativeName) {
 		splitPathAndPerformOperationAtGivenTreePath(parentAbsolutePath, null,
 				null, function(path, dataTree, currentNode) {
 
-					if ($.jstree._reference(dataTree)._is_loaded(currentNode)) {
+					if ($j.jstree._reference(dataTree)._is_loaded(currentNode)) {
 
 						// parent node was already loaded, so it makes sense to
 						// add
@@ -2086,7 +2086,7 @@ function addANodeToTheParentInTheTree(parentAbsolutePath, childRelativeName) {
 						nodeProps.attr = attrBuf;
 						nodeProps.state = state;
 
-						$.jstree._reference(dataTree).create_node(currentNode,
+						$j.jstree._reference(dataTree).create_node(currentNode,
 								"inside", nodeProps, null, false);
 
 					}
@@ -2104,7 +2104,7 @@ function addANodeToTheParentInTheTree(parentAbsolutePath, childRelativeName) {
 		splitPathAndPerformOperationAtGivenTreePath(parentAbsolutePath, null,
 				null, function(path, dataTree, currentNode) {
 
-					if ($.jstree._reference(dataTree)._is_loaded(currentNode)) {
+					if ($j.jstree._reference(dataTree)._is_loaded(currentNode)) {
 
 						// parent node was already loaded, so it makes sense to
 						// add
@@ -2125,7 +2125,7 @@ function addANodeToTheParentInTheTree(parentAbsolutePath, childRelativeName) {
 						nodeProps.attr = attrBuf;
 						nodeProps.state = state;
 
-						$.jstree._reference(dataTree).create_node(currentNode,
+						$j.jstree._reference(dataTree).create_node(currentNode,
 								"inside", nodeProps, null, false);
 
 					}
@@ -2175,8 +2175,8 @@ function refreshOpenNodeAtAbsolutePath(path) {
 	performOperationAtGivenTreePath(splitPath, null, null, function(thisPath,
 			dataTree, currentNode) {
 
-		$.jstree._reference(dataTree).refresh(currentNode);
-		$.jstree._reference(dataTree).select_node(currentNode, true);
+		$j.jstree._reference(dataTree).refresh(currentNode);
+		$j.jstree._reference(dataTree).select_node(currentNode, true);
 
 	});
 }
@@ -2197,9 +2197,9 @@ function reloadAndSelectTreePathBasedOnIrodsAbsolutePath(path) {
 	performOperationAtGivenTreePath(splitPath, null, null, function(thisPath,
 			dataTree, currentNode) {
 
-		$.jstree._reference(dataTree).refresh(currentNode);
-		$.jstree._reference(dataTree).open_node(currentNode);
-		$.jstree._reference(dataTree).select_node(currentNode, true);
+		$j.jstree._reference(dataTree).refresh(currentNode);
+		$j.jstree._reference(dataTree).open_node(currentNode);
+		$j.jstree._reference(dataTree).select_node(currentNode, true);
 
 	});
 }
@@ -2221,7 +2221,7 @@ function reloadTreePathBasedOnIrodsAbsolutePath(path) {
 	performOperationAtGivenTreePath(splitPath, null, null, function(thisPath,
 			dataTree, currentNode) {
 
-		$.jstree._reference(dataTree).refresh(currentNode);
+		$j.jstree._reference(dataTree).refresh(currentNode);
 
 	});
 }
@@ -2247,7 +2247,7 @@ function selectTreePath(path, currentNode, currentIndex) {
 	}
 
 	if (path == null) {
-		var val = $("#searchTerm").val();
+		var val = $j("#searchTerm").val();
 		if (val == "") {
 			setMessage("enter a path to search");
 			return false;
@@ -2263,7 +2263,7 @@ function selectTreePath(path, currentNode, currentIndex) {
 
 	performOperationAtGivenTreePath(path, null, null, function(path, dataTree,
 			currentNode) {
-		$.jstree._reference(dataTree).open_node(currentNode);
+		$j.jstree._reference(dataTree).open_node(currentNode);
 		
 		// see if this node should be selected by comparing paths
 		
@@ -2271,7 +2271,7 @@ function selectTreePath(path, currentNode, currentIndex) {
 			var currentId = currentNode[0].id;
 			var idPath = currentId.split("/");
 			if (path.length == idPath.length) {
-				$.jstree._reference(dataTree).select_node(currentNode, true);
+				$j.jstree._reference(dataTree).select_node(currentNode, true);
 			}
 		}
 		
@@ -2291,9 +2291,9 @@ function selectTreePath(path, currentNode, currentIndex) {
 function getPathInNode(childNodes, targetPath) {
 	var foundChild = null;
 	var nodeText = null;
-	$.each(childNodes, function(index, value) {
-		var theChild = $.jstree._reference(dataTree)._get_node(value);
-		nodeText = $.jstree._reference(dataTree).get_text(theChild);
+	$j.each(childNodes, function(index, value) {
+		var theChild = $j.jstree._reference(dataTree)._get_node(value);
+		nodeText = $j.jstree._reference(dataTree).get_text(theChild);
 
 		if (nodeText == targetPath) {
 			foundChild = theChild;
@@ -2356,7 +2356,7 @@ function performOperationAtGivenTreePath(path, currentNode, currentIndex,
 	}
 
 	if (path == null) {
-		var val = $("#searchTerm").val();
+		var val = $j("#searchTerm").val();
 
 		// alert("select tree path:" + val);
 		path = val.split("/");
@@ -2365,8 +2365,8 @@ function performOperationAtGivenTreePath(path, currentNode, currentIndex,
 	// if called with no params, get the root node, open it, and process the
 	// children
 	if (currentNode == null) {
-		currentNode = $.jstree._reference(dataTree).get_container();
-		var children = $.jstree._reference(dataTree)._get_children(currentNode);
+		currentNode = $j.jstree._reference(dataTree).get_container();
+		var children = $j.jstree._reference(dataTree)._get_children(currentNode);
 		currentNode = children[0];
 		// fix for a bug in ie9 that surfaces on initial load, otherwise does
 		// infinite recursion...
@@ -2393,7 +2393,7 @@ function performOperationAtGivenTreePath(path, currentNode, currentIndex,
 
 	var skip = false;
 	var end = false;
-	$.each(path,
+	$j.each(path,
 			function(index, value) {
 				if (skip) {
 					return;
@@ -2420,11 +2420,11 @@ function performOperationAtGivenTreePath(path, currentNode, currentIndex,
 				// } else {
 
 				// if (value > "") {
-				var loaded = $.jstree._reference(dataTree)._is_loaded(
+				var loaded = $j.jstree._reference(dataTree)._is_loaded(
 						currentNode);
 				if (!loaded) {
 					skip = true;
-					$.jstree._reference(dataTree)
+					$j.jstree._reference(dataTree)
 							.open_node(
 									currentNode,
 									function() {
@@ -2434,11 +2434,11 @@ function performOperationAtGivenTreePath(path, currentNode, currentIndex,
 									}, false);
 					return;
 				} else {
-					$.jstree._reference(dataTree).open_node(currentNode, false,
+					$j.jstree._reference(dataTree).open_node(currentNode, false,
 							false);
 				}
 
-				var children = $.jstree._reference(dataTree)._get_children(
+				var children = $j.jstree._reference(dataTree)._get_children(
 						currentNode);
 				currentNode = getPathInNode(children, value);
 				if (currentNode == null) {
@@ -2512,7 +2512,7 @@ function setDefaultStorageResource(resource) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + "/browse/setDefautlResourceForAccount",
+	var jqxhr = $j.post(context + "/browse/setDefautlResourceForAccount",
 			params, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
 		if (!continueReq) {
@@ -2594,7 +2594,7 @@ function browseDataDetailsFunction(clickedIcon, rowActionIsOn) {
 	/* Open this row */
 	lcCloseTableNodes(dataTable);
 	// nTr points to row and has absPath in id
-	var absPath = $(rowActionIsOn).attr('id');
+	var absPath = $j(rowActionIsOn).attr('id');
 	// alert("absPath:" + absPath);
 	var detailsId = "details_" + absPath;
 	var detailsHtmlDiv = "details_html_" + absPath;
@@ -2622,7 +2622,7 @@ function buildDetailsLayout(detailsId) {
 	img.setAttribute("src", context + "/images/ajax-loader.gif");
 	detailsPulldownDiv.appendChild(img);
 	td.appendChild(detailsPulldownDiv);
-	return $(td).html();
+	return $j(td).html();
 }
 
 function askForBrowseDetailsPulldown(absPath, detailsId) {
@@ -2646,8 +2646,8 @@ function clickOnPathInBrowseDetails(data) {
 	splitPathAndPerformOperationAtGivenTreePath(data, null, null, function(
 			path, dataTree, currentNode) {
 
-		$.jstree._reference(dataTree).open_node(currentNode);
-		$.jstree._reference(dataTree).select_node(currentNode, true);
+		$j.jstree._reference(dataTree).open_node(currentNode);
+		$j.jstree._reference(dataTree).select_node(currentNode, true);
 
 	});
 }
@@ -2657,8 +2657,8 @@ function clickOnPathInBrowseDetails(data) {
  */
 function closePublicLinkDialog() {
 
-	$("#browseDialogArea").hide("slow");
-	$("#browseDialogArea").html();
+	$j("#browseDialogArea").hide("slow");
+	$j("#browseDialogArea").html();
 }
 
 
@@ -2666,7 +2666,7 @@ function closePublicLinkDialog() {
  * Set a no data message in the div
  */
 function setInfoDivNoData() {
-	$("#infoDiv").html("<h2>No data to display</h2>"); // FIXME: i18n
+	$j("#infoDiv").html("<h2>No data to display</h2>"); // FIXME: i18n
 
 }
 
@@ -2675,8 +2675,8 @@ function setInfoDivNoData() {
  * submitted dialog
  */
 function submitStarDialog() {
-	var absPath = $("#absPath").val();
-	var description = $.trim($("#description").val());
+	var absPath = $j("#absPath").val();
+	var description = $j.trim($j("#description").val());
 
 	var params = {
 		absPath : absPath,
@@ -2685,7 +2685,7 @@ function submitStarDialog() {
 
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + fileStarUrl, params,
+	var jqxhr = $j.post(context + fileStarUrl, params,
 			function(data, status, xhr) {
 			}, "html").success(function(returnedData, status, xhr) {
 		var continueReq = checkForSessionTimeout(returnedData, xhr);
@@ -2708,7 +2708,7 @@ function submitStarDialog() {
 * Cause a dialog to appear that can create a share for this folder
 */
 function addShareAtPath() {
-	$("#sharingPanelContainingDiv").html();
+	$j("#sharingPanelContainingDiv").html();
 	var path = selectedPath;
 	if (selectedPath == null) {
 		return false;
@@ -2729,8 +2729,8 @@ function addShareAtPath() {
 * Edit the share at the given path
 */
 function editShareAtPath() {
-	$("#sharingPanelContainingDiv").html();
-	var path = $("#infoAbsPath").val();
+	$j("#sharingPanelContainingDiv").html();
+	var path = $j("#infoAbsPath").val();
 	if (path == null) {
 		setMessage(jQuery.i18n.prop('msg_path_missing'));
 		unblockPanel();		
@@ -2751,7 +2751,7 @@ function editShareAtPath() {
  * remove a named share
  */
 function removeShareAtPath() {
-	var path = $("#aclDetailsAbsPath").val();
+	var path = $j("#aclDetailsAbsPath").val();
 	
 	if (path == null) {
 		setMessage(jQuery.i18n.prop('msg_path_missing'));
@@ -2771,7 +2771,7 @@ function removeShareAtPath() {
 	
 	showBlockingPanel();
 	
-	var jqxhr = $.post(context + "/sharing/removeShare", params,
+	var jqxhr = $j.post(context + "/sharing/removeShare", params,
 			function(data, status, xhr) {
 		
 		var continueReq = checkForSessionTimeout(data, xhr);
@@ -2779,7 +2779,7 @@ function removeShareAtPath() {
 			return false;
 		}
 		
-		$("#sharingPanelContainingDiv").empty().append( data );
+		$j("#sharingPanelContainingDiv").empty().append( data );
 		unblockPanel();
 
 	}).fail(function(xhr, status, error) {
@@ -2794,7 +2794,7 @@ function removeShareAtPath() {
 */
 function fillInShareDialog(data) {
 
-	$("#sharingPanelContainingDiv").html(data);
+	$j("#sharingPanelContainingDiv").html(data);
 	
 }
 
@@ -2802,9 +2802,9 @@ function fillInShareDialog(data) {
  * Submit the dialog to add or update a share
  */
 function updateNamedShare() {
-	var path = $("#aclDetailsAbsPath").val();
-	var shareName = $("#shareName").val();
-	var formAction = $("#formAction").val();
+	var path = $j("#aclDetailsAbsPath").val();
+	var shareName = $j("#shareName").val();
+	var formAction = $j("#formAction").val();
 	showBlockingPanel();
 	
 	if (path == null) {
@@ -2826,7 +2826,7 @@ function updateNamedShare() {
 			formAction : formAction
 		}
 		
-	var jqxhr = $.post(context + "/sharing/processUpdateShareDialog", params,
+	var jqxhr = $j.post(context + "/sharing/processUpdateShareDialog", params,
 			function(data, status, xhr) {
 		
 		var continueReq = checkForSessionTimeout(data, xhr);
@@ -2834,7 +2834,7 @@ function updateNamedShare() {
 			return false;
 		}
 		
-		$("#sharingPanelContainingDiv").empty().append( data );
+		$j("#sharingPanelContainingDiv").empty().append( data );
 		unblockPanel();
 
 	}).fail(function(xhr, status, error) {
@@ -2868,16 +2868,16 @@ function closeNamedShareDialog() {
  */
 function closeShareDialog() {
 	
-		$("#aclDialogArea").hide("slow");
-		$("#aclDialogArea").html();
-		$("#aclDetailsArea").show("slow");
+		$j("#aclDialogArea").hide("slow");
+		$j("#aclDialogArea").html();
+		$j("#aclDetailsArea").show("slow");
 }
 
 /*
 * Cause a dialog to appear that has a link for a public path for the current path
 */
 function makePublicLinkAtPath() {
-	$("#aclDialogArea").html();
+	$j("#aclDialogArea").html();
 	var path = selectedPath;
 	if (selectedPath == null) {
 		return false;
@@ -2899,18 +2899,18 @@ function makePublicLinkAtPath() {
  */
 function closePublicLinkDialog() {
 	
-		$("#aclDialogArea").hide("slow");
-		$("#aclDialogArea").html();
-		var path = $("#publicLinkDialogAbsPath").val();
+		$j("#aclDialogArea").hide("slow");
+		$j("#aclDialogArea").html();
+		var path = $j("#publicLinkDialogAbsPath").val();
 		reloadAclTable(path);
-		$("#aclDetailsArea").show("slow");
+		$j("#aclDetailsArea").show("slow");
 }
 
 /**
  * Grant public (anonymous access) via the public link dialog.  Submit dialog and present the response
  */
 function grantPublicLink() {
-	var path = $("#publicLinkDialogAbsPath").val();
+	var path = $j("#publicLinkDialogAbsPath").val();
 	showBlockingPanel();
 	if (path == null) {
 		setMessage(jQuery.i18n.prop('msg.path.missing'));
@@ -2921,7 +2921,7 @@ function grantPublicLink() {
 			absPath : path
 		}
 	
-	var jqxhr = $.get(context + "/browse/updatePublicLinkDialog", params,
+	var jqxhr = $j.get(context + "/browse/updatePublicLinkDialog", params,
 			function(data, status, xhr) {
 		
 		var continueReq = checkForSessionTimeout(data, xhr);
@@ -2929,7 +2929,7 @@ function grantPublicLink() {
 			return false;
 		}
 		
-		$("#publicLinkDialog").empty().append( data );
+		$j("#publicLinkDialog").empty().append( data );
 		unblockPanel();
 
 	}).fail(function(xhr, status, error) {
@@ -2942,8 +2942,8 @@ function grantPublicLink() {
 *Given the contents of the 'create public link' dialog, 
 */
 function fillInACLDialog(data) {
-	$("#aclDetailsArea").hide("slow");
-	$("#aclDialogArea").html(data);
-	$("#aclDialogArea").show("slow");
+	$j("#aclDetailsArea").hide("slow");
+	$j("#aclDialogArea").html(data);
+	$j("#aclDialogArea").show("slow");
 }
 

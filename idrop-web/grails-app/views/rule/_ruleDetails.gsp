@@ -73,7 +73,7 @@
 <script type="text/javascript">
 
 var editor = null;
-$(function() {
+$j(function() {
    /* var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('ruleBody'),{
         mode: 'clike',
         lineNumbers: true,

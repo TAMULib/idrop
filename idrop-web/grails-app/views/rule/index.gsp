@@ -60,7 +60,7 @@
 			return false;
 		}
 
-		var absPath = $("#ruleAbsPath").val();
+		var absPath = $j("#ruleAbsPath").val();
 		if (absPath == null || absPath == "") {
 			setErrorMessage("no absPath for rule");
 			return false;
@@ -72,14 +72,14 @@
 				}
 
 		
-		var jqxhr = $.post(context + "/rule/deleteRuleInputParameter", params, "html").success(
+		var jqxhr = $j.post(context + "/rule/deleteRuleInputParameter", params, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
 						return false;
 					}
 					setMessage("Parameter deleted");
-					$("#ruleDetailDiv").html(returnedData);
+					$j("#ruleDetailDiv").html(returnedData);
 				}).error(function(xhr, status, error) {
 			setErrorMessage(xhr.responseText);
 		});
@@ -87,7 +87,7 @@
 
 
 	function deleteOutputParam(param) {
-		var absPath = $("#ruleAbsPath").val();
+		var absPath = $j("#ruleAbsPath").val();
 		if (absPath == null || absPath == "") {
 			setErrorMessage("no absPath for rule");
 			return false;
@@ -99,29 +99,29 @@
 				}
 
 		
-		var jqxhr = $.post(context + "/rule/deleteRuleOutputParameter", params, "html").success(
+		var jqxhr = $j.post(context + "/rule/deleteRuleOutputParameter", params, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
 						return false;
 					}
 					setMessage("Parameter deleted");
-					$("#ruleDetailDiv").html(returnedData);
+					$j("#ruleDetailDiv").html(returnedData);
 				}).error(function(xhr, status, error) {
 			setErrorMessage(xhr.responseText);
 		});	}
 
 	function callSaveRule() {
 		editor.mirror.save();
-		var formData = $("#ruleDetailsForm").serializeArray();
-		var jqxhr = $.post(context + "/rule/updateRule", formData, "html").success(
+		var formData = $j("#ruleDetailsForm").serializeArray();
+		var jqxhr = $j.post(context + "/rule/updateRule", formData, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
 						return false;
 					}
 					setMessage("rule saved");
-					$("#ruleDetailDiv").html(returnedData);
+					$j("#ruleDetailDiv").html(returnedData);
 				}).error(function(xhr, status, error) {
 			setErrorMessage(xhr.responseText);
 		});
@@ -131,16 +131,16 @@
 
 	function callShowRule() {
 
-		$("#ruleDetailDiv").show("slow");
-		$(".ruleEdit").show("slow");
-		$("#ruleResultDiv").html("");
-		$("#ruleResultDiv").hide("slow");
-		$(".ruleResultView").hide("slow");
+		$j("#ruleDetailDiv").show("slow");
+		$j(".ruleEdit").show("slow");
+		$j("#ruleResultDiv").html("");
+		$j("#ruleResultDiv").hide("slow");
+		$j(".ruleResultView").hide("slow");
 		
 		}
 
 	function callReloadRule(absPath) {
-		var absPath = $("#ruleAbsPath").val();
+		var absPath = $j("#ruleAbsPath").val();
 		if (absPath == null || absPath == "") {
 			showError("no absPath for rule");
 			return false;
@@ -150,13 +150,13 @@
 				absPath : absPath
 
 				}
-		var jqxhr = $.get(context + "/rule/reloadRule", params, "html").success(
+		var jqxhr = $j.get(context + "/rule/reloadRule", params, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
 						return false;
 					}
-					$("#ruleDetailDiv").html(returnedData);
+					$j("#ruleDetailDiv").html(returnedData);
 				}).error(function(xhr, status, error) {
 			setErrorMessage(xhr.responseText);
 		});
@@ -166,23 +166,23 @@
 
 	function callRunRule() {
 		editor.mirror.save();
-		var formData = $("#ruleDetailsForm").serializeArray();
-		$("#ruleDetailDiv").hide("slow");
-		$(".ruleEdit").hide("slow");
-		$("#ruleResultDiv").html("");
-		$("#ruleResultDiv").show("slow");
-		$(".ruleResultView").show("slow");
+		var formData = $j("#ruleDetailsForm").serializeArray();
+		$j("#ruleDetailDiv").hide("slow");
+		$j(".ruleEdit").hide("slow");
+		$j("#ruleResultDiv").html("");
+		$j("#ruleResultDiv").show("slow");
+		$j(".ruleResultView").show("slow");
 
 		showBlockingPanel();
 		
-		var jqxhr = $.post(context + "/rule/runRule", formData, "html").success(
+		var jqxhr = $j.post(context + "/rule/runRule", formData, "html").success(
 				function(returnedData, status, xhr) {
 					var continueReq = checkForSessionTimeout(returnedData, xhr);
 					if (!continueReq) {
 						unblockPanel();
 						return false;
 					}
-					$("#ruleResultDiv").html(returnedData);
+					$j("#ruleResultDiv").html(returnedData);
 					unblockPanel();
 					 
 
@@ -196,7 +196,7 @@
 
 	function callAddInputParameter() {
 		
-		var absPath = $("#ruleAbsPath").val();
+		var absPath = $j("#ruleAbsPath").val();
 		if (absPath == null || absPath == "") {
 			setErrorMessage("no absPath for rule");
 			return false;
@@ -211,7 +211,7 @@
 	}
 
 	function callAddOutputParameter() {
-		var absPath = $("#ruleAbsPath").val();
+		var absPath = $j("#ruleAbsPath").val();
 		if (absPath == null || absPath == "") {
 			setErrorMessage("no absPath for rule");
 			return false;

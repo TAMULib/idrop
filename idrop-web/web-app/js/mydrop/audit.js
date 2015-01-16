@@ -31,7 +31,7 @@ function reloadAuditTable(absPath, usePageSize, useOffset) {
 		useOffset = 0;
 	}
 
-	$("#auditTableDiv").empty();
+	$j("#auditTableDiv").empty();
 	lcShowBusyIconInDiv("#auditTableDiv");
 	
 	var params = {
@@ -40,9 +40,9 @@ function reloadAuditTable(absPath, usePageSize, useOffset) {
 		offset : useOffset
 	}
 
-	var jqxhr = $.get(context + auditLoadUrl, params,
+	var jqxhr = $j.get(context + auditLoadUrl, params,
 			function(data, status, xhr) {
-				$('#auditTableDiv').html(data);
+				$j('#auditTableDiv').html(data);
 			}, "html").error(function(xhr, status, error) {
 		setErrorMessage(xhr.responseText);
 	}).success(function(data, status, xhr) {
@@ -78,7 +78,7 @@ function buildAuditTableInPlace() {
 /* click twistie to open details table info */
 function auditDetailsClick(minMaxIcon) {
 
-   		var dataTable = $("#auditDetailsTable").dataTable();
+   		var dataTable = $j("#auditDetailsTable").dataTable();
         var nTr = minMaxIcon.parentNode.parentNode;
 
         if (minMaxIcon.parentNode.innerHTML.match('circle-minus')) {
@@ -97,11 +97,11 @@ function auditDetailsClick(minMaxIcon) {
 to server and get the details.
 */
 function browseAuditDetailsFunction(clickedIcon, rowActionIsOn) {
-		var dataTable = $("#auditDetailsTable").dataTable();
+		var dataTable = $j("#auditDetailsTable").dataTable();
         /* Open this row */
         lcCloseTableNodes(dataTable);
         // nTr points to row and has absPath in id
-        var objId = $(rowActionIsOn).attr('id');
+        var objId = $j(rowActionIsOn).attr('id');
         //alert("absPath:" + absPath);
         var detailsId = "details_" + objId;
         var detailsHtmlDiv = "details_html_" + objId;
@@ -110,14 +110,14 @@ function browseAuditDetailsFunction(clickedIcon, rowActionIsOn) {
         newRowNode = dataTable.fnOpen(rowActionIsOn,
                         buildDetailsLayoutVal, 'details');
         newRowNode.setAttribute("id", detailsId);
-        var absPath = $("#auditDetailsAbsPath").val();
+        var absPath = $j("#auditDetailsAbsPath").val();
         
         // get the audit action and timestamp from the hidden fields
         var auditActionSelector = '#audit_' + objId + '_code';
-        var auditAction = $(auditActionSelector).val();
+        var auditAction = $j(auditActionSelector).val();
         
         var timestampSelector = '#audit_' + objId + '_timestamp';
-        var timestamp = $(timestampSelector).val();
+        var timestamp = $j(timestampSelector).val();
         
         askForAuditDetailsPulldown(absPath, auditAction, timestamp);
 
@@ -136,7 +136,7 @@ function buildAuditDetailsLayout(detailsId) {
         img.setAttribute("src", context + "/images/ajax-loader.gif");
         detailsPulldownDiv.appendChild(img);
         td.appendChild(detailsPulldownDiv);
-        return $(td).html();
+        return $j(td).html();
 }
 
 function askForAuditDetailsPulldown(absPath, auditAction, timestamp) {

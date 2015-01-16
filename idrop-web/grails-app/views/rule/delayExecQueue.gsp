@@ -5,21 +5,21 @@
 		<g:render template="ruleDelayExecQueueDetails" />
 </div>
 <script>
-$(document).ready(function() {
+$j(document).ready(function() {
 
-		$.ajaxSetup({
+		$j.ajaxSetup({
 			cache : false
 		});
-		$("#topbarTools").addClass("active");
+		$j("#topbarTools").addClass("active");
 	});
 
 
 function deleteRulesBulkAction() {
 
-	var formData = $("#delayExecForm").serializeArray();
+	var formData = $j("#delayExecForm").serializeArray();
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + "/rule/deleteDelayExecQueue", formData, "html")
+	var jqxhr = $j.post(context + "/rule/deleteDelayExecQueue", formData, "html")
 			.success(function(returnedData, status, xhr) {
 				var continueReq = checkForSessionTimeout(returnedData, xhr);
 				if (!continueReq) {
@@ -27,7 +27,7 @@ function deleteRulesBulkAction() {
 				}
 				
 				setMessage("Delete action successful");
-				$("#delayExecQueueDiv").html(returnedData);
+				$j("#delayExecQueueDiv").html(returnedData);
 				unblockPanel();
 			}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);

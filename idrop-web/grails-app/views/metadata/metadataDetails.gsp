@@ -55,12 +55,12 @@
 <script type="text/javascript">
 	var origData = "";
 
-	var path = $("#metadataDetailsAbsPath").val();
+	var path = $j("#metadataDetailsAbsPath").val();
 	if (path == null) {
 		path = baseAbsPath;
 	}
 
-	$(function() {
+	$j(function() {
 
 		reloadMetadataDetailsTable(path);
 	});

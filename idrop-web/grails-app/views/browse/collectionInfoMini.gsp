@@ -100,9 +100,9 @@
 
 
 function updateTagsFromCollectionInfoMini() {
-	var infoTagsVal = $("#infoTags").val();
-	var infoCommentVal = $("#infoComment").val();
-	var absPathVal = $("#infoAbsPath").val();
+	var infoTagsVal = $j("#infoTags").val();
+	var infoCommentVal = $j("#infoComment").val();
+	var absPathVal = $j("#infoAbsPath").val();
 	
 	updateTagsAtPath(absPathVal, infoTagsVal, infoCommentVal);
 }

@@ -142,12 +142,12 @@
 
 	}
 
-	$(function() {
+	$j(function() {
 		//alert("building table ");
 		dataTable = lcBuildTableInPlace("#browseDataDetailsTable",
 				browseDetailsClick, ".browse_detail_icon", tableParams);
-		$("#infoDiv").resize();
-		$.extend($.fn.dataTableExt.oStdClasses, {
+		$j("#infoDiv").resize();
+		$j.extend($j.fn.dataTableExt.oStdClasses, {
 			"sSortAsc" : "header headerSortDown",
 			"sSortDesc" : "header headerSortUp",
 			"sSortable" : "header"
@@ -155,11 +155,11 @@
 	});
 
 	function showLegend() {
-		$("#legend").show("slow");
+		$j("#legend").show("slow");
 	}
 
 	function hideLegend() {
-		$("#legend").hide("slow");
+		$j("#legend").hide("slow");
 	}
 
 	function infoHere(path) {

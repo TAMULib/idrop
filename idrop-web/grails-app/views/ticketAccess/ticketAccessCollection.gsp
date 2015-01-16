@@ -36,8 +36,8 @@
 var fileUploadUI;
 
 function uploadToCollectionButton() {
-	var ticketString = $("#ticketString").val();
-	var irodsURI = $("#irodsURI").val();
+	var ticketString = $j("#ticketString").val();
+	var irodsURI = $j("#irodsURI").val();
 	var url = "/ticketAccess/prepareUploadDialog";
 	var params = {
 		irodsURI : irodsURI,
@@ -54,9 +54,9 @@ function fillInUploadToCollectionDialog(data) {
 		return;
 	}
 
-	//$('#uploadToTicketCollectionDialogDiv').remove();
+	//$j('#uploadToTicketCollectionDialogDiv').remove();
 
-	var $dialog = $("#uploadToTicketCollectionDialogDiv").html(data).dialog({
+	var $jdialog = $j("#uploadToTicketCollectionDialogDiv").html(data).dialog({
 		autoOpen : false,
 		modal : true,
 		width : 500,
@@ -66,7 +66,7 @@ function fillInUploadToCollectionDialog(data) {
 		}
 	});
 
-	$dialog.dialog('open');
+	$jdialog.dialog('open');
 }
 
 /**
@@ -75,32 +75,32 @@ function fillInUploadToCollectionDialog(data) {
 function initializeUploadToTicketCollectionDialogAjaxLoader() {
 
 	if (fileUploadUI != null) {
-		$("#fileUploadForm").remove;
+		$j("#fileUploadForm").remove;
 	}
 
-	fileUploadUI = $('#uploadForm')
+	fileUploadUI = $j('#uploadForm')
 			.fileUploadUI(
 					{
-						uploadTable : $('#files'),
-						downloadTable : $('#files'),
+						uploadTable : $j('#files'),
+						downloadTable : $j('#files'),
 
 						buildUploadRow : function(files, index) {
-							$("#upload_message_area").html("");
-							$("#upload_message_area").removeClass();
-							return $('<tr><td>'
+							$j("#upload_message_area").html("");
+							$j("#upload_message_area").removeClass();
+							return $j('<tr><td>'
 									+ files[index].name
 									+ '<\/td>'
 									+ '<td class="file_upload_progress"><div><\/div><\/td>'
 									+ '<\/tr>');
 						},
 						buildDownloadRow : function(file) {
-							return $('<tr><td>' + file.name + '<\/td><\/tr>');
+							return $j('<tr><td>' + file.name + '<\/td><\/tr>');
 						},
 						onComplete : function(event, files, index, xhr, handler) {
 							setMessage(jQuery.i18n.prop('msg_upload_complete'));
 
-							$('#uploadToTicketCollectionDialogDiv').dialog('close');
-							$('#uploadToTicketCollectionDialogDiv').remove();
+							$j('#uploadToTicketCollectionDialogDiv').dialog('close');
+							$j('#uploadToTicketCollectionDialogDiv').remove();
 
 						},
 						onError : function(event, files, index, xhr, handler) {

@@ -27,14 +27,14 @@
 /*
         var userListTable;
 
-        $(function() {
+        $j(function() {
 
-        	$('.userDetailRow').click(function(event) {
+        	$j('.userDetailRow').click(function(event) {
         		//requestUserPopup(event);
         		});
 
           
-               userListTable = $("#userListTable").dataTable({
+               userListTable = $j("#userListTable").dataTable({
             	 	"bFilter": false,
             		"bScrollCollapse": true,
             		 "bLengthChange": false,
@@ -42,7 +42,7 @@
             		"iDisplayLength": 15
             	});
 
-				userListTable = $("#userListTable").dataTable({});
+				userListTable = $j("#userListTable").dataTable({});
               	userListTable.fnAdjustColumnSizing();
                
         });

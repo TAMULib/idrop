@@ -17,6 +17,7 @@ var host = "";
 var port = "";
 var messageClass = "message";
 
+var $j = jQuery.noConflict();
 
 function checkForSessionTimeout(data, xhr) {
 	var headers = xhr.getAllResponseHeaders();
@@ -47,9 +48,9 @@ function displayMessageAsBootstrapAlert(message, targetDiv) {
 	}
 	
 	var divTag = document.createElement("div");
-	$(divTag).addClass('alert');
-	$(divTag).html(message);
-	$(targetDiv).html(divTag);
+	$j(divTag).addClass('alert');
+	$j(divTag).html(message);
+	$j(targetDiv).html(divTag);
 	
 }
 
@@ -118,7 +119,7 @@ function setMessage(message) {
 		message = "An unknown error has occurred";
 	}
 	
-	$.gritter.add({
+	$j.gritter.add({
 		// (string | mandatory) the heading of the notification
 		title: 'iDrop Message',
 		// (string | mandatory) the text inside the notification
@@ -141,7 +142,7 @@ function setErrorMessage(message) {
 	if (message == null || message == "") {
 		message = "An unknown error has occurred";
 	}
-	$.gritter.add({
+	$j.gritter.add({
 		// (string | mandatory) the heading of the notification
 		title: 'iDrop Error Message',
 		// (string | mandatory) the text inside the notification
@@ -231,11 +232,11 @@ function lcSendValueAndBuildTable(getUrl, params, tableDiv, newTableId,
 	var img = document.createElement('IMG');
 	img.setAttribute("src", context + "/images/ajax-loader.gif");
 
-	$(tableDiv).html(img);
+	$j(tableDiv).html(img);
 
 	try {
 
-		$.get(context + getUrl, params, function(data, status, xhr) {
+		$j.get(context + getUrl, params, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
 				lcBuildTable(data, tableDiv, newTableId, detailsFunction, detailsIconSelector, tableParams);
@@ -245,7 +246,7 @@ function lcSendValueAndBuildTable(getUrl, params, tableDiv, newTableId,
 	} catch (err) {
 		// FIXME: console traces are not good for IE - mcc
 		// console.trace();
-		$(tableDiv).html(""); // FIXME: some sort of error icon?
+		$j(tableDiv).html(""); // FIXME: some sort of error icon?
 		setErrorMessage(err);
 		// console.log("javascript error:" + err);
 	}
@@ -268,20 +269,20 @@ function lcSendValueAndBuildTable(getUrl, params, tableDiv, newTableId,
  */
 function lcBuildTable(data, tableDiv, newTableId, detailsFunction,
 		dataIconSelector, tableParams) {
-	$(tableDiv).html(data);
+	$j(tableDiv).html(data);
 	
 	if (tableParams == null) {
 		tableParams = {"bJQueryUI" : false}
 	}
 	
-	var dataTableCreated = $(newTableId).dataTable(tableParams);
+	var dataTableCreated = $j(newTableId).dataTable(tableParams);
 	
 	dataTableCreated.fnAdjustColumnSizing();
 	
 	
 	if (detailsFunction != null) {
-		$(dataIconSelector, dataTableCreated.fnGetNodes()).each(function() {
-			$(this).click(function() {
+		$j(dataIconSelector, dataTableCreated.fnGetNodes()).each(function() {
+			$j(this).click(function() {
 				detailsFunction(this);
 			});
 		});
@@ -306,11 +307,11 @@ function lcBuildTableInPlace(newTableId, detailsFunction, dataIconSelector, tabl
 		tableParams = {"bJQueryUI" : true}
 	}
 
-	var dataTableCreated = $(newTableId).dataTable(tableParams);
+	var dataTableCreated = $j(newTableId).dataTable(tableParams);
 
 	if (detailsFunction != null) {
-		$(dataIconSelector, dataTableCreated.fnGetNodes()).each(function() {
-			$(this).click(function() {
+		$j(dataIconSelector, dataTableCreated.fnGetNodes()).each(function() {
+			$j(this).click(function() {
 				detailsFunction(this);
 			});
 		});
@@ -328,9 +329,9 @@ function lcBuildTableInPlace(newTableId, detailsFunction, dataIconSelector, tabl
  *            reference to jquery dataTable (not a selector, the table)
  */
 function lcCloseTableNodes(dataTable) {
-	$(dataTable.fnGetNodes()).each(function(index, value) {
+	$j(dataTable.fnGetNodes()).each(function(index, value) {
 		if (value.innerHTML.match('circle-minus')) {
-			var firstNode = $(value).children().first().children(".ui-icon");
+			var firstNode = $j(value).children().first().children(".ui-icon");
 			firstNode.removeClass("ui-icon-circle-minus");
 			firstNode.addClass("ui-icon-circle-plus");
 			dataTable.fnClose(value);
@@ -366,11 +367,11 @@ function lcSendValueAndPlugHtmlInDiv(getUrl, resultDiv, context,
 
 	showBlockingPanel();
 
-	$(resultDiv).html(img);
+	$j(resultDiv).html(img);
 
 	try {
 
-		$.get(getUrl, function(data, status, xhr) {
+		$j.get(getUrl, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
 				lcFillInDivWithHtml(data, resultDiv, postLoadFunction);
@@ -385,7 +386,7 @@ function lcSendValueAndPlugHtmlInDiv(getUrl, resultDiv, context,
 	} catch (err) {
 		
 		try {
-			$(resultDiv).html(""); // FIXME: some sort of error icon?
+			$j(resultDiv).html(""); // FIXME: some sort of error icon?
 		} catch(err) {
 			// ignore
 		}
@@ -409,7 +410,7 @@ function lcSendValueWithParamsAndPlugHtmlInDiv(getUrl, params, resultDiv,
 
 	try {
 
-		$.get(context + getUrl, params, function(data, status, xhr) {
+		$j.get(context + getUrl, params, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (!continueReq) {
 				return false;
@@ -418,7 +419,7 @@ function lcSendValueWithParamsAndPlugHtmlInDiv(getUrl, params, resultDiv,
 			lcFillInDivWithHtml(data, resultDiv, postLoadFunction);
 			unblockPanel();
 		}, "html").error(function(xhr, status, error) {
-			$(resultDiv).html("");
+			$j(resultDiv).html("");
 			setErrorMessage(xhr.responseText);
 			unblockPanel();
 		});
@@ -427,7 +428,7 @@ function lcSendValueWithParamsAndPlugHtmlInDiv(getUrl, params, resultDiv,
 		// FIXME: console traces are not good for IE - mcc
 		// console.trace();
 		try {
-			$(resultDiv).html(""); // FIXME: some sort of error icon?
+			$j(resultDiv).html(""); // FIXME: some sort of error icon?
 		} catch(err) {
 			// ignore
 		}
@@ -454,29 +455,29 @@ function lcSendValueAndCallbackHtmlAfterErrorCheck(getUrl, divForAjaxError,
 
 	try {
 
-		$.get(context + getUrl, function(data, status, xhr) {
+		$j.get(context + getUrl, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
-				$(divForLoadingGif).html("");
+				$j(divForLoadingGif).html("");
 				if (callbackFunction != null) {
 					var myHtml = data;
 					callbackFunction(myHtml);
 				} else {
-					$(divForLoadingGif).html(data);
+					$j(divForLoadingGif).html(data);
 				
 				}
 				unblockPanel();
 			}
 		}, "html").error(function(xhr, status, error) {
 			
-			$(divForLoadingGif).html("");
+			$j(divForLoadingGif).html("");
 			setErrorMessage(xhr.responseText);
 			unblockPanel();
 		});
 
 	} catch (err) {
 		try {
-			$(resultDiv).html(""); // FIXME: some sort of error icon?
+			$j(resultDiv).html(""); // FIXME: some sort of error icon?
 		} catch(err) {
 			// ignore
 		}
@@ -503,15 +504,15 @@ function lcSendValueAndCallbackHtmlAfterErrorCheckPreserveMessage(getUrl, divFor
 	
 	try {
 
-		$.get(context + getUrl, function(data, status, xhr) {
+		$j.get(context + getUrl, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
-				$(divForLoadingGif).html("");
+				$j(divForLoadingGif).html("");
 				if (callbackFunction != null) {
 					var myHtml = data;
 					callbackFunction(myHtml);
 				} else {
-					$(divForLoadingGif).html(data);
+					$j(divForLoadingGif).html(data);
 				
 				}
 			}
@@ -519,7 +520,7 @@ function lcSendValueAndCallbackHtmlAfterErrorCheckPreserveMessage(getUrl, divFor
 		}, "html").error(function(xhr, status, error) {
 			
 			try {
-				$(resultDiv).html(""); // FIXME: some sort of error icon?
+				$j(resultDiv).html(""); // FIXME: some sort of error icon?
 			} catch(err) {
 				// ignore
 			}
@@ -528,7 +529,7 @@ function lcSendValueAndCallbackHtmlAfterErrorCheckPreserveMessage(getUrl, divFor
 		});
 
 	} catch (err) {
-		$(divForLoadingGif).html(""); 
+		$j(divForLoadingGif).html(""); 
 		unblockPanel();
 		
 		if (err.indexOf("Runtime") > -1) {
@@ -554,19 +555,19 @@ function lcSendValueAndCallbackHtmlAfterErrorCheckThrowsException(getUrl,
 	}
 
 		showBlockingPanel();
-		$.get(context + getUrl, function(data, status, xhr) {
+		$j.get(context + getUrl, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
-				$(divForLoadingGif).html("");
+				$j(divForLoadingGif).html("");
 				if (callbackFunction != null) {
 					callbackFunction(data);
 				} else {
-					$(divForLoadingGif).html(data);
+					$j(divForLoadingGif).html(data);
 				}
 			}
 			unblockPanel();
 		}, "html").error(function(xhr, status, error) {
-			$(divForLoadingGif).html("");
+			$j(divForLoadingGif).html("");
 			if (errorHandlingFunction == null) {
 				throw "error loading:" + error;
 			} else {
@@ -607,21 +608,21 @@ function lcSendValueViaPostAndCallbackHtmlAfterErrorCheck(postUrl, params,
 	showBlockingPanel();
 	try {
 
-		$.post(context + postUrl, params, function(data, status, xhr) {
+		$j.post(context + postUrl, params, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
-				$(divForLoadingGif).html("");
+				$j(divForLoadingGif).html("");
 				if (callbackFunction != null) {
 					var myHtml = data;
 					callbackFunction(myHtml);
 				} else {
-					$(divForLoadingGif).html(data);
+					$j(divForLoadingGif).html(data);
 				}
 			}
 			unblockPanel();
 		}, "html").error(function(xhr, status, error) {
 			if (divForLoadingGif != null) {
-				$(divForLoadingGif).html("");
+				$j(divForLoadingGif).html("");
 			}
 			setErrorMessage(xhr.responseText);
 			unblockPanel();
@@ -630,7 +631,7 @@ function lcSendValueViaPostAndCallbackHtmlAfterErrorCheck(postUrl, params,
 
 	} catch (err) {
 		try {
-			$(divForLoadingGif).html(""); 
+			$j(divForLoadingGif).html(""); 
 		} catch(err) {
 			// ignore
 		}
@@ -653,7 +654,7 @@ function lcSendValueAndCallbackWithJsonAfterErrorCheck(getUrl, parms,
 
 	try {  
 
-		$.get(context + getUrl, parms, function(data, status, xhr) {
+		$j.get(context + getUrl, parms, function(data, status, xhr) {
 			var continueReq = checkForSessionTimeout(data, xhr);
 			if (continueReq) {
 				callbackFunction(data);
@@ -670,7 +671,7 @@ function lcSendValueAndCallbackWithJsonAfterErrorCheck(getUrl, parms,
 }
 
 function lcFillInDivWithHtml(data, resultDiv, postLoadFunction) {
-	$(resultDiv).html(data);
+	$j(resultDiv).html(data);
 	if (postLoadFunction != null) {
 		postLoadFunction(data);
 	}
@@ -688,7 +689,7 @@ function lcShowBusyIconInDiv(divSelector) {
 	var img = document.createElement('IMG');
 	img.setAttribute("src", context + "/images/ajax-loader.gif");
 
-	$(divSelector).html(img);
+	$j(divSelector).html(img);
 }
 
 /**
@@ -698,8 +699,8 @@ function lcShowBusyIconInDiv(divSelector) {
  * @param divSelector
  */
 function lcClearDivAndDivClass(divSelector) {
-	$(divSelector).removeClass();
-	$(divSelector).html("");
+	$j(divSelector).removeClass();
+	$j(divSelector).html("");
 }
 
 /**
@@ -710,8 +711,8 @@ function lcClearDivAndDivClass(divSelector) {
  */
 function lcSetMessageWithMessageClass(divSelector, message) {
 	lcClearDivAndDivClass(divSelector);
-	$(divSelector).html(message);
-	$(divSelector).addClass(messageClass);
+	$j(divSelector).html(message);
+	$j(divSelector).addClass(messageClass);
 }
 
 /**
@@ -724,7 +725,7 @@ function lcShowLoaderBarIconInDiv(divSelector) {
 	var img = document.createElement('IMG');
 	img.setAttribute("src", context + "/images/ajax-loader-bar.gif");
 
-	$(divSelector).html(img);
+	$j(divSelector).html(img);
 }
 
 /**
@@ -741,11 +742,11 @@ function showBlockingPanel(message) {
 	messageHtml += message;
 	messageHtml += "</h1>";
 	
-	$.blockUI({ message: messageHtml });
+	$j.blockUI({ message: messageHtml });
 	
 } 
 
 
 function unblockPanel() {
-	$.unblockUI();
+	$j.unblockUI();
 }

@@ -38,8 +38,8 @@
 
 	var messageAreaSelector="#aclMessageArea";
 	
-	$(function() {
-		var path = $("#aclDetailsAbsPath").val();
+	$j(function() {
+		var path = $j("#aclDetailsAbsPath").val();
 		if (path == null) {
 			path = baseAbsPath;
 		}

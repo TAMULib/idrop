@@ -29,9 +29,9 @@ function reloadTicketTable(absPath) {
 
 	showBlockingPanel();
 
-	var jqxhr = $.get(context + ticketTableUrl, params,
+	var jqxhr = $j.get(context + ticketTableUrl, params,
 			function(data, status, xhr) {
-				$('#ticketTableDiv').html(data);
+				$j('#ticketTableDiv').html(data);
 				var continueReq = checkForSessionTimeout(data, xhr);
 				if (!continueReq) {
 					return false;
@@ -97,7 +97,7 @@ function browseTicketDetailsFunction(clickedIcon, rowActionIsOn) {
         /* Open this row */
         lcCloseTableNodes(ticketTable);
         // nTr points to row and has ticket string in id
-        var ticketString = $(rowActionIsOn).attr('id');
+        var ticketString = $j(rowActionIsOn).attr('id');
         //alert("ticketString:" + ticketString);
         var detailsId = "details_" + ticketString;
         var detailsHtmlDiv = "details_html_" + ticketString;
@@ -123,11 +123,11 @@ function browseTicketDetailsFunction(clickedIcon, rowActionIsOn) {
          img.setAttribute("src", context + "/images/ajax-loader.gif");
          detailsPulldownDiv.appendChild(img);
          td.appendChild(detailsPulldownDiv);
-         return $(td).html();
+         return $j(td).html();
  }
  
  function askForTicketDetailsPulldown(ticketString, detailsId) {
-	 var absPath = $("#ticketDetailsAbsPath").val();
+	 var absPath = $j("#ticketDetailsAbsPath").val();
 	 
 	
      var params = {
@@ -150,7 +150,7 @@ function browseTicketDetailsFunction(clickedIcon, rowActionIsOn) {
  */
 
 function reloadTickets() {
-	var absPath = $("#ticketDetailsAbsPath").val();
+	var absPath = $j("#ticketDetailsAbsPath").val();
 	reloadTicketTable(absPath);
 }
 
@@ -162,7 +162,7 @@ function reloadTickets() {
  */
 
 function prepareTicketDetailsDialog(ticketString) {
-	var absPath = $("#ticketDetailsAbsPath").val();
+	var absPath = $j("#ticketDetailsAbsPath").val();
 	var url = "/ticket/ticketDetailsDialog";
 	
 	var create = false;
@@ -188,7 +188,7 @@ function prepareTicketDetailsDialog(ticketString) {
  *The ticket in the pulldown should be updated 
  */
 function updateTicketFromPulldown() {
-	var formData = $("#ticketPulldownDetailsForm").serializeArray();
+	var formData = $j("#ticketPulldownDetailsForm").serializeArray();
 	if (formData == null) {
 		setErrorMessage(jQuery.i18n.prop('msg_no_ticket_data'));
 		return false;
@@ -198,7 +198,7 @@ function updateTicketFromPulldown() {
 
 	lcShowBusyIconInDiv("#ticketPulldownDiv");
 
-	var jqxhr = $.post(context + ticketUpdateUrl, formData,
+	var jqxhr = $j.post(context + ticketUpdateUrl, formData,
 			function(data, status, xhr) {
 			}, "html").success(function(data, status, xhr) {
 				var continueReq = checkForSessionTimeout(data, xhr);
@@ -206,7 +206,7 @@ function updateTicketFromPulldown() {
 					return false;
 				} 
 				
-	$(".ticketDetails").html(data);
+	$j(".ticketDetails").html(data);
         unblockPanel();
 				
 	}).error(function(xhr, status, error) {
@@ -223,16 +223,16 @@ function updateTicketFromPulldown() {
  *            html data
  */
 function showTicketDetailsDialog(data) {
-	//$("#ticketTableDiv").fadeOut('slow');
-	$("#ticketDetailsTableArea").fadeOut('slow');
-	$("#ticketDialogArea").html(data).fadeIn('slow');
+	//$j("#ticketTableDiv").fadeOut('slow');
+	$j("#ticketDetailsTableArea").fadeOut('slow');
+	$j("#ticketDialogArea").html(data).fadeIn('slow');
 }
 
 /*
  *Reload the ticket pulldown data 
  */
 function cancelTicketFromPulldown() {
-	var ticketString = $("#ticketString").val();
+	var ticketString = $j("#ticketString").val();
 	
 	if (ticketString == null) {
 		setErrorMessage(jQuery.i18n.prop('msg_ticket_no_data'));
@@ -247,9 +247,9 @@ function cancelTicketFromPulldown() {
  */
 function closeTicketDialog() {
 	
-	$("#ticketDialogArea").fadeOut('slow');
-	$("#ticketDialogArea").html("");
-	$("#ticketDetailsTableArea").fadeIn('slow');
+	$j("#ticketDialogArea").fadeOut('slow');
+	$j("#ticketDialogArea").html("");
+	$j("#ticketDetailsTableArea").fadeIn('slow');
 	reloadTicketTable(selectedPath);
 	
 	// setting width and height?
@@ -262,7 +262,7 @@ function closeTicketDialog() {
  */
 function submitTicketDialog() {
 	
-		var selectedPath = $("#ticketDetailsAbsPath").val();
+		var selectedPath = $j("#ticketDetailsAbsPath").val();
 	
 		if (selectedPath == null) {
 			setErrorMessage("no collection or data object selected");
@@ -270,14 +270,14 @@ function submitTicketDialog() {
 		}
 		
 		// see if there is form data (users in a pick list) that are selected
-		var formData = $("#ticketPulldownDetailsForm").serializeArray();
+		var formData = $j("#ticketPulldownDetailsForm").serializeArray();
 	
 		if (formData == null) {
 			setErrorMessage(jQuery.i18n.prop('msg_no_ticket_data'));
 			return false;
 		}
 	
-		var jqxhr = $.post(context + ticketUpdateUrl, formData,
+		var jqxhr = $j.post(context + ticketUpdateUrl, formData,
 				function(data, status, xhr) {
 				}, "html").success(function(data, status, xhr) {
 					var continueReq = checkForSessionTimeout(data, xhr);
@@ -288,7 +288,7 @@ function submitTicketDialog() {
 					//closeTicketDialog();
 					//setMessage(jQuery.i18n.prop('msg_ticket_update_successful'));
 					//reloadTicketTable(selectedPath);
-					$("#ticketDialogArea").html(data);
+					$j("#ticketDialogArea").html(data);
 
 		}).error(function(xhr, status, error) {
 			closeTicketDialog();
@@ -305,10 +305,10 @@ function deleteTicket() {
 		return false;
 	}
     
-	var formData = $("#ticketTableForm").serializeArray();
+	var formData = $j("#ticketTableForm").serializeArray();
 	showBlockingPanel();
 
-	var jqxhr = $.post(context + deleteTicketsActionUrl, formData, "html")
+	var jqxhr = $j.post(context + deleteTicketsActionUrl, formData, "html")
 			.success(function(returnedData, status, xhr) {
 				var continueReq = checkForSessionTimeout(returnedData, xhr);
 				if (!continueReq) {
@@ -329,14 +329,14 @@ function deleteTicket() {
  */
 function editTicketDialog() {
 	// find first selected ticket in table, if none selected show message and ignore
-	var edited =  $(":checked").filter("#selectedTicket");
+	var edited =  $j(":checked").filter("#selectedTicket");
 	if (!edited.length > 0) {
 		setMessage(jQuery.i18n.prop('msg_nothing_selected_for_edit'));
 		return;
 	}
 	
-	var selectedTR = $(edited[0]).parent().parent();
-	var ticketString = $(selectedTR).attr('id');
+	var selectedTR = $j(edited[0]).parent().parent();
+	var ticketString = $j(selectedTR).attr('id');
 	prepareTicketDetailsDialog(ticketString);
 
 }

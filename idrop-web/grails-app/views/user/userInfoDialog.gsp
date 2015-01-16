@@ -24,8 +24,8 @@
 </fieldset>
 <script>
 
-	$(function() {
-		$("#userInfoDialog").dialog({width:500, modal:true});
+	$j(function() {
+		$j("#userInfoDialog").dialog({width:500, modal:true});
 	});
 
 

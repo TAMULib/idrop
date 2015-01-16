@@ -29,7 +29,7 @@ function prosecuteSearch(searchTerm, searchType) {
 }
 
 function searchDetailsClick(minMaxIcon) {
-	var searchTable = $("#searchResultTable").dataTable();
+	var searchTable = $j("#searchResultTable").dataTable();
 	var nTr = minMaxIcon.parentNode.parentNode;
 	if (minMaxIcon.parentNode.innerHTML.match('circle-minus')) {
 		lcCloseTableNodes(searchTable);
@@ -44,11 +44,11 @@ function searchDetailsClick(minMaxIcon) {
 }
 
 function searchDetailsFunction(clickedIcon, rowActionIsOn) {
-	var searchTable = $("#searchResultTable").dataTable();
+	var searchTable = $j("#searchResultTable").dataTable();
 	/* Open this row */
 	lcCloseTableNodes(searchTable);
 	// nTr points to row and has absPath in id
-	var absPath = $(rowActionIsOn).attr('id');
+	var absPath = $j(rowActionIsOn).attr('id');
 	var detailsId = "details_" + absPath;
 	var detailsHtmlDiv = "details_html_" + absPath;
 	var buildDetailsLayoutVal = buildSearchLayout(detailsId);
@@ -71,7 +71,7 @@ function buildSearchLayout(detailsId) {
 	img.setAttribute("src", context + "/images/ajax-loader.gif");
 	detailsPulldownDiv.appendChild(img);
 	td.appendChild(detailsPulldownDiv);
-	return $(td).html();
+	return $j(td).html();
 }
 
 function askForSearchDetailsPulldown(absPath, detailsId) {
