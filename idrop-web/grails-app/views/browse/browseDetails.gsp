@@ -12,7 +12,8 @@
 	
 				var file_name = file.fileName;
 				var collection = $j("#browseDetailsAbsPath").val();
-				alert("Uploaded " + file_name + ", Collection: " + collection);				
+				alert("Uploaded " + file_name + ", Collection: " + collection);	
+				$j{remoteFunction(controller:'uploadr', action:'handle', params:'\'file=\'+file._name+\'&collectionParentName=\'+collection')};
 			
 			</uploadr:onSuccess>
 		</uploadr:add>

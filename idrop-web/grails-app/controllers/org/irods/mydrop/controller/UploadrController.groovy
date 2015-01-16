@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile
 
 import grails.converters.JSON
 
-class UploadController {
+class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
 	IRODSAccount irodsAccount
 	static long MAX_UPLOAD = 3221225472  // 3GB
@@ -44,6 +44,9 @@ class UploadController {
 	def handle = {
 	
 		log.info("upload action in file controller")
+		
+		log.info(params.file);
+		log.info(params.path);
 								
 		int status = 0
 		def statusText = ""
