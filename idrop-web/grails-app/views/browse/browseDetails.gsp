@@ -7,15 +7,25 @@
 	<div id="idropUploadrArea">
 		<!--  area to show idrop lite 1 -->	
 		<asset:javascript src="uploadr.manifest.js"/>
-    	<asset:stylesheet href="uploadr.manifest.css"/>	
+    	<asset:stylesheet href="uploadr.manifest.css"/>
+    	
+    	<% def path = new File("/tmp/uploadr") %>
+    		
 		<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
-			<g:each in="${files}" var="file">
+			
+			<!-- <g:each in="${files}" var="file"> -->
+			
+			<% path.listFiles().each { file -> %>
+			
     			<uploadr:file name="${file.name}">
         			<uploadr:fileSize>${file.size()}</uploadr:fileSize>
         			<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
         			<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
     			</uploadr:file>
-			</g:each>
+			
+			<% } %>
+			
+			<!-- </g:each> -->
 		
 			<uploadr:onSuccess>
 	
