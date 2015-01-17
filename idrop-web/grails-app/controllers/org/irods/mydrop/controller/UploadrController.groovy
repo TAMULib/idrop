@@ -76,7 +76,7 @@ class UploadrController {
 		}
 
 		log.info("name is : ${name}")
-		def irodsCollectionPath = params.collectionParentName
+		def irodsCollectionPath = params.path
 
 		if (f == null || f.empty) {
 			log.error("no file to upload")
