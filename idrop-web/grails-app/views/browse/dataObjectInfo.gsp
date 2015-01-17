@@ -19,6 +19,7 @@
 					"path": collection
 				};
 				
+				alert(file.contentType);
 				//alert("Uploaded " + file_name + ", Collection: " + collection);
 				$j.ajax({
     				url:"${g.createLink(controller:'uploadr',action:'handle')}",
