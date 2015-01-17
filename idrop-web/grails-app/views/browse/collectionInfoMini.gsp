@@ -9,24 +9,20 @@
 		<asset:javascript src="uploadr.manifest.js"/>
     	<asset:stylesheet href="uploadr.manifest.css"/>
     	
-    	<% def path = new File("/tmp/uploadr") %>
+    	<% def epath = new File("/tmp/uploadr") %>
     	
 		<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
+						
+			<% epath.listFiles().each { efile -> %>
 			
-			<!-- <g:each in="${files}" var="file"> -->
-			
-			<% path.listFiles().each { file -> %>
-			
-    			<uploadr:file name="${file.name}">
-        			<uploadr:fileSize>${file.size()}</uploadr:fileSize>
-        			<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
+    			<uploadr:file name="${efile.name}">
+        			<uploadr:fileSize>${efile.size()}</uploadr:fileSize>
+        			<uploadr:fileModified>${efile.lastModified()}</uploadr:fileModified>
         			<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
     			</uploadr:file>
 			
 			<% } %>
-			
-			<!-- </g:each> -->
-			
+						
 			<uploadr:onSuccess>
 	
 				var file_name = file.fileName;
