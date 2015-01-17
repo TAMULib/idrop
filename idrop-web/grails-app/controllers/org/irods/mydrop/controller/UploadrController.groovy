@@ -54,11 +54,12 @@ class UploadrController {
 		
 		log.info(params.path);
 		
-		
+				
 		log.info("uploaded files")
 		new File("/tmp/uploadr/").eachFile() { file ->
    			log.info(file.getName())
 		}
+		
 		
 		File file = new File("/tmp/uploadr/" + params.file)
 		
@@ -107,7 +108,6 @@ class UploadrController {
 			response.sendError(500,message)
 			return
 		}
-
 		
 		def irodsCollectionPath = params.path
 
@@ -131,6 +131,14 @@ class UploadrController {
 			targetFile.setResource(irodsAccount.defaultStorageResource)
 			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
 			stream2Stream.transferStreamToFileUsingIOStreams(fis, targetFile, f.size, 0)
+			 
+    		if(file.delete()) {
+        		log.info("file deleted")
+    		}
+    		else {
+        		log.error("file not deleted")
+    		}
+			
 		} catch (NoResourceDefinedException nrd) {
 			log.error("no resource defined exception", nrd)
 			response.sendError(500, message(code:"message.no.resource"))
