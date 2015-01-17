@@ -16,6 +16,8 @@ import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile
+
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
 	IRODSAccount irodsAccount
