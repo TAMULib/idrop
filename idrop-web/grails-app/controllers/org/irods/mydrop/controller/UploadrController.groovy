@@ -1,10 +1,6 @@
 package org.irods.mydrop.controller
 
-import java.io.File;
-
 import grails.converters.JSON
-
-import org.apache.commons.fileupload.disk.DiskFileItem;
 
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
@@ -15,6 +11,14 @@ import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.commons.CommonsMultipartFile
+
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
+import org.springframework.mock.web.MockMultipartFile
+
+
 
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
@@ -52,11 +56,16 @@ class UploadrController {
 		
 		log.info(params.path);
 		
-		File file = new File("/tmp/uploadr/" + params.file);
-    	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile());
-    	fileItem.getOutputStream();    	 
+		Path path = Paths.get("/tmp/uploadr/" + params.file);
+		String name = params.file;
+		String originalFileName = name;
+		String contentType = "text/plain";
+		byte[] content = null;
+		try {
+    		content = Files.readAllBytes(path);
+		} catch (final IOException e) { }
+		MultipartFile f = new MockMultipartFile(name, originalFileName, contentType, content);
 		
-		MultipartFile f = new CommonsMultipartFile(fileItem);
 		def name = f.getOriginalFilename()
 
 		log.info("f is ${f}")
