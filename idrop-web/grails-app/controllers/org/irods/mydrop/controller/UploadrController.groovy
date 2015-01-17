@@ -57,14 +57,13 @@ class UploadrController {
 		log.info(params.path);
 		
 		Path path = Paths.get("/tmp/uploadr/" + params.file);
-		String name = params.file;
-		String originalFileName = name;
+		String originalFileName = params.file;
 		String contentType = "text/plain";
 		byte[] content = null;
 		try {
     		content = Files.readAllBytes(path);
 		} catch (final IOException e) { }
-		MultipartFile f = new MockMultipartFile(name, originalFileName, contentType, content);
+		MultipartFile f = new MockMultipartFile(params.file, originalFileName, contentType, content);
 		
 		def name = f.getOriginalFilename()
 
