@@ -1,5 +1,7 @@
 package org.irods.mydrop.controller
 
+import java.io.File
+
 import org.irods.jargon.core.connection.AuthScheme
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.connection.auth.AuthResponse
@@ -8,6 +10,8 @@ import org.irods.jargon.core.pub.IRODSAccessObjectFactory
 import org.irods.jargon.core.pub.ResourceAO
 import org.irods.jargon.core.pub.UserAO
 import org.irods.mydrop.service.ViewStateService
+
+import org.springframework.web.multipart.MultipartFile
 
 class LoginController {
 
