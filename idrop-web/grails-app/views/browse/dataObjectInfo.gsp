@@ -40,7 +40,7 @@
     					dataType: 'json',
     					data: parameters,
     					success: function(data) {
-        					alert(data)
+        					//alert(data)
     					},
     					error: function(request, status, error) {
         					alert(error)
