@@ -55,11 +55,17 @@ class UploadrController {
 		log.info(params.path);
 		
 		
+		log.info("uploaded files")
+		new File("/tmp/uploadr/").eachFile() { file ->
+   			log.info(file.getName())
+		}
+		
 		File file = new File("/tmp/uploadr/" + params.file);
 		
 		log.info(":file abs path " + file.getAbsolutePath());
 		
 		log.info(":file length " + file.length());
+    	
     	
     	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile());
     	    	
@@ -67,17 +73,9 @@ class UploadrController {
     	
     	log.info(":fileItem name " + fileItem.getName());
     	
+    	
     	MultipartFile f = new CommonsMultipartFile(fileItem);
-		
-		
-		log.info("uploaded files")
-		new File("/tmp/uploadr/").eachFile() { file ->
-   			log.info(file.getName())
-		}
-		
-		
-		//MultipartFile f = null;
-		
+			
 		def name = f.getOriginalFilename()
 
 		log.info("name is : ${name}")

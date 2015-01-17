@@ -32,7 +32,9 @@
     					},
     					complete: function() {
     					}
-				});				
+				});
+				
+				callback();
 			
 		</uploadr:onSuccess>
 	</uploadr:add>

@@ -31,8 +31,10 @@
     					},
     					complete: function() {
     					}
-				});				
-			
+				});
+				
+				callback();
+							
 		</uploadr:onSuccess>
 	</uploadr:add>
 	<div id='bulkUploadMenu' class='fg-buttonset fg-buttonset-single' style='float:none'>
