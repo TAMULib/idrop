@@ -2,6 +2,11 @@ package org.irods.mydrop.controller
 
 import grails.converters.JSON
 
+import java.io.File
+
+import org.apache.commons.fileupload.disk.DiskFileItem
+ 
+
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
@@ -10,12 +15,6 @@ import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
-
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-
-import org.springframework.mock.web.MockMultipartFile
 
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
@@ -53,17 +52,25 @@ class UploadrController {
 		
 		log.info(params.path);
 		
-		Path path = Paths.get("/tmp/uploadr/" + params.file);
-		String originalFileName = params.file;
-		String contentType = "text/plain";
-		byte[] content = null;
-		try {
-    		content = Files.readAllBytes(path);
-		} catch (final IOException e) { }
-		MultipartFile f = new MockMultipartFile(params.file, originalFileName, contentType, content);
+		
+		File file = new File("/tmp/uploadr/" + params.file);
+		
+		log.info(":file abs path " + file.getAbsolutePath());
+    	
+    	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile());
+    	    	
+    	fileItem.getOutputStream();
+    	
+    	log.info(":fileItem name " + fileItem.getName());
+    	
+    	MultipartFile f = new CommonsMultipartFile(fileItem);
+		
+		
+		//MultipartFile f = null;
 		
 		def name = f.getOriginalFilename()
 
+		log.info("name is : ${name}")
 		log.info("f is ${f}")
 		log.info("length of f is ${f.size}")
 		log.info("max upload size is ${MAX_UPLOAD}")
@@ -80,7 +87,7 @@ class UploadrController {
 			return
 		}
 
-		log.info("name is : ${name}")
+		
 		def irodsCollectionPath = params.path
 
 		if (f == null || f.empty) {
