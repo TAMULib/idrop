@@ -109,7 +109,7 @@ legend {
 						  <div style="margin: 20px;">
 						    <g:checkBox name="useGuestLogin" id="useGuestLogin" value="${loginCommand.useGuestLogin}" 
 						      onclick="toggleGuestLogin()" style="margin-left: 15px; vertical-align: text-top;" />
-						  </div
+						  </div>
 						</div>
 
 						<label class="userLoginData" style="margin-bottom: 15px;">
@@ -149,7 +149,7 @@ legend {
 		</div>
 
 	</div>
-	<script type="text/javascript">
+<script type="text/javascript">
 	$j(function() {
 		toggleGuestLogin();
 

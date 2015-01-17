@@ -1,3 +1,4 @@
+<%@ page import="org.apache.commons.lang.RandomStringUtils" %>
 <g:hiddenField id="infoAbsPath" name="absolutePath" value="${collection.collectionName}" />
 <div id="infoMessageArea">
 	<!--  -->
@@ -8,6 +9,14 @@
 	<asset:javascript src="uploadr.manifest.js"/>
     <asset:stylesheet href="uploadr.manifest.css"/>
 	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
+		<g:each in="${files}" var="file">
+    		<uploadr:file name="${file.name}">
+        		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
+        		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
+        		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
+    		</uploadr:file>
+		</g:each>
+		
 		<uploadr:onSuccess>
 	
 			var file_name = file.fileName;
@@ -34,11 +43,7 @@
 				});
 				
 				callback();		
-				
-				$j('.uploadr[name=idropUploadr]').data('uploadr').clear({    				
-    				erase: true
-				});
-				
+								
 				refreshTree();			
 			
 		</uploadr:onSuccess>
