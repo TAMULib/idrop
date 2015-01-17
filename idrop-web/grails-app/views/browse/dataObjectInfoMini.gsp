@@ -9,10 +9,10 @@
 	<asset:javascript src="uploadr.manifest.js"/>
     <asset:stylesheet href="uploadr.manifest.css"/>
     
-    <% def epath = new File("/tmp/uploadr") %>
+    <% def epath = new File("${updir}") %>
     
-	<uploadr:add name="idropUploadr" path="/tmp/uploadr" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
-					
+	<uploadr:add name="idropUploadr" path="${updir}" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
+			
 		<% epath.listFiles().each { efile -> %>
 			
    			<uploadr:file name="${efile.name}">
@@ -22,7 +22,7 @@
    			</uploadr:file>
 			
 		<% } %>
-					
+
 		<uploadr:onSuccess>
 	
 			var file_name = file.fileName;
@@ -39,7 +39,7 @@
     					dataType: 'json',
     					data: parameters,
     					success: function(data) {
-        					//alert(data)
+        					alert(data)
     					},
     					error: function(request, status, error) {
         					alert(error)

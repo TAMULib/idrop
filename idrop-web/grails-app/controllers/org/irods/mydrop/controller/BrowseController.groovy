@@ -421,8 +421,10 @@ class BrowseController {
 			//PagingActions pagingActions = PagingAnalyser.buildPagingActionsFromListOfIRODSDomainObjects(entries, pageSize)
 			//log.debug("retrieved collectionAndDataObjectList: ${entries}")
 			//log.debug("pagingActions:${pagingActions}")
+			
+			def uploadrDir = "/tmp/uploadr/" + irodsAccount.getUserName()
 
-			render(view:"browseDetails", model:[collection:entries, parent:retObj, showLite:collectionAndDataObjectListAndSearchAO.getIRODSServerProperties().isTheIrodsServerAtLeastAtTheGivenReleaseVersion("rods3.0"), viewState:viewState])
+			render(view:"browseDetails", model:[collection:entries, parent:retObj, showLite:collectionAndDataObjectListAndSearchAO.getIRODSServerProperties().isTheIrodsServerAtLeastAtTheGivenReleaseVersion("rods3.0"), viewState:viewState, updir: uploadrDir])
 		} catch (FileNotFoundException fnf) {
 			log.info("file not found looking for data, show stand-in page", fnf)
 			render(view:"noInfo")
@@ -479,6 +481,8 @@ class BrowseController {
 		def getThumbnail = false
 
 		log.info "is this a data object? ${isDataObject}"
+		
+		def uploadrDir = "/tmp/uploadr/" + irodsAccount.getUserName()
 
 		FreeTaggingService freeTaggingService = taggingServiceFactory.instanceFreeTaggingService(irodsAccount)
 		IRODSTaggingService irodsTaggingService = taggingServiceFactory.instanceIrodsTaggingService(irodsAccount)
@@ -501,7 +505,7 @@ class BrowseController {
 				getThumbnail = true
 			}
 
-			render(view:"dataObjectInfoMini", model:[dataObject:retObj,tags:freeTags,comment:comment,getThumbnail:getThumbnail])
+			render(view:"dataObjectInfoMini", model:[dataObject:retObj,tags:freeTags,comment:comment,getThumbnail:getThumbnail,updir:uploadrDir])
 		} else {
 			log.info("getting free tags for collection")
 			def freeTags = freeTaggingService.getTagsForCollectionInFreeTagForm(absPath)
@@ -516,7 +520,8 @@ class BrowseController {
 			log.info("comment was:${comment}")
 
 			log.info("rendering as collection: ${retObj}")
-			render(view:"collectionInfoMini", model:[collection:retObj,comment:comment,tags:freeTags])
+			
+			render(view:"collectionInfoMini", model:[collection:retObj,comment:comment,tags:freeTags,updir:uploadrDir])
 		}
 	}
 
@@ -728,7 +733,6 @@ class BrowseController {
 		def getThumbnail = false
 		def renderMedia = false
 
-
 		log.info "is this a data object? ${isDataObject}"
 
 		FreeTaggingService freeTaggingService = taggingServiceFactory.instanceFreeTaggingService(irodsAccount)
@@ -741,6 +745,8 @@ class BrowseController {
 			irodsStarredFileOrCollection = null
 		}
 		log.info "starring info:${irodsStarredFileOrCollection}"
+		
+		def uploadrDir = "/tmp/uploadr/" + irodsAccount.getUserName()
 
 		if (isDataObject) {
 			long maxSize
@@ -791,7 +797,7 @@ class BrowseController {
 			}
 
 			mav.view = "dataObjectInfo"
-			mav.model = [dataObject:retObj,tags:freeTags,comment:comment,getThumbnail:getThumbnail,renderMedia:renderMedia,isDataObject:isDataObject,irodsStarredFileOrCollection:irodsStarredFileOrCollection,showLite:collectionAndDataObjectListAndSearchAO.getIRODSServerProperties().isTheIrodsServerAtLeastAtTheGivenReleaseVersion("rods3.0"), rule:rule]
+			mav.model = [dataObject:retObj,tags:freeTags,comment:comment,getThumbnail:getThumbnail,renderMedia:renderMedia,isDataObject:isDataObject,irodsStarredFileOrCollection:irodsStarredFileOrCollection,showLite:collectionAndDataObjectListAndSearchAO.getIRODSServerProperties().isTheIrodsServerAtLeastAtTheGivenReleaseVersion("rods3.0"), rule:rule, updir: uploadrDir]
 			return mav
 		} else {
 			log.info("getting free tags for collection")
@@ -804,7 +810,7 @@ class BrowseController {
 			}
 			log.info("rendering as collection: ${retObj}")
 			mav.view = "collectionInfo"
-			mav.model = [collection:retObj,comment:comment,tags:freeTags,  isDataObject:isDataObject, irodsStarredFileOrCollection:irodsStarredFileOrCollection,showLite:collectionAndDataObjectListAndSearchAO.getIRODSServerProperties().isTheIrodsServerAtLeastAtTheGivenReleaseVersion("rods3.0")]
+			mav.model = [collection:retObj,comment:comment,tags:freeTags,  isDataObject:isDataObject, irodsStarredFileOrCollection:irodsStarredFileOrCollection,showLite:collectionAndDataObjectListAndSearchAO.getIRODSServerProperties().isTheIrodsServerAtLeastAtTheGivenReleaseVersion("rods3.0"), updir: uploadrDir]
 			return mav
 
 		}
