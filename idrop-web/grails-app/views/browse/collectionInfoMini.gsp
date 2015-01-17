@@ -32,8 +32,14 @@
     					complete: function() {
     					}
 				});
+				
+				refreshTree();
 
 				callback();
+				
+				$j('.uploadr[name=myUploadr]').data('uploadr').clear({    				
+    				erase: true
+				});
 							
 			</uploadr:onSuccess>
 		</uploadr:add>
