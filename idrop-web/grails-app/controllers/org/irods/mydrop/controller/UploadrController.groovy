@@ -59,9 +59,9 @@ class UploadrController {
    		//	log.info(file.getName())
 		//}
 		
-		def localPath = "/tmp/uploadr/" + irodsAccount.getUserName() + "/"
+		def localPath = "/tmp/uploadr/" + irodsAccount.getUserName()
 		
-		File file = new File(localPath + params.file)
+		File file = new File(localPath + "/" + params.file)
 		
 		//log.info(":file abs path " + file.getAbsolutePath())
 		
