@@ -49,7 +49,7 @@ class LoginController {
 		def presetAuthScheme = grailsApplication.config.idrop.config.preset.authScheme
 
 		response.setHeader("apptimeout","apptimeout")
-
+		
 		LoginCommand loginCommand = new LoginCommand()
 
 		if (presetHost) {
@@ -193,6 +193,18 @@ class LoginController {
 			render(view:"login", model:[loginCommand:loginCommand])
 			return
 		}
+		
+		
+		def storagePathDirectory = new File("/tmp/uploadr/" + userName)
+        if (!storagePathDirectory.exists()) {            
+            if (storagePathDirectory.mkdirs()) {
+                log.info("created directory for user")
+            } else {
+                log.error("failed to create directory for user")
+            }
+        }
+		
+		
 		session["SPRING_SECURITY_CONTEXT"] = authResponse.authenticatedIRODSAccount
 		redirect(controller:"home")
 	}
