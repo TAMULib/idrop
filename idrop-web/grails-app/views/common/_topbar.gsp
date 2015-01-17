@@ -67,8 +67,9 @@
 	//$j(function() {	
 		//$j("#accountZoneAndUserDisplay").html(currentZone + ":" + currentUser);
 //	});
-	 </g:ifAuthenticated>
 </script>
+ </g:ifAuthenticated>
+
 
 
 
