@@ -10,15 +10,12 @@ import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
-import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
 import org.springframework.mock.web.MockMultipartFile
-
-
 
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
