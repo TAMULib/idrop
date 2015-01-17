@@ -1584,6 +1584,7 @@ function requestThumbnailImageForInfoPane() {
  */
 function refreshTree() {
 	$j.jstree._reference(dataTree).refresh();
+	$j.jstree._reference(dataTree).open_node($j.jstree._reference(dataTree).get_container());
 }
 
 /**
