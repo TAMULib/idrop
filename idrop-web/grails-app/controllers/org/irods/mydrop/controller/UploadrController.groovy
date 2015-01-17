@@ -14,6 +14,7 @@ import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
@@ -49,7 +50,6 @@ class UploadrController {
 	
 		log.info("upload action in file controller")
 		
-		log.info(params.file);
 		log.info(params.path);
 		
 		File file = new File("/tmp/uploadr/" + params.file);
