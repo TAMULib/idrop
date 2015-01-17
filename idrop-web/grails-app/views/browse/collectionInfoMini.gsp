@@ -33,13 +33,13 @@
     					}
 				});
 				
-				refreshTree();
-
 				callback();
 				
-				$j('.uploadr[name=myUploadr]').data('uploadr').clear({    				
+				$j('.uploadr[name=idropUploadr]').data('uploadr').clear({    				
     				erase: true
 				});
+				
+				refreshTree();
 							
 			</uploadr:onSuccess>
 		</uploadr:add>

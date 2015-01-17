@@ -10,7 +10,7 @@
           host = "${request.localName}";
           port = "${request.localPort}";
 
-          $(function(){
+          $j(function(){
                  
                     jQuery.i18n.properties({
                               name:'messages', 
