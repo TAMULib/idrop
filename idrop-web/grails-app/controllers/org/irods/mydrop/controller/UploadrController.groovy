@@ -1,5 +1,11 @@
 package org.irods.mydrop.controller
 
+import java.io.File;
+
+import grails.converters.JSON
+
+import org.apache.commons.fileupload.disk.DiskFileItem;
+
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
@@ -8,8 +14,6 @@ import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
-
-import grails.converters.JSON
 
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
@@ -47,18 +51,12 @@ class UploadrController {
 		
 		log.info(params.file);
 		log.info(params.path);
-								
-		int status = 0
-		def statusText = ""
 		
-		response.contentType = 'application/json'
+		File file = new File("/tmp/uploadr/" + params.file);
+    	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile());
+    	fileItem.getOutputStream();    	 
 		
-		response.setStatus(status)
-		render([written: (status == 200), fileName: "", status: status, statusText: statusText] as JSON)
-		
-		
-		/*
-		MultipartFile f //= new File("/tmp/uploadr/" + params.file)
+		MultipartFile f = new CommonsMultipartFile(fileItem);
 		def name = f.getOriginalFilename()
 
 		log.info("f is ${f}")
@@ -93,7 +91,6 @@ class UploadrController {
 		InputStream fis = null
 		log.info("building irodsFile for file name: ${name}")
 
-
 		try {
 			fis = new BufferedInputStream(f.getInputStream())
 			IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
@@ -112,10 +109,9 @@ class UploadrController {
 		}
 
 		render "{\"name\":\"${name}\",\"type\":\"image/jpeg\",\"size\":\"1000\"}"
-		*/
 	}
 	
-	    def index = {
+	def index = {
         redirect(uri: "/")
 	}
 

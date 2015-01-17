@@ -18,8 +18,8 @@
 					"path": collection
 				};
 				
-				alert("Uploaded " + file_name + ", Collection: " + collection);
-				$.ajax({
+				//alert("Uploaded " + file_name + ", Collection: " + collection);
+				$j.ajax({
     				url:"${g.createLink(controller:'uploadr',action:'handle')}",
     					dataType: 'json',
     					data: parameters,
