@@ -60,21 +60,34 @@ class UploadrController {
    			log.info(file.getName())
 		}
 		
-		File file = new File("/tmp/uploadr/" + params.file);
+		File file = new File("/tmp/uploadr/" + params.file)
 		
-		log.info(":file abs path " + file.getAbsolutePath());
+		log.info(":file abs path " + file.getAbsolutePath())
 		
-		log.info(":file length " + file.length());
+		log.info(":file length " + file.length())
     	
     	
-    	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile());
+    	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile())
     	    	
-    	fileItem.getOutputStream();
+		try {    	    	
+    		InputStream input =  new FileInputStream(file)
+        	OutputStream os = fileItem.getOutputStream()
+        	int ret = input.read()
+        	while ( ret != -1 ) {
+            	os.write(ret)
+            	ret = input.read()
+        	}
+        	os.flush()
+        }
+        catch (Exception e) {
+        	e.printStackTrace()        	
+        }
+        
+            	
+    	log.info(":fileItem name " + fileItem.getName())
     	
-    	log.info(":fileItem name " + fileItem.getName());
     	
-    	
-    	MultipartFile f = new CommonsMultipartFile(fileItem);
+    	MultipartFile f = new CommonsMultipartFile(fileItem)
 			
 		def name = f.getOriginalFilename()
 
