@@ -132,13 +132,13 @@ class UploadrController {
 			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
 			stream2Stream.transferStreamToFileUsingIOStreams(fis, targetFile, f.size, 0)
 			 
-			// maybe delete file after uploaded
-    		//if(file.delete()) {
-        	//	log.info("file deleted")
-    		//}
-    		//else {
-        	//	log.error("file not deleted")
-    		//}
+			// delete file after uploaded
+    		if(file.delete()) {
+        		log.info("file deleted")
+    		}
+    		else {
+        		log.error("file not deleted")
+    		}
 			
 		} catch (NoResourceDefinedException nrd) {
 			log.error("no resource defined exception", nrd)
