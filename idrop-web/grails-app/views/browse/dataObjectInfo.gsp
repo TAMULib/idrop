@@ -113,7 +113,7 @@
 							<g:message code="heading.info" />
 						</div>
 					</div>
-
+					<!--
 					<div class="row" id="infoThumbnailLoadArea">
 						<div class="span12">
 							<g:if test="${renderMedia}">
@@ -126,7 +126,7 @@
 							</g:else>
 						</div>
 					</div>
-
+					-->
 					<div class="row">
 						<div class="span2">
 							<strong><g:message code="text.length" />

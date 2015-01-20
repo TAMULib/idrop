@@ -84,7 +84,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<!--
 	<div style="display:table-row;">
 	<div id="infoThumbnailAndMediaDisplay"  style="display:table-cell;">
 	<div id="infoThumbnailLoadArea"></div>
@@ -97,7 +97,7 @@
 		
 		</div>
 	</div>
-	
+	-->
 	<div style="display:table-row;">
 		<div id="infoDisplaySecondary"  style="display:table-cell;">
 		

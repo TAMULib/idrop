@@ -63,13 +63,13 @@
 		
 		<!-- display area lays out info in a main and side column -->
 	<div id="infoDisplayLayout" style="display:table;width:100%;height:100%;">
-	
+	<!--
 	<div style="display:table-row;">
 		<div id="infoThumbnailAndMediaDisplay"  style="display:table-cell;">
 			<div id="infoThumbnailLoadArea"><image src="<g:resource dir="images" file="folder.png" alt="folder icon" />"/></div>
 		</div>
 	</div>
-	
+	-->
 	<div style="display:table-row;">
 		<div id="infoDisplayMain"  style="display:table-cell;">
 		
