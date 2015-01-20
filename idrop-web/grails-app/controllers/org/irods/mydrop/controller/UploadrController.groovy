@@ -130,23 +130,25 @@ class UploadrController {
 			fis = new BufferedInputStream(f.getInputStream())
 			
 			
-			byte[] buffer = new byte[1024]
-       		MessageDigest complete = MessageDigest.getInstance("MD5")
-       		int numRead = 0
-
-       		while (numRead != -1) {
-           		numRead = fis.read(buffer)
-           		if (numRead > 0) {
-               		complete.update(buffer, 0, numRead)
-           		}
-       		} 
-       		
-       		String result = ""
-
-       		for (int i = 0; i < buffer.length; i++) {
-           		result += Integer.toString( ( buffer[i] & 0xff ) + 0x100, 16).substring( 1 )
-       		}
-       		
+			MessageDigest md = MessageDigest.getInstance("MD5")
+			byte[] dataBytes = new byte[1024]
+			
+			int nread = 0 
+ 
+    		while ((nread = fis.read(dataBytes)) != -1) {
+      			md.update(dataBytes, 0, nread)
+    		}
+ 
+    		byte[] mdbytes = md.digest()
+ 
+    		//convert the byte to hex format
+    		StringBuffer sb = new StringBuffer("")
+    		for (int i = 0; i < mdbytes.length; i++) {
+    			sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1))
+    		}
+    		
+    		String result = sb.toString())
+			
 			log.info("MD5 checksum is : " + result)
 			
 			
