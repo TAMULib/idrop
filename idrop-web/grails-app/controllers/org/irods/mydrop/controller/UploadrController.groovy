@@ -8,6 +8,11 @@ import java.security.MessageDigest
 
 import org.apache.commons.fileupload.disk.DiskFileItem
 
+import org.irods.jargon.core.pub.io.IRODSFileFactoryImpl
+import org.irods.jargon.core.connection.SettableJargonProperties
+import org.irods.jargon.core.connection.JargonProperties
+import org.irods.jargon.core.connection.IRODSSession
+
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
@@ -125,7 +130,7 @@ class UploadrController {
 
 		InputStream fis = null
 		log.info("building irodsFile for file name: ${name}")
-
+		
 		try {
 			fis = new BufferedInputStream(f.getInputStream())
 			
@@ -150,9 +155,30 @@ class UploadrController {
     		String result = sb.toString()
 			
 			log.info("MD5 checksum is : " + result)
+			
 			*/
 			
-			IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
+			
+			
+            IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
+
+            IRODSSession session = irodsFileFactory.getIRODSSession()
+
+            JargonProperties properties = session.getJargonProperties()
+
+            SettableJargonProperties sProperties = new SettableJargonProperties(properties)
+
+            sProperties.setComputeChecksumAfterTransfer(true)
+
+			sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
+			
+            session.setJargonProperties(sProperties)
+
+
+            irodsFileFactory = new IRODSFileFactoryImpl(session, irodsAccount)
+			
+			
+			//IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
 			targetFile.setResource(irodsAccount.defaultStorageResource)
 			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
@@ -175,7 +201,7 @@ class UploadrController {
 		} finally {
 			// stream2Stream will close input and output streams
 		}
-
+		
 		render "{\"name\":\"${name}\",\"type\":\"image/jpeg\",\"size\":\"1000\"}"
 	}
 	
