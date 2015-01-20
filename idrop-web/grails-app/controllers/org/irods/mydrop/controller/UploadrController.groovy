@@ -132,14 +132,14 @@ class UploadrController {
 			
 			byte[] buffer = new byte[1024]
        		MessageDigest complete = MessageDigest.getInstance("MD5")
-       		int numRead
+       		int numRead = 0
 
-       		do {
+       		while (numRead != -1) {
            		numRead = fis.read(buffer)
            		if (numRead > 0) {
                		complete.update(buffer, 0, numRead)
            		}
-       		} while (numRead != -1)
+       		} 
        		
        		String result = ""
 
