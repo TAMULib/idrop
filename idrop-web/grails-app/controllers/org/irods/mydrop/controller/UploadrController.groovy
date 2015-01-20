@@ -4,6 +4,8 @@ import grails.converters.JSON
 
 import java.io.File
 
+import java.security.MessageDigest
+
 import org.apache.commons.fileupload.disk.DiskFileItem
 
 import org.irods.jargon.core.connection.IRODSAccount
@@ -126,6 +128,28 @@ class UploadrController {
 
 		try {
 			fis = new BufferedInputStream(f.getInputStream())
+			
+			
+			byte[] buffer = new byte[1024]
+       		MessageDigest complete = MessageDigest.getInstance("MD5")
+       		int numRead
+
+       		do {
+           		numRead = fis.read(buffer)
+           		if (numRead > 0) {
+               		complete.update(buffer, 0, numRead)
+           		}
+       		} while (numRead != -1)
+       		
+       		String result = ""
+
+       		for (int i=0; i < b.length; i++) {
+           		result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 )
+       		}
+       		
+			log.info("MD5 checksum is : " + result)
+			
+			
 			IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
 			targetFile.setResource(irodsAccount.defaultStorageResource)

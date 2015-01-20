@@ -10,8 +10,8 @@
     <asset:stylesheet href="uploadr.manifest.css"/>
     
     <!-- <% def epath = new File("${updir}") %> -->
-    
-	<uploadr:add name="idropUploadr" path="${updir}" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="10485760" >
+
+	<uploadr:add name="idropUploadr" path="${updir}" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="2500000000" >
 		<!--
 		<% epath.listFiles().each { efile -> %>
 			
