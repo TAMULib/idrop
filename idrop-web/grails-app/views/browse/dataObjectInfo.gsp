@@ -51,7 +51,7 @@
 				
 				callback();
 								
-				refreshTree();
+				//refreshTree();
 			
 		</uploadr:onSuccess>
 	</uploadr:add>
