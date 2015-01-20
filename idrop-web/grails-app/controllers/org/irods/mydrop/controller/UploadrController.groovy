@@ -129,7 +129,7 @@ class UploadrController {
 		try {
 			fis = new BufferedInputStream(f.getInputStream())
 			
-			
+			/*
 			MessageDigest md = MessageDigest.getInstance("MD5")
 			byte[] dataBytes = new byte[1024]
 			
@@ -150,7 +150,7 @@ class UploadrController {
     		String result = sb.toString()
 			
 			log.info("MD5 checksum is : " + result)
-			
+			*/
 			
 			IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
