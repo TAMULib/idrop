@@ -143,8 +143,8 @@ class UploadrController {
        		
        		String result = ""
 
-       		for (int i=0; i < b.length; i++) {
-           		result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 )
+       		for (int i = 0; i < buffer.length; i++) {
+           		result += Integer.toString( ( buffer[i] & 0xff ) + 0x100, 16).substring( 1 )
        		}
        		
 			log.info("MD5 checksum is : " + result)
