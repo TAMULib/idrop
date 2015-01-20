@@ -147,7 +147,7 @@ class UploadrController {
     			sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1))
     		}
     		
-    		String result = sb.toString())
+    		String result = sb.toString()
 			
 			log.info("MD5 checksum is : " + result)
 			
