@@ -11,7 +11,7 @@
     
     <!-- <% def epath = new File("${updir}") %> -->
     
-	<uploadr:add name="idropUploadr" path="${updir}" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="0" >
+	<uploadr:add name="idropUploadr" path="${updir}" direction="up" maxVisible="10" colorPicker="true" noSound="true" maxSize="0" downloadable="false" >
 		<!--
 		<% epath.listFiles().each { efile -> %>
 			
