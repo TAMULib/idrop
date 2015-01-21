@@ -8,6 +8,8 @@ import java.security.MessageDigest
 
 import org.apache.commons.fileupload.disk.DiskFileItem
 
+import org.irods.jargon.core.protovalues.ChecksumEncodingEnum
+
 import org.irods.jargon.core.pub.io.IRODSFileFactoryImpl
 import org.irods.jargon.core.connection.SettableJargonProperties
 import org.irods.jargon.core.connection.JargonProperties
