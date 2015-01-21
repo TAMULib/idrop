@@ -56,17 +56,24 @@
 			 <g:ifAuthenticated>
 			 	  <li id="topbarShoppingCart" class="topbarItem"><g:link class="pull-right" controller="shoppingCart" action="index"><span id="shoppingCartToolbarLabel"><g:message code="text.shopping.cart" /></span></g:link></li>
 			 </g:ifAuthenticated>
-		
+			 
 		</ul>
-  </div>
+		
+	<div style="float:right; margin-right:20px; margin-top: 10px;">
+        <g:message code="text.host" />
+  	</div>
+		
+		
+  </div>  
 </div>
  <g:ifAuthenticated>
 <script>
+	var currentZone = "${irodsAccount?.host}";
 	var currentZone = "${irodsAccount?.zone}";
 	var currentUser = "${irodsAccount?.userName}";
-	//$j(function() {	
-		//$j("#accountZoneAndUserDisplay").html(currentZone + ":" + currentUser);
-//	});
+	//$j(function() {
+	//	$j("#accountZoneAndUserDisplay").html(host + ":" + currentZone + ":" + currentUser);
+	//});
 </script>
  </g:ifAuthenticated>
 
