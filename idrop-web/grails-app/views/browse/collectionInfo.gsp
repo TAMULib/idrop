@@ -48,9 +48,7 @@
     					}
 				});
 				
-				callback();		
-								
-				//refreshTree();
+				callback();
 			
 		</uploadr:onSuccess>
 	</uploadr:add>

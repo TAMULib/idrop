@@ -50,8 +50,6 @@
 				});
 				
 				callback();
-								
-				//refreshTree();
 			
 		</uploadr:onSuccess>
 	</uploadr:add>

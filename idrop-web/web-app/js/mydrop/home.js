@@ -1471,6 +1471,8 @@ function closeIdropUploadrArea() {
 	} else {
 		reloadAndSelectTreePathBasedOnIrodsAbsolutePath(selectedPath);
 	}
+	
+	refreshTree();
 }
 
 /**

@@ -4,27 +4,21 @@ import grails.converters.JSON
 
 import java.io.File
 
-import java.security.MessageDigest
-
-import org.apache.commons.fileupload.disk.DiskFileItem
-
-import org.irods.jargon.core.protovalues.ChecksumEncodingEnum
-
-import org.irods.jargon.core.pub.io.IRODSFileFactoryImpl
 import org.irods.jargon.core.connection.SettableJargonProperties
 import org.irods.jargon.core.connection.JargonProperties
 import org.irods.jargon.core.connection.IRODSSession
-
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
+import org.irods.jargon.core.protovalues.ChecksumEncodingEnum
+import org.irods.jargon.core.pub.DataObjectAOImpl
+import org.irods.jargon.core.pub.io.IRODSFileFactoryImpl
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory
-import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
-import org.springframework.web.multipart.MultipartFile
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile
+import org.springframework.web.multipart.MultipartFile
 
 class UploadrController {
 	IRODSAccessObjectFactory irodsAccessObjectFactory
@@ -62,129 +56,45 @@ class UploadrController {
 		
 		log.info(params.path);
 		
-				
+		def localPath = "/tmp/uploadr/" + irodsAccount.getUserName()
+		
+		File file = new File(localPath + "/" + params.file)
+						
 		//log.info("uploaded files")
 		//new File("/tmp/uploadr/").eachFile() { file ->
    		//	log.info(file.getName())
 		//}
 		
-		def localPath = "/tmp/uploadr/" + irodsAccount.getUserName()
-		
-		File file = new File(localPath + "/" + params.file)
-		
 		//log.info(":file abs path " + file.getAbsolutePath())
-		
 		//log.info(":file length " + file.length())
     	
+    	def name = params.file
+    	def irodsCollectionPath = params.path
     	
-    	DiskFileItem fileItem = new DiskFileItem("file", "text/plain", false, file.getName(), (int) file.length() , file.getParentFile())
-    	    	
-		try {    	    	
-    		InputStream input =  new FileInputStream(file)
-        	OutputStream os = fileItem.getOutputStream()
-        	int ret = input.read()
-        	while ( ret != -1 ) {
-            	os.write(ret)
-            	ret = input.read()
-        	}
-        	os.flush()
-        }
-        catch (Exception e) {
-        	e.printStackTrace()        	
-        }
-        
-            	
-    	//log.info(":fileItem name " + fileItem.getName())
-    	
-    	
-    	MultipartFile f = new CommonsMultipartFile(fileItem)
+    	try {			
 			
-		def name = f.getOriginalFilename()
-
-		log.info("name is : ${name}")
-		log.info("f is ${f}")
-		log.info("length of f is ${f.size}")
-		log.info("max upload size is ${MAX_UPLOAD}")
-
-		if (f.size > MAX_UPLOAD) {
-			log.error("file size is too large, send error message to use bulk upload")
-			def message = message(code:"error.use.bulk.upload")
-			response.sendError(500,message)
-			return
-		} else if (f.size == 0) {
-			log.error("file is zero length")
-			def message = message(code:"error.zero.length.upload")
-			response.sendError(500,message)
-			return
-		}
-		
-		def irodsCollectionPath = params.path
-
-		if (f == null || f.empty) {
-			log.error("no file to upload")
-			throw new JargonException("No file to upload")
-		}
-
-		if (irodsCollectionPath == null || irodsCollectionPath.empty) {
-			log.error("no target iRODS collection given in upload request")
-			throw new JargonException("No iRODS target collection given for upload")
-		}
-
-		InputStream fis = null
-		log.info("building irodsFile for file name: ${name}")
-		
-		try {
-			fis = new BufferedInputStream(f.getInputStream())
-			
-			/*
-			MessageDigest md = MessageDigest.getInstance("MD5")
-			byte[] dataBytes = new byte[1024]
-			
-			int nread = 0 
- 
-    		while ((nread = fis.read(dataBytes)) != -1) {
-      			md.update(dataBytes, 0, nread)
-    		}
- 
-    		byte[] mdbytes = md.digest()
- 
-    		//convert the byte to hex format
-    		StringBuffer sb = new StringBuffer("")
-    		for (int i = 0; i < mdbytes.length; i++) {
-    			sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1))
-    		}
-    		
-    		String result = sb.toString()
-			
-			log.info("MD5 checksum is : " + result)
-			
-			*/
-			
-			
-			
-            IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
-
-            IRODSSession session = irodsFileFactory.getIRODSSession()
+            IRODSSession session = irodsAccessObjectFactory.getIrodsSession()
 
             JargonProperties properties = session.getJargonProperties()
 
             SettableJargonProperties sProperties = new SettableJargonProperties(properties)
 
             sProperties.setComputeChecksumAfterTransfer(true)
+            sProperties.setComputeAndVerifyChecksumAfterTransfer(true)
+            
+            sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
 
-			sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
-			
             session.setJargonProperties(sProperties)
-
-
-            irodsFileFactory = new IRODSFileFactoryImpl(session, irodsAccount)
+            
+			irodsAccessObjectFactory.setIrodsSession(session)
 			
+			IRODSFileFactory  irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
 			
-			//IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
-			targetFile.setResource(irodsAccount.defaultStorageResource)
-			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
-			stream2Stream.transferStreamToFileUsingIOStreams(fis, targetFile, f.size, 0)
+			
+			DataObjectAOImpl dataObjectAO = (DataObjectAOImpl) irodsAccessObjectFactory.getDataObjectAO(irodsAccount);
+ 
+ 		 	dataObjectAO.putLocalDataObjectToIRODS(file, targetFile, false) 
 			 
 			// delete file after uploaded
     		if(file.delete()) {
