@@ -1605,7 +1605,7 @@ function downloadViaToolbar() {
  */
 function downloadViaToolbarGivenPath(path) {
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 	
@@ -1639,7 +1639,7 @@ function downloadViaToolbarGivenPath(path) {
 function doActualDownload(path) {
 	
 	if (path == null) {
-		setErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		setErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 	
@@ -1718,7 +1718,7 @@ function deleteViaBrowseDetailsToolbar() {
 function deleteViaToolbarGivenPath(path) {
 
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop("msg.path.missing"));
+		showErrorMessage($j.i18n.prop("msg.path.missing"));
 		// i18n
 		return false;
 	}
@@ -2413,7 +2413,7 @@ function setDefaultStorageResource(resource) {
 		if (!continueReq) {
 			return false;
 		}
-		setMessage(jQuery.i18n.prop('msg_resource_changed'));
+		setMessage($j.i18n.prop('msg_resource_changed'));
 		unblockPanel();
 	}).error(function(xhr, status, error) {
 		setErrorMessage(xhr.responseText);
@@ -2587,7 +2587,7 @@ function submitStarDialog() {
 		if (!continueReq) {
 			return false;
 		}
-		setMessage(jQuery.i18n.prop('msg_file_starred'));
+		setMessage($j.i18n.prop('msg_file_starred'));
 		updateBrowseDetailsForPathBasedOnCurrentModel(selectedPath);
 		closeStarDialog();
 		unblockPanel();
@@ -2627,7 +2627,7 @@ function editShareAtPath() {
 	$j("#sharingPanelContainingDiv").html();
 	var path = $j("#infoAbsPath").val();
 	if (path == null) {
-		setMessage(jQuery.i18n.prop('msg_path_missing'));
+		setMessage($j.i18n.prop('msg_path_missing'));
 		unblockPanel();		
 		return false;
 	}
@@ -2649,7 +2649,7 @@ function removeShareAtPath() {
 	var path = $j("#aclDetailsAbsPath").val();
 	
 	if (path == null) {
-		setMessage(jQuery.i18n.prop('msg_path_missing'));
+		setMessage($j.i18n.prop('msg_path_missing'));
 		unblockPanel();		
 		return false;
 	}
@@ -2658,7 +2658,7 @@ function removeShareAtPath() {
 			absPath : path
 		}
 		
-	var answer = confirm(jQuery.i18n.prop('msg_delete_share')); 
+	var answer = confirm($j.i18n.prop('msg_delete_share')); 
 	
 	if (!answer) {
 		return false;
@@ -2703,13 +2703,13 @@ function updateNamedShare() {
 	showBlockingPanel();
 	
 	if (path == null) {
-		setMessage(jQuery.i18n.prop('msg_path_missing'));
+		setMessage($j.i18n.prop('msg_path_missing'));
 		unblockPanel();		
 		return false;
 	}
 	
 	if (formAction == null) {
-		setErrorMessage(jQuery.i18n.prop('msg_action_missing'));
+		setErrorMessage($j.i18n.prop('msg_action_missing'));
 		unblockPanel();
 		return false;
 	}
@@ -2808,7 +2808,7 @@ function grantPublicLink() {
 	var path = $j("#publicLinkDialogAbsPath").val();
 	showBlockingPanel();
 	if (path == null) {
-		setMessage(jQuery.i18n.prop('msg.path.missing'));
+		setMessage($j.i18n.prop('msg.path.missing'));
 		unblockPanel();		
 	}
 	

@@ -39,7 +39,7 @@ function reloadTicketTable(absPath) {
 				buildTicketTableInPlace();
 			}, "html")
 			.error(function(xhr, status, error) {
-				var message = jQuery.i18n.prop('msg_ticket_error');
+				var message = $j.i18n.prop('msg_ticket_error');
 				displayMessageAsBootstrapAlert(message, "#infoAccordionTicketsInner");
 				 setErrorMessage(xhr.responseText);
 				 unblockPanel();
@@ -190,7 +190,7 @@ function prepareTicketDetailsDialog(ticketString) {
 function updateTicketFromPulldown() {
 	var formData = $j("#ticketPulldownDetailsForm").serializeArray();
 	if (formData == null) {
-		setErrorMessage(jQuery.i18n.prop('msg_no_ticket_data'));
+		setErrorMessage($j.i18n.prop('msg_no_ticket_data'));
 		return false;
 	}
 	
@@ -235,7 +235,7 @@ function cancelTicketFromPulldown() {
 	var ticketString = $j("#ticketString").val();
 	
 	if (ticketString == null) {
-		setErrorMessage(jQuery.i18n.prop('msg_ticket_no_data'));
+		setErrorMessage($j.i18n.prop('msg_ticket_no_data'));
 		return false;
 	}
 	
@@ -273,7 +273,7 @@ function submitTicketDialog() {
 		var formData = $j("#ticketPulldownDetailsForm").serializeArray();
 	
 		if (formData == null) {
-			setErrorMessage(jQuery.i18n.prop('msg_no_ticket_data'));
+			setErrorMessage($j.i18n.prop('msg_no_ticket_data'));
 			return false;
 		}
 	
@@ -286,7 +286,7 @@ function submitTicketDialog() {
 					} 
 					
 					//closeTicketDialog();
-					//setMessage(jQuery.i18n.prop('msg_ticket_update_successful'));
+					//setMessage($j.i18n.prop('msg_ticket_update_successful'));
 					//reloadTicketTable(selectedPath);
 					$j("#ticketDialogArea").html(data);
 
@@ -300,7 +300,7 @@ function submitTicketDialog() {
 
 function deleteTicket() {
 	
-	if (!confirm(jQuery.i18n.prop('msg_delete_confirm'))) {
+	if (!confirm($j.i18n.prop('msg_delete_confirm'))) {
         // your deletion code
 		return false;
 	}
@@ -315,7 +315,7 @@ function deleteTicket() {
 					return false;
 				}
 				reloadTicketTable(selectedPath);
-				setMessage(jQuery.i18n.prop('msg_delete_successful'));
+				setMessage($j.i18n.prop('msg_delete_successful'));
 				unblockPanel();
 			}).error(function(xhr, status, error) {
 				setErrorMessage(xhr.responseText);
@@ -331,7 +331,7 @@ function editTicketDialog() {
 	// find first selected ticket in table, if none selected show message and ignore
 	var edited =  $j(":checked").filter("#selectedTicket");
 	if (!edited.length > 0) {
-		setMessage(jQuery.i18n.prop('msg_nothing_selected_for_edit'));
+		setMessage($j.i18n.prop('msg_nothing_selected_for_edit'));
 		return;
 	}
 	

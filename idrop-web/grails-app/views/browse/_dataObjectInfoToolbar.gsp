@@ -30,7 +30,7 @@ function dibDownloadFile() {
 	var path = $j("#infoAbsPath").val();
 	//alert("path from infoAbsPath:" + path);
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 
@@ -43,7 +43,7 @@ function dibDownloadFile() {
 function dibRenameFile() {
 	var path = $j("#infoAbsPath").val();
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 
@@ -56,7 +56,7 @@ function dibRenameFile() {
 function dibDeleteFile() {
 	var path = $j("#infoAbsPath").val();
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 
@@ -69,7 +69,7 @@ function dibDeleteFile() {
 function dibStarFile() {
 	var path = $j("#infoAbsPath").val();
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 
@@ -95,7 +95,7 @@ function dibStarFile() {
 function dibUnstarFile() {
 	var path = $j("#infoAbsPath").val();
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 
@@ -120,7 +120,7 @@ function dibUnstarFile() {
 				if (!continueReq) {
 					return false;
 				}
-				setMessage(jQuery.i18n.prop('msg_file_unstarred'));
+				setMessage($j.i18n.prop('msg_file_unstarred'));
 				updateBrowseDetailsForPathBasedOnCurrentModel(selectedPath);
 				closeStarDialog();
 				unblockPanel();

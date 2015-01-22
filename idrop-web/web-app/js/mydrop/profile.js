@@ -26,7 +26,7 @@ function updateUserProfile() {
 			if (!continueReq) {
 				return false;
 			}
-			setMessage(jQuery.i18n.prop('msg_profile_update_successful'));
+			setMessage($j.i18n.prop('msg_profile_update_successful'));
 			$j("#profileDataArea").html(returnedData);
 			unblockPanel();
 		}).error(function(xhr, status, error) {

@@ -38,7 +38,7 @@ function topBarDefaultResourceChanged() {
 			return false;
 		}
 		setDefaultStorageResource(resource);
-		//setMessage(jQuery.i18n.prop('msg_resource_changed'));
+		//setMessage($j.i18n.prop('msg_resource_changed'));
 	} finally {
 		//unblockPanel();
 	}

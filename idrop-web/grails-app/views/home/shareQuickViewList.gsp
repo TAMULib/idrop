@@ -34,7 +34,7 @@
 */
 function quickviewUpload(path) {
 	if (path == null) {
-		showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+		showErrorMessage($j.i18n.prop('msg.path.missing'));
 		return false;
 	}
 

@@ -43,7 +43,7 @@
 	function cibSetCollectionAsRoot() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 
@@ -58,7 +58,7 @@
 	function cibUploadViaBrowser() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 
@@ -74,7 +74,7 @@
 		
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 				
@@ -88,7 +88,7 @@
 	function cibNewFolder() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 		newFolderViaToolbarGivenPath(path);
@@ -100,7 +100,7 @@
 	function cibRenameCollection() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 
@@ -114,7 +114,7 @@
 	function cibDeleteCollection() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 
@@ -127,7 +127,7 @@
 	function cibStarCollection() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 
@@ -153,7 +153,7 @@
 	function cibUnstarCollection() {
 		var path = $j("#infoAbsPath").val();
 		if (path == null) {
-			showErrorMessage(jQuery.i18n.prop('msg.path.missing'));
+			showErrorMessage($j.i18n.prop('msg.path.missing'));
 			return false;
 		}
 
@@ -180,7 +180,7 @@
 					if (!continueReq) {
 						return false;
 					}
-					setMessage(jQuery.i18n.prop('msg_file_unstarred'));
+					setMessage($j.i18n.prop('msg_file_unstarred'));
 					updateBrowseDetailsForPathBasedOnCurrentModel(selectedPath);
 					closeStarDialog();
 					unblockPanel();
