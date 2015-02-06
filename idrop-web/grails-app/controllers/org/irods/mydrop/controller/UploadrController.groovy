@@ -2,7 +2,7 @@ package org.irods.mydrop.controller
 
 import grails.converters.JSON
 
-import java.io.File
+import java.io.File 
 
 import org.irods.jargon.core.connection.SettableJargonProperties
 import org.irods.jargon.core.connection.JargonProperties
@@ -59,7 +59,7 @@ class UploadrController {
 		def localPath = "/tmp/uploadr/" + irodsAccount.getUserName()
 		
 		File file = new File(localPath + "/" + params.file)
-						
+		
 		//log.info("uploaded files")
 		//new File("/tmp/uploadr/").eachFile() { file ->
    		//	log.info(file.getName())
@@ -91,16 +91,19 @@ class UploadrController {
 			IRODSFileFactory  irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
 			
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
+			targetFile.setResource(irodsAccount.defaultStorageResource)
 			
 			DataObjectAOImpl dataObjectAO = (DataObjectAOImpl) irodsAccessObjectFactory.getDataObjectAO(irodsAccount);
  
  			try {
- 		 		dataObjectAO.putLocalDataObjectToIRODS(file, targetFile, false)
+ 		 		dataObjectAO.putLocalDataObjectToIRODS(file, targetFile, false) 		 			
  		 	}
- 		 	catch(Exception _e) {
- 		 		log.info("File uploaded but exception thrown!!")
- 		 	} 		 	
-			 
+ 		 	catch(Exception _e) { 		 		
+ 		 		log.info(_e.getMessage())
+ 		 		log.info(targetFile.toString())
+ 		 		log.info(irodsCollectionPath.toString())
+ 		 	}
+			
 			// delete file after uploaded
     		if(file.delete()) {
         		log.info("file deleted")
