@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	<div class="row alert alert-info">
-		<div class="span12">
+		<div class="span13">
 			<g:message code="heading.metadata" />
 		</div>
 	</div>

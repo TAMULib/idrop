@@ -102,7 +102,7 @@ legend {
 								value="${loginCommand.authMethod}" />
 						</g:else>
 
-						<div>
+						<div style="display:none;">
 						  <div style="float: left;">
 						    <label><g:message code="text.guest.login" />:</label>
 						  </div>

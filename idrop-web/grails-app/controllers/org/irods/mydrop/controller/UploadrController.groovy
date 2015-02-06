@@ -94,7 +94,12 @@ class UploadrController {
 			
 			DataObjectAOImpl dataObjectAO = (DataObjectAOImpl) irodsAccessObjectFactory.getDataObjectAO(irodsAccount);
  
- 		 	dataObjectAO.putLocalDataObjectToIRODS(file, targetFile, false) 
+ 			try {
+ 		 		dataObjectAO.putLocalDataObjectToIRODS(file, targetFile, false)
+ 		 	}
+ 		 	catch(Exception _e) {
+ 		 		log.info("File uploaded but exception thrown!!")
+ 		 	} 		 	
 			 
 			// delete file after uploaded
     		if(file.delete()) {
