@@ -79,7 +79,8 @@ class QuickUploadController {
 
 		try {
 		
-			//fis = new BufferedInputStream(f.getInputStream())			
+			fis = new BufferedInputStream(f.getInputStream())			
+			
 			//IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)			
 			//IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)			
 			//targetFile.setResource(irodsAccount.defaultStorageResource)
@@ -88,16 +89,16 @@ class QuickUploadController {
 			
 			IRODSSession session = irodsAccessObjectFactory.getIrodsSession()
 
-            JargonProperties properties = session.getJargonProperties()
+            		JargonProperties properties = session.getJargonProperties()
 
-            SettableJargonProperties sProperties = new SettableJargonProperties(properties)
+            		SettableJargonProperties sProperties = new SettableJargonProperties(properties)
 
-            sProperties.setComputeChecksumAfterTransfer(true)
-            sProperties.setComputeAndVerifyChecksumAfterTransfer(true)
+            		sProperties.setComputeChecksumAfterTransfer(true)
+            		sProperties.setComputeAndVerifyChecksumAfterTransfer(true)
             
-            sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
+            		sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
 
-            session.setJargonProperties(sProperties)
+        		 session.setJargonProperties(sProperties)
             
 			irodsAccessObjectFactory.setIrodsSession(session)
 			
@@ -105,8 +106,6 @@ class QuickUploadController {
 			
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
 			targetFile.setResource(irodsAccount.defaultStorageResource)
-			
-			
 			
 						
 			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
