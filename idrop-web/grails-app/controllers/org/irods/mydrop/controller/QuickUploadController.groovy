@@ -6,6 +6,7 @@ import org.irods.jargon.core.connection.IRODSSession
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
+import org.irods.jargon.core.protovalues.ChecksumEncodingEnum
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory
 import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
