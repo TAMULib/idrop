@@ -1,5 +1,7 @@
 package org.irods.mydrop.controller
 
+import java.io.File
+
 import org.irods.jargon.core.connection.SettableJargonProperties
 import org.irods.jargon.core.connection.JargonProperties
 import org.irods.jargon.core.connection.IRODSSession
@@ -7,8 +9,10 @@ import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
 import org.irods.jargon.core.protovalues.ChecksumEncodingEnum
+import org.irods.jargon.core.pub.DataObjectAOImpl
+import org.irods.jargon.core.pub.io.IRODSFileFactoryImpl
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory
-import org.irods.jargon.core.pub.Stream2StreamAO
+//import org.irods.jargon.core.pub.Stream2StreamAO
 import org.irods.jargon.core.pub.io.IRODSFile
 import org.irods.jargon.core.pub.io.IRODSFileFactory
 import org.springframework.web.multipart.MultipartFile
@@ -75,31 +79,50 @@ class QuickUploadController {
 		}
 
 		InputStream fis = null
+		
+		OutputStream fos = null
+		
 		log.info("building irodsFile for file name: ${name}")
 
 
+		def localPath = "/tmp/uploadr/" + irodsAccount.getUserName()
+		
+		File file = new File(localPath + "/${name}")
+		
+		
 		try {
 		
-			fis = new BufferedInputStream(f.getInputStream())			
+			fis = new BufferedInputStream(f.getInputStream())
+			
+			fos = new FileOutputStream(file)
+			
+			int read = 0
+			byte[] bytes = new byte[1024]
+ 
+			while ((read = fis.read(bytes)) != -1) {
+				fos.write(bytes, 0, read)
+			}
+			
 			
 			//IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)			
 			//IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)			
 			//targetFile.setResource(irodsAccount.defaultStorageResource)
 			
+			//Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
 			
+			//stream2Stream.transferStreamToFileUsingIOStreams(fis, targetFile, f.size, 0)
+						
 			
 			IRODSSession session = irodsAccessObjectFactory.getIrodsSession()
 
-            		JargonProperties properties = session.getJargonProperties()
+            JargonProperties properties = session.getJargonProperties()
 
-            		SettableJargonProperties sProperties = new SettableJargonProperties(properties)
+            SettableJargonProperties sProperties = new SettableJargonProperties(properties)
+       		sProperties.setComputeChecksumAfterTransfer(true)
+       		sProperties.setComputeAndVerifyChecksumAfterTransfer(true)            
+       		sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
 
-            		sProperties.setComputeChecksumAfterTransfer(true)
-            		sProperties.setComputeAndVerifyChecksumAfterTransfer(true)
-            
-            		sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
-
-        		 session.setJargonProperties(sProperties)
+      		session.setJargonProperties(sProperties)
             
 			irodsAccessObjectFactory.setIrodsSession(session)
 			
@@ -108,10 +131,26 @@ class QuickUploadController {
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
 			targetFile.setResource(irodsAccount.defaultStorageResource)
 			
-						
-			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
 			
-			stream2Stream.transferStreamToFileUsingIOStreams(fis, targetFile, f.size, 0)
+			DataObjectAOImpl dataObjectAO = (DataObjectAOImpl) irodsAccessObjectFactory.getDataObjectAO(irodsAccount);
+ 
+ 			try {
+ 		 		dataObjectAO.putLocalDataObjectToIRODS(file, targetFile, false) 		 			
+ 		 	}
+ 		 	catch(Exception _e) { 		 		
+ 		 		log.info(_e.getMessage())
+ 		 		log.info(targetFile.toString())
+ 		 		log.info(irodsCollectionPath.toString())
+ 		 	}
+			
+			// delete file after uploaded
+    		if(file.delete()) {
+        		log.info("file deleted")
+    		}
+    		else {
+        		log.error("file not deleted")
+    		}
+			
 			
 		} catch (NoResourceDefinedException nrd) {
 			log.error("no resource defined exception", nrd)
@@ -121,6 +160,24 @@ class QuickUploadController {
 			response.sendError(500, message(code:"message.error.in.upload"))
 		} finally {
 			// stream2Stream will close input and output streams
+			
+			if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (fos != null) {
+				try {
+					// fos.flush();
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	 
+			}			
+			
 		}
 
 		render "{\"name\":\"${name}\",\"type\":\"image/jpeg\",\"size\":\"1000\"}"
