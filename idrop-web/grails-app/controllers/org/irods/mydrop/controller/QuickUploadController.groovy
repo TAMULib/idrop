@@ -1,5 +1,8 @@
 package org.irods.mydrop.controller
 
+import org.irods.jargon.core.connection.SettableJargonProperties
+import org.irods.jargon.core.connection.JargonProperties
+import org.irods.jargon.core.connection.IRODSSession
 import org.irods.jargon.core.connection.IRODSAccount
 import org.irods.jargon.core.exception.JargonException
 import org.irods.jargon.core.exception.NoResourceDefinedException
@@ -75,12 +78,41 @@ class QuickUploadController {
 
 
 		try {
-			fis = new BufferedInputStream(f.getInputStream())
-			IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
+		
+			//fis = new BufferedInputStream(f.getInputStream())			
+			//IRODSFileFactory irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)			
+			//IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)			
+			//targetFile.setResource(irodsAccount.defaultStorageResource)
+			
+			
+			
+			IRODSSession session = irodsAccessObjectFactory.getIrodsSession()
+
+            JargonProperties properties = session.getJargonProperties()
+
+            SettableJargonProperties sProperties = new SettableJargonProperties(properties)
+
+            sProperties.setComputeChecksumAfterTransfer(true)
+            sProperties.setComputeAndVerifyChecksumAfterTransfer(true)
+            
+            sProperties.setChecksumEncoding(ChecksumEncodingEnum.MD5)
+
+            session.setJargonProperties(sProperties)
+            
+			irodsAccessObjectFactory.setIrodsSession(session)
+			
+			IRODSFileFactory  irodsFileFactory = irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount)
+			
 			IRODSFile targetFile = irodsFileFactory.instanceIRODSFile(irodsCollectionPath, name)
 			targetFile.setResource(irodsAccount.defaultStorageResource)
+			
+			
+			
+						
 			Stream2StreamAO stream2Stream = irodsAccessObjectFactory.getStream2StreamAO(irodsAccount)
+			
 			stream2Stream.transferStreamToFileUsingIOStreams(fis, targetFile, f.size, 0)
+			
 		} catch (NoResourceDefinedException nrd) {
 			log.error("no resource defined exception", nrd)
 			response.sendError(500, message(code:"message.no.resource"))
